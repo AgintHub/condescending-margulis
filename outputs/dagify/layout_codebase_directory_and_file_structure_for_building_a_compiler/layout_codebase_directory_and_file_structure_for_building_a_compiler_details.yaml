@@ -1,11 +1,52 @@
-dag_type: spec
+dag_type: stub
 description: Generated workflow from UI.
 name: layout_codebase_directory_and_file_structure_for_building_a_compiler
 nodes:
   approve_final_test_report:
     agent: false
+    code_node_type: stub
     description: Approves the final test report after a comprehensive review to ensure
       all tests have passed and no critical issues remain.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass GenerateFinalTestReportOutput(BaseModel):\n    \"\"\"Pydantic model\
+      \ for generate_final_test_report node outputs.\"\"\"\n    test_report_path:\
+      \ str = Field(..., description=\"The file path where the generated test report\
+      \ is saved.\")\n    total_tests: int = Field(..., description=\"Total number\
+      \ of tests run.\")\n    passed_tests: int = Field(..., description=\"Number\
+      \ of tests that passed.\")\n    failed_tests: int = Field(..., description=\"\
+      Number of tests that failed.\")\n    error_messages: List[str] = Field(...,\
+      \ description=\"List of error messages from the failed tests.\")\n    stack_traces:\
+      \ List[str] = Field(..., description=\"List of stack traces from the failed\
+      \ tests.\")\n    remaining_issues: List[str] = Field(..., description=\"List\
+      \ of remaining issues identified in the test reports.\")\n    pass_fail_rates:\
+      \ List[float] = Field(..., description=\"List of pass/fail rates for different\
+      \ types of tests (e.g., unit tests, integration tests).\")\n    performance_metrics:\
+      \ List[float] = Field(..., description=\"List of performance metrics such as\
+      \ execution time and resource utilization for the tests.\")\n    patterns_trends:\
+      \ List[str] = Field(..., description=\"List of patterns and trends identified\
+      \ in the test results.\")\n    improvement_areas: List[str] = Field(..., description=\"\
+      List of potential areas for improvement based on the test results.\")\n\n\n\
+      class ApproveFinalTestReportOutput(BaseModel):\n    \"\"\"Pydantic model for\
+      \ approve_final_test_report node outputs.\"\"\"\n    report_approved: bool =\
+      \ Field(..., description=\"Whether the final test report has been approved.\"\
+      )\n    critical_issues_remaining: List[str] = Field(..., description=\"List\
+      \ of critical issues identified in the report that were not resolved.\")\n \
+      \   pass_fail_rates_meet_thresholds: bool = Field(..., description=\"Whether\
+      \ the pass/fail rates in the report meet the specified thresholds.\")\n    error_message_accuracy:\
+      \ bool = Field(..., description=\"Whether the error messages in the report are\
+      \ accurate.\")\n    issue_documentation_completeness: bool = Field(..., description=\"\
+      Whether the issue documentation in the report is complete.\")\n\n\ndef approve_final_test_report(generate_final_test_report_input:\
+      \ GenerateFinalTestReportOutput, **kwargs) -> ApproveFinalTestReportOutput:\n\
+      \    \"\"\"Approves the final test report after a comprehensive review to ensure\
+      \ all tests have passed and no critical issues remain.\n\n    Args:\n      \
+      \  generate_final_test_report_input: Input from the 'generate_final_test_report'\
+      \ node.\n        **kwargs: Additional keyword arguments.\n\n    Returns:\n \
+      \       ApproveFinalTestReportOutput: Object containing outputs for this node.\n\
+      \    \"\"\"\n    # TODO: Implement this function\n\n    # Return stub output\
+      \ with placeholder values\n    return ApproveFinalTestReportOutput(\n      \
+      \  report_approved=False,\n        critical_issues_remaining=[],\n        pass_fail_rates_meet_thresholds=False,\n\
+      \        error_message_accuracy=False,\n        issue_documentation_completeness=False,\n\
+      \    )"
     name: approve_final_test_report
     nodes_depended_on:
     - generate_final_test_report
@@ -140,11 +181,39 @@ nodes:
       of issue documentation. Approve the report only if it meets all quality assurance
       criteria, including thorough analysis of test results, detailed variance decomposition,
       and robustness diagnostics.
+    shims: []
   compile_backend_code:
     agent: false
+    code_node_type: stub
     description: Compiles the backend code written in the previous step, ensuring
       it is optimized and ready for further processing. The output is an object file
       or library that can be linked with other components of the system.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass WriteBackendCodeOutput(BaseModel):\n    \"\"\"Pydantic model for write_backend_code\
+      \ node outputs.\"\"\"\n    code_files_generated: List[str] = Field(..., description=\"\
+      List of file names of the generated backend code files.\")\n    unit_tests_generated:\
+      \ List[str] = Field(..., description=\"List of file names of the generated unit\
+      \ tests for the backend code.\")\n    code_validity: bool = Field(..., description=\"\
+      Whether the generated backend code is valid and meets the quality assurance\
+      \ criteria.\")\n\n\nclass CompileBackendCodeOutput(BaseModel):\n    \"\"\"Pydantic\
+      \ model for compile_backend_code node outputs.\"\"\"\n    compilation_status:\
+      \ bool = Field(..., description=\"Whether the compilation was successful.\"\
+      )\n    object_file_path: str = Field(..., description=\"Path to the generated\
+      \ object file or library.\")\n    unit_test_pass_rate: float = Field(..., description=\"\
+      Pass rate of the unit tests for the compiled backend code.\")\n    static_analysis_issues:\
+      \ List[str] = Field(..., description=\"List of issues identified by static analysis\
+      \ tools during compilation.\")\n\n\ndef compile_backend_code(write_backend_code_input:\
+      \ WriteBackendCodeOutput, **kwargs) -> CompileBackendCodeOutput:\n    \"\"\"\
+      Compiles the backend code written in the previous step, ensuring it is optimized\
+      \ and ready for further processing. The output is an object file or library\
+      \ that can be linked with other components of the system.\n\n    Args:\n   \
+      \     write_backend_code_input: Input from the 'write_backend_code' node.\n\
+      \        **kwargs: Additional keyword arguments.\n\n    Returns:\n        CompileBackendCodeOutput:\
+      \ Object containing outputs for this node.\n    \"\"\"\n    # TODO: Implement\
+      \ this function\n\n    # Return stub output with placeholder values\n    return\
+      \ CompileBackendCodeOutput(\n        compilation_status=False,\n        object_file_path=\"\
+      \",\n        unit_test_pass_rate=0.0,\n        static_analysis_issues=[],\n\
+      \    )"
     name: compile_backend_code
     nodes_depended_on:
     - write_backend_code
@@ -259,12 +328,44 @@ nodes:
       Utilize advanced compiler flags and optimizations to enhance performance and
       reduce memory footprint. Verify the correctness of the compiled code through
       unit tests and static analysis tools.
+    shims: []
   compile_lexer_code:
     agent: false
+    code_node_type: stub
     description: Compiles the lexer code written in the previous step, ensuring it
       produces an optimized object file or static library suitable for further processing
       in the workflow. This step involves using a C++ compiler with appropriate flags
       to enhance performance and reliability of the lexer component.
+    implementation: "from pydantic import BaseModel, Field\n\n\nclass WriteLexerCodeOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for write_lexer_code node outputs.\"\"\"\n    lexer_code_path:\
+      \ str = Field(..., description=\"The path to the compiled lexer code.\")\n \
+      \   token_types: str = Field(..., description=\"A list of token types defined\
+      \ in the lexer code.\")\n    error_handling_methods: str = Field(..., description=\"\
+      A list of error handling methods implemented in the lexer code.\")\n    logging_level:\
+      \ str = Field(..., description=\"The logging level set in the lexer code for\
+      \ debugging purposes.\")\n    code_coverage_percentage: float = Field(..., description=\"\
+      The percentage of code coverage achieved by the unit tests for the lexer code.\"\
+      )\n\n\nclass CompileLexerCodeOutput(BaseModel):\n    \"\"\"Pydantic model for\
+      \ compile_lexer_code node outputs.\"\"\"\n    compilation_status: bool = Field(...,\
+      \ description=\"Whether the compilation was successful.\")\n    object_file_path:\
+      \ str = Field(..., description=\"Path to the generated object file or static\
+      \ library.\")\n    error_messages: str = Field(..., description=\"List of error\
+      \ messages encountered during compilation.\")\n    warning_messages: str = Field(...,\
+      \ description=\"List of warning messages encountered during compilation.\")\n\
+      \    compilation_time: float = Field(..., description=\"Time taken for the compilation\
+      \ process in seconds.\")\n\n\ndef compile_lexer_code(write_lexer_code_input:\
+      \ WriteLexerCodeOutput, **kwargs) -> CompileLexerCodeOutput:\n    \"\"\"Compiles\
+      \ the lexer code written in the previous step, ensuring it produces an optimized\
+      \ object file or static library suitable for further processing in the workflow.\
+      \ This step involves using a C++ compiler with appropriate flags to enhance\
+      \ performance and reliability of the lexer component.\n\n    Args:\n       \
+      \ write_lexer_code_input: Input from the 'write_lexer_code' node.\n        **kwargs:\
+      \ Additional keyword arguments.\n\n    Returns:\n        CompileLexerCodeOutput:\
+      \ Object containing outputs for this node.\n    \"\"\"\n    # TODO: Implement\
+      \ this function\n\n    # Return stub output with placeholder values\n    return\
+      \ CompileLexerCodeOutput(\n        compilation_status=False,\n        object_file_path=\"\
+      \",\n        error_messages=\"\",\n        warning_messages=\"\",\n        compilation_time=0.0,\n\
+      \    )"
     name: compile_lexer_code
     nodes_depended_on:
     - write_lexer_code
@@ -371,12 +472,46 @@ nodes:
       the workflow. Verify that the compiled output includes all necessary functions
       for tokenizing input code and adheres to the specified coding standards and
       best practices.
+    shims: []
   compile_optimizer_code:
     agent: false
+    code_node_type: stub
     description: Compiles the optimizer code written in the previous step, ensuring
       it produces an object file or library ready for integration into the project.
       This step involves using advanced compilation techniques to optimize performance
       and ensure compatibility with the rest of the system.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass WriteOptimizerCodeOutput(BaseModel):\n    \"\"\"Pydantic model for\
+      \ write_optimizer_code node outputs.\"\"\"\n    optimizer_code_path: str = Field(...,\
+      \ description=\"The path to the written optimizer code.\")\n    optimization_techniques_used:\
+      \ List[str] = Field(..., description=\"A list of optimization techniques used\
+      \ in the optimizer code.\")\n    code_modularity_score: float = Field(..., description=\"\
+      A score indicating the modularity of the written optimizer code, ranging from\
+      \ 0 to 1.\")\n    code_efficiency_score: float = Field(..., description=\"A\
+      \ score indicating the efficiency of the written optimizer code, ranging from\
+      \ 0 to 1.\")\n    code_documentation_status: bool = Field(..., description=\"\
+      Whether the optimizer code is well-documented.\")\n\n\nclass CompileOptimizerCodeOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for compile_optimizer_code node outputs.\"\"\"\n \
+      \   compiled_file_path: str = Field(..., description=\"The path to the compiled\
+      \ object file or library.\")\n    compilation_success: bool = Field(..., description=\"\
+      Whether the compilation was successful.\")\n    error_messages: str = Field(...,\
+      \ description=\"List of error messages encountered during the compilation process.\"\
+      )\n    warning_messages: str = Field(..., description=\"List of warning messages\
+      \ generated during the compilation process.\")\n    optimization_flags_used:\
+      \ str = Field(..., description=\"List of optimization flags used during the\
+      \ compilation process.\")\n\n\ndef compile_optimizer_code(write_optimizer_code_input:\
+      \ WriteOptimizerCodeOutput, **kwargs) -> CompileOptimizerCodeOutput:\n    \"\
+      \"\"Compiles the optimizer code written in the previous step, ensuring it produces\
+      \ an object file or library ready for integration into the project. This step\
+      \ involves using advanced compilation techniques to optimize performance and\
+      \ ensure compatibility with the rest of the system.\n\n    Args:\n        write_optimizer_code_input:\
+      \ Input from the 'write_optimizer_code' node.\n        **kwargs: Additional\
+      \ keyword arguments.\n\n    Returns:\n        CompileOptimizerCodeOutput: Object\
+      \ containing outputs for this node.\n    \"\"\"\n    # TODO: Implement this\
+      \ function\n\n    # Return stub output with placeholder values\n    return CompileOptimizerCodeOutput(\n\
+      \        compiled_file_path=\"\",\n        compilation_success=False,\n    \
+      \    error_messages=\"\",\n        warning_messages=\"\",\n        optimization_flags_used=\"\
+      \",\n    )"
     name: compile_optimizer_code
     nodes_depended_on:
     - write_optimizer_code
@@ -501,12 +636,45 @@ nodes:
       code includes all necessary functions for optimizing compiled code, such as
       gradient descent, Adam, and RMSprop algorithms, and that it adheres to best
       practices for numerical stability and efficiency.
+    shims: []
   compile_parser_code:
     agent: false
+    code_node_type: stub
     description: Compiles the parser code written in the previous step, ensuring it
       produces an optimized object file or library suitable for integration into the
       broader workflow. This step involves using advanced compilation techniques to
       enhance performance and maintainability.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass WriteParserCodeOutput(BaseModel):\n    \"\"\"Pydantic model for write_parser_code\
+      \ node outputs.\"\"\"\n    parser_code_path: str = Field(..., description=\"\
+      The file path where the parser code has been written.\")\n    code_lines_written:\
+      \ int = Field(..., description=\"The number of lines of code written for the\
+      \ parser.\")\n    is_modular: bool = Field(..., description=\"Whether the parser\
+      \ code is modular and follows best practices.\")\n    is_efficient: bool = Field(...,\
+      \ description=\"Whether the parser code is efficient and optimized for performance.\"\
+      )\n    is_well_documented: bool = Field(..., description=\"Whether the parser\
+      \ code is well-documented with clear explanations and examples.\")\n\n\nclass\
+      \ CompileParserCodeOutput(BaseModel):\n    \"\"\"Pydantic model for compile_parser_code\
+      \ node outputs.\"\"\"\n    compilation_status: bool = Field(..., description=\"\
+      Whether the compilation was successful.\")\n    object_file_path: str = Field(...,\
+      \ description=\"The path to the generated object file or library.\")\n    error_messages:\
+      \ List[str] = Field(..., description=\"List of error messages encountered during\
+      \ the compilation process.\")\n    warning_messages: List[str] = Field(...,\
+      \ description=\"List of warning messages encountered during the compilation\
+      \ process.\")\n    optimization_flags_used: List[str] = Field(..., description=\"\
+      List of optimization flags used during the compilation process.\")\n\n\ndef\
+      \ compile_parser_code(write_parser_code_input: WriteParserCodeOutput, **kwargs)\
+      \ -> CompileParserCodeOutput:\n    \"\"\"Compiles the parser code written in\
+      \ the previous step, ensuring it produces an optimized object file or library\
+      \ suitable for integration into the broader workflow. This step involves using\
+      \ advanced compilation techniques to enhance performance and maintainability.\n\
+      \n    Args:\n        write_parser_code_input: Input from the 'write_parser_code'\
+      \ node.\n        **kwargs: Additional keyword arguments.\n\n    Returns:\n \
+      \       CompileParserCodeOutput: Object containing outputs for this node.\n\
+      \    \"\"\"\n    # TODO: Implement this function\n\n    # Return stub output\
+      \ with placeholder values\n    return CompileParserCodeOutput(\n        compilation_status=False,\n\
+      \        object_file_path=\"\",\n        error_messages=[],\n        warning_messages=[],\n\
+      \        optimization_flags_used=[],\n    )"
     name: compile_parser_code
     nodes_depended_on:
     - write_parser_code
@@ -617,12 +785,35 @@ nodes:
       with the project's build system. Verify that the compiled code adheres to the
       specified language standards and includes all necessary parsing functions for
       different parts of the language syntax.
+    shims: []
   create_backend_directory:
     agent: false
+    code_node_type: stub
     description: Create the backend directory within the source code directory. This
       step is crucial for organizing the project's backend components, ensuring a
       modular and scalable architecture. The 'backend' directory will be used to store
       all server-side code, database schemas, and API definitions, among other resources.
+    implementation: "from pydantic import BaseModel, Field\n\n\nclass CreateSrcDirectoryOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for create_src_directory node outputs.\"\"\"\n   \
+      \ src_directory_path: str = Field(..., description=\"The path to the newly created\
+      \ 'src' directory.\")\n    is_success: bool = Field(..., description=\"Indicates\
+      \ whether the creation of the 'src' directory was successful.\")\n\n\nclass\
+      \ CreateBackendDirectoryOutput(BaseModel):\n    \"\"\"Pydantic model for create_backend_directory\
+      \ node outputs.\"\"\"\n    backend_directory_path: str = Field(..., description=\"\
+      The path to the created backend directory.\")\n    is_success: bool = Field(...,\
+      \ description=\"Whether the creation of the backend directory was successful.\"\
+      )\n\n\ndef create_backend_directory(create_src_directory_input: CreateSrcDirectoryOutput,\
+      \ **kwargs) -> CreateBackendDirectoryOutput:\n    \"\"\"Create the backend directory\
+      \ within the source code directory. This step is crucial for organizing the\
+      \ project's backend components, ensuring a modular and scalable architecture.\
+      \ The 'backend' directory will be used to store all server-side code, database\
+      \ schemas, and API definitions, among other resources.\n\n    Args:\n      \
+      \  create_src_directory_input: Input from the 'create_src_directory' node.\n\
+      \        **kwargs: Additional keyword arguments.\n\n    Returns:\n        CreateBackendDirectoryOutput:\
+      \ Object containing outputs for this node.\n    \"\"\"\n    # TODO: Implement\
+      \ this function\n\n    # Return stub output with placeholder values\n    return\
+      \ CreateBackendDirectoryOutput(\n        backend_directory_path=\"\",\n    \
+      \    is_success=False,\n    )"
     name: create_backend_directory
     nodes_depended_on:
     - create_src_directory
@@ -697,12 +888,37 @@ nodes:
       endpoints. Ensure that the directory structure adheres to best practices in
       software development, such as maintaining a clean separation of concerns and
       facilitating easy navigation and management of code assets.
+    shims: []
   create_build_directory:
     agent: false
+    code_node_type: stub
     description: Creates the build directory within the project root directory, which
       is essential for organizing compiled files and artifacts. This step ensures
       that the build environment is properly set up and ready for subsequent compilation
       tasks.
+    implementation: "from pydantic import BaseModel, Field\n\n\nclass DefineProjectRootDirectoryOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for define_project_root_directory node outputs.\"\"\
+      \"\n    project_root_path: str = Field(..., description=\"The path to the newly\
+      \ created project root directory.\")\n    directory_creation_success: bool =\
+      \ Field(..., description=\"Indicates whether the project root directory was\
+      \ successfully created.\")\n\n\nclass CreateBuildDirectoryOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for create_build_directory node outputs.\"\"\"\n \
+      \   build_directory_path: str = Field(..., description=\"The path to the newly\
+      \ created build directory.\")\n    is_empty: bool = Field(..., description=\"\
+      Whether the build directory is empty after creation.\")\n    permissions_set:\
+      \ bool = Field(..., description=\"Whether the appropriate permissions have been\
+      \ set on the build directory.\")\n\n\ndef create_build_directory(define_project_root_directory_input:\
+      \ DefineProjectRootDirectoryOutput, **kwargs) -> CreateBuildDirectoryOutput:\n\
+      \    \"\"\"Creates the build directory within the project root directory, which\
+      \ is essential for organizing compiled files and artifacts. This step ensures\
+      \ that the build environment is properly set up and ready for subsequent compilation\
+      \ tasks.\n\n    Args:\n        define_project_root_directory_input: Input from\
+      \ the 'define_project_root_directory' node.\n        **kwargs: Additional keyword\
+      \ arguments.\n\n    Returns:\n        CreateBuildDirectoryOutput: Object containing\
+      \ outputs for this node.\n    \"\"\"\n    # TODO: Implement this function\n\n\
+      \    # Return stub output with placeholder values\n    return CreateBuildDirectoryOutput(\n\
+      \        build_directory_path=\"\",\n        is_empty=False,\n        permissions_set=False,\n\
+      \    )"
     name: create_build_directory
     nodes_depended_on:
     - define_project_root_directory
@@ -774,13 +990,39 @@ nodes:
       project project's source code. Ensure that the 'build' directory is created
       in a manner that adheres to best practices for directory structure and organization,
       such as setting appropriate permissions and ensuring it is empty before use.
+    shims: []
   create_developer_guide_directory:
     agent: false
+    code_node_type: stub
     description: This node creates the 'developer_guide' directory within the existing
       'docs' directory. The 'docs' directory is assumed to be already created by the
       parent node 'create_docs_directory'. This step is crucial for maintaining a
       structured and accessible documentation hierarchy, facilitating easy navigation
       and retrieval of developer-specific information.
+    implementation: "from pydantic import BaseModel, Field\n\n\nclass CreateDocsDirectoryOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for create_docs_directory node outputs.\"\"\"\n  \
+      \  docs_directory_path: str = Field(..., description=\"The path to the created\
+      \ documentation directory.\")\n    is_success: bool = Field(..., description=\"\
+      Indicates whether the creation of the documentation directory was successful.\"\
+      )\n\n\nclass CreateDeveloperGuideDirectoryOutput(BaseModel):\n    \"\"\"Pydantic\
+      \ model for create_developer_guide_directory node outputs.\"\"\"\n    docs_directory_path:\
+      \ str = Field(..., description=\"The path to the 'docs' directory.\")\n    developer_guide_directory_path:\
+      \ str = Field(..., description=\"The path to the 'developer_guide' directory.\"\
+      )\n    is_created: bool = Field(..., description=\"Whether the 'developer_guide'\
+      \ directory was successfully created.\")\n\n\ndef create_developer_guide_directory(create_docs_directory_input:\
+      \ CreateDocsDirectoryOutput, **kwargs) -> CreateDeveloperGuideDirectoryOutput:\n\
+      \    \"\"\"This node creates the 'developer_guide' directory within the existing\
+      \ 'docs' directory. The 'docs' directory is assumed to be already created by\
+      \ the parent node 'create_docs_directory'. This step is crucial for maintaining\
+      \ a structured and accessible documentation hierarchy, facilitating easy navigation\
+      \ and retrieval of developer-specific information.\n\n    Args:\n        create_docs_directory_input:\
+      \ Input from the 'create_docs_directory' node.\n        **kwargs: Additional\
+      \ keyword arguments.\n\n    Returns:\n        CreateDeveloperGuideDirectoryOutput:\
+      \ Object containing outputs for this node.\n    \"\"\"\n    # TODO: Implement\
+      \ this function\n\n    # Return stub output with placeholder values\n    return\
+      \ CreateDeveloperGuideDirectoryOutput(\n        docs_directory_path=\"\",\n\
+      \        developer_guide_directory_path=\"\",\n        is_created=False,\n \
+      \   )"
     name: create_developer_guide_directory
     nodes_depended_on:
     - create_docs_directory
@@ -862,11 +1104,33 @@ nodes:
       Then, within the 'docs' directory, instantiate a subdirectory named 'developer_guide'.
       This operation ensures that the project's documentation structure is properly
       organized and includes a dedicated section for developer guides.
+    shims: []
   create_docs_directory:
     agent: false
+    code_node_type: stub
     description: Creates the documentation directory within the project root directory,
       ensuring it is properly structured and ready for storing all relevant project
       documents.
+    implementation: "from pydantic import BaseModel, Field\n\n\nclass DefineProjectRootDirectoryOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for define_project_root_directory node outputs.\"\"\
+      \"\n    project_root_path: str = Field(..., description=\"The path to the newly\
+      \ created project root directory.\")\n    directory_creation_success: bool =\
+      \ Field(..., description=\"Indicates whether the project root directory was\
+      \ successfully created.\")\n\n\nclass CreateDocsDirectoryOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for create_docs_directory node outputs.\"\"\"\n  \
+      \  docs_directory_path: str = Field(..., description=\"The path to the created\
+      \ documentation directory.\")\n    is_success: bool = Field(..., description=\"\
+      Indicates whether the creation of the documentation directory was successful.\"\
+      )\n\n\ndef create_docs_directory(define_project_root_directory_input: DefineProjectRootDirectoryOutput,\
+      \ **kwargs) -> CreateDocsDirectoryOutput:\n    \"\"\"Creates the documentation\
+      \ directory within the project root directory, ensuring it is properly structured\
+      \ and ready for storing all relevant project documents.\n\n    Args:\n     \
+      \   define_project_root_directory_input: Input from the 'define_project_root_directory'\
+      \ node.\n        **kwargs: Additional keyword arguments.\n\n    Returns:\n \
+      \       CreateDocsDirectoryOutput: Object containing outputs for this node.\n\
+      \    \"\"\"\n    # TODO: Implement this function\n\n    # Return stub output\
+      \ with placeholder values\n    return CreateDocsDirectoryOutput(\n        docs_directory_path=\"\
+      \",\n        is_success=False,\n    )"
     name: create_docs_directory
     nodes_depended_on:
     - define_project_root_directory
@@ -944,12 +1208,35 @@ nodes:
       documentation, including user guides, technical specifications, and development
       logs. Ensure that the directory structure is consistent with best practices
       in software engineering to facilitate easy navigation and maintenance.
+    shims: []
   create_integration_tests_directory:
     agent: false
+    code_node_type: stub
     description: This node creates the 'integration_tests' directory within the existing
       'test' directory. The 'integration_tests' directory is crucial for organizing
       and managing integration test scripts and resources, facilitating their easy
       access and maintenance throughout the project lifecycle.
+    implementation: "from pydantic import BaseModel, Field\n\n\nclass CreateTestDirectoryOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for create_test_directory node outputs.\"\"\"\n  \
+      \  test_directory_path: str = Field(..., description=\"The path to the newly\
+      \ created test directory.\")\n    is_created_successfully: bool = Field(...,\
+      \ description=\"Indicates whether the test directory was created successfully.\"\
+      )\n\n\nclass CreateIntegrationTestsDirectoryOutput(BaseModel):\n    \"\"\"Pydantic\
+      \ model for create_integration_tests_directory node outputs.\"\"\"\n    directory_path:\
+      \ str = Field(..., description=\"The path to the created 'integration_tests'\
+      \ directory.\")\n    creation_success: bool = Field(..., description=\"Indicates\
+      \ whether the directory was successfully created.\")\n\n\ndef create_integration_tests_directory(create_test_directory_input:\
+      \ CreateTestDirectoryOutput, **kwargs) -> CreateIntegrationTestsDirectoryOutput:\n\
+      \    \"\"\"This node creates the 'integration_tests' directory within the existing\
+      \ 'test' directory. The 'integration_tests' directory is crucial for organizing\
+      \ and managing integration test scripts and resources, facilitating their easy\
+      \ access and maintenance throughout the project lifecycle.\n\n    Args:\n  \
+      \      create_test_directory_input: Input from the 'create_test_directory' node.\n\
+      \        **kwargs: Additional keyword arguments.\n\n    Returns:\n        CreateIntegrationTestsDirectoryOutput:\
+      \ Object containing outputs for this node.\n    \"\"\"\n    # TODO: Implement\
+      \ this function\n\n    # Return stub output with placeholder values\n    return\
+      \ CreateIntegrationTestsDirectoryOutput(\n        directory_path=\"\",\n   \
+      \     creation_success=False,\n    )"
     name: create_integration_tests_directory
     nodes_depended_on:
     - create_test_directory
@@ -1019,12 +1306,34 @@ nodes:
       This subdirectory will serve as the designated location for storing all integration
       test scripts and resources, ensuring they are organized and accessible for further
       development and execution.
+    shims: []
   create_lexer_directory:
     agent: false
+    code_node_type: stub
     description: This node creates the lexer directory within the source code directory.
       The lexer directory is crucial for organizing and managing all files related
       to the lexical analysis phase of the compiler project, including token definitions,
       lexer implementations, and any associated utilities or configurations.
+    implementation: "from pydantic import BaseModel, Field\n\n\nclass CreateSrcDirectoryOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for create_src_directory node outputs.\"\"\"\n   \
+      \ src_directory_path: str = Field(..., description=\"The path to the newly created\
+      \ 'src' directory.\")\n    is_success: bool = Field(..., description=\"Indicates\
+      \ whether the creation of the 'src' directory was successful.\")\n\n\nclass\
+      \ CreateLexerDirectoryOutput(BaseModel):\n    \"\"\"Pydantic model for create_lexer_directory\
+      \ node outputs.\"\"\"\n    lexer_directory_path: str = Field(..., description=\"\
+      The path to the newly created lexer directory.\")\n    is_success: bool = Field(...,\
+      \ description=\"Indicates whether the creation of the lexer directory was successful.\"\
+      )\n\n\ndef create_lexer_directory(create_src_directory_input: CreateSrcDirectoryOutput,\
+      \ **kwargs) -> CreateLexerDirectoryOutput:\n    \"\"\"This node creates the\
+      \ lexer directory within the source code directory. The lexer directory is crucial\
+      \ for organizing and managing all files related to the lexical analysis phase\
+      \ of the compiler project, including token definitions, lexer implementations,\
+      \ and any associated utilities or configurations.\n\n    Args:\n        create_src_directory_input:\
+      \ Input from the 'create_src_directory' node.\n        **kwargs: Additional\
+      \ keyword arguments.\n\n    Returns:\n        CreateLexerDirectoryOutput: Object\
+      \ containing outputs for this node.\n    \"\"\"\n    # TODO: Implement this\
+      \ function\n\n    # Return stub output with placeholder values\n    return CreateLexerDirectoryOutput(\n\
+      \        lexer_directory_path=\"\",\n        is_success=False,\n    )"
     name: create_lexer_directory
     nodes_depended_on:
     - create_src_directory
@@ -1094,13 +1403,37 @@ nodes:
     prompt: Within the 'src' directory, create a subdirectory named 'lexer'. This
       directory will serve as the container for all lexer-related files and modules,
       ensuring a structured and organized project hierarchy.
+    shims: []
   create_optimizer_directory:
     agent: false
+    code_node_type: stub
     description: This node creates the 'optimizer' directory within the 'src' directory.
       The 'optimizer' directory is crucial for organizing and managing all files related
       to the optimization process, including configuration files, logs, and any custom
       optimizer implementations. It ensures that the project maintains a clean and
       structured layout, which is essential for efficient development and maintenance.
+    implementation: "from pydantic import BaseModel, Field\n\n\nclass CreateSrcDirectoryOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for create_src_directory node outputs.\"\"\"\n   \
+      \ src_directory_path: str = Field(..., description=\"The path to the newly created\
+      \ 'src' directory.\")\n    is_success: bool = Field(..., description=\"Indicates\
+      \ whether the creation of the 'src' directory was successful.\")\n\n\nclass\
+      \ CreateOptimizerDirectoryOutput(BaseModel):\n    \"\"\"Pydantic model for create_optimizer_directory\
+      \ node outputs.\"\"\"\n    directory_path: str = Field(..., description=\"The\
+      \ path to the created 'optimizer' directory.\")\n    creation_success: bool\
+      \ = Field(..., description=\"Indicates whether the directory was successfully\
+      \ created.\")\n\n\ndef create_optimizer_directory(create_src_directory_input:\
+      \ CreateSrcDirectoryOutput, **kwargs) -> CreateOptimizerDirectoryOutput:\n \
+      \   \"\"\"This node creates the 'optimizer' directory within the 'src' directory.\
+      \ The 'optimizer' directory is crucial for organizing and managing all files\
+      \ related to the optimization process, including configuration files, logs,\
+      \ and any custom optimizer implementations. It ensures that the project maintains\
+      \ a clean and structured layout, which is essential for efficient development\
+      \ and maintenance.\n\n    Args:\n        create_src_directory_input: Input from\
+      \ the 'create_src_directory' node.\n        **kwargs: Additional keyword arguments.\n\
+      \n    Returns:\n        CreateOptimizerDirectoryOutput: Object containing outputs\
+      \ for this node.\n    \"\"\"\n    # TODO: Implement this function\n\n    # Return\
+      \ stub output with placeholder values\n    return CreateOptimizerDirectoryOutput(\n\
+      \        directory_path=\"\",\n        creation_success=False,\n    )"
     name: create_optimizer_directory
     nodes_depended_on:
     - create_src_directory
@@ -1180,13 +1513,36 @@ nodes:
       directory will serve as the primary location for storing all optimizer-related
       files and scripts, ensuring they are organized and accessible within the project
       structure.
+    shims: []
   create_parser_directory:
     agent: false
+    code_node_type: stub
     description: This node creates the 'parser' directory within the existing 'src'
       directory. The 'parser' directory is crucial for organizing and managing all
       parser-related files and modules, which are essential for parsing and processing
       data within the compiler project. It ensures that the project structure remains
       consistent and scalable, facilitating easier maintenance and future development.
+    implementation: "from pydantic import BaseModel, Field\n\n\nclass CreateSrcDirectoryOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for create_src_directory node outputs.\"\"\"\n   \
+      \ src_directory_path: str = Field(..., description=\"The path to the newly created\
+      \ 'src' directory.\")\n    is_success: bool = Field(..., description=\"Indicates\
+      \ whether the creation of the 'src' directory was successful.\")\n\n\nclass\
+      \ CreateParserDirectoryOutput(BaseModel):\n    \"\"\"Pydantic model for create_parser_directory\
+      \ node outputs.\"\"\"\n    parser_directory_path: str = Field(..., description=\"\
+      The path to the newly created 'parser' directory.\")\n    is_created: bool =\
+      \ Field(..., description=\"Whether the 'parser' directory was successfully created.\"\
+      )\n\n\ndef create_parser_directory(create_src_directory_input: CreateSrcDirectoryOutput,\
+      \ **kwargs) -> CreateParserDirectoryOutput:\n    \"\"\"This node creates the\
+      \ 'parser' directory within the existing 'src' directory. The 'parser' directory\
+      \ is crucial for organizing and managing all parser-related files and modules,\
+      \ which are essential for parsing and processing data within the compiler project.\
+      \ It ensures that the project structure remains consistent and scalable, facilitating\
+      \ easier maintenance and future development.\n\n    Args:\n        create_src_directory_input:\
+      \ Input from the 'create_src_directory' node.\n        **kwargs: Additional\
+      \ keyword arguments.\n\n    Returns:\n        CreateParserDirectoryOutput: Object\
+      \ containing outputs for this node.\n    \"\"\"\n    # TODO: Implement this\
+      \ function\n\n    # Return stub output with placeholder values\n    return CreateParserDirectoryOutput(\n\
+      \        parser_directory_path=\"\",\n        is_created=False,\n    )"
     name: create_parser_directory
     nodes_depended_on:
     - create_src_directory
@@ -1264,11 +1620,33 @@ nodes:
     prompt: Within the 'src' directory, create a subdirectory named 'parser'. This
       subdirectory will serve as the primary location for storing all parser-related
       files and modules, ensuring a structured and organized project hierarchy.
+    shims: []
   create_src_directory:
     agent: false
+    code_node_type: stub
     description: Creates the source code directory within the project root directory.
       This step is crucial for maintaining a clean and organized project structure,
       facilitating easy access and management of source code files.
+    implementation: "from pydantic import BaseModel, Field\n\n\nclass DefineProjectRootDirectoryOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for define_project_root_directory node outputs.\"\"\
+      \"\n    project_root_path: str = Field(..., description=\"The path to the newly\
+      \ created project root directory.\")\n    directory_creation_success: bool =\
+      \ Field(..., description=\"Indicates whether the project root directory was\
+      \ successfully created.\")\n\n\nclass CreateSrcDirectoryOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for create_src_directory node outputs.\"\"\"\n   \
+      \ src_directory_path: str = Field(..., description=\"The path to the newly created\
+      \ 'src' directory.\")\n    is_success: bool = Field(..., description=\"Indicates\
+      \ whether the creation of the 'src' directory was successful.\")\n\n\ndef create_src_directory(define_project_root_directory_input:\
+      \ DefineProjectRootDirectoryOutput, **kwargs) -> CreateSrcDirectoryOutput:\n\
+      \    \"\"\"Creates the source code directory within the project root directory.\
+      \ This step is crucial for maintaining a clean and organized project structure,\
+      \ facilitating easy access and management of source code files.\n\n    Args:\n\
+      \        define_project_root_directory_input: Input from the 'define_project_root_directory'\
+      \ node.\n        **kwargs: Additional keyword arguments.\n\n    Returns:\n \
+      \       CreateSrcDirectoryOutput: Object containing outputs for this node.\n\
+      \    \"\"\"\n    # TODO: Implement this function\n\n    # Return stub output\
+      \ with placeholder values\n    return CreateSrcDirectoryOutput(\n        src_directory_path=\"\
+      \",\n        is_success=False,\n    )"
     name: create_src_directory
     nodes_depended_on:
     - define_project_root_directory
@@ -1353,10 +1731,32 @@ nodes:
       code files related to the project. Ensure that the directory structure is consistent
       with best practices in software development, including proper naming conventions
       and organization of files.
+    shims: []
   create_test_directory:
     agent: false
+    code_node_type: stub
     description: Creates the test code directory within the project's root directory,
       ensuring a structured and organized environment for testing activities.
+    implementation: "from pydantic import BaseModel, Field\n\n\nclass DefineProjectRootDirectoryOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for define_project_root_directory node outputs.\"\"\
+      \"\n    project_root_path: str = Field(..., description=\"The path to the newly\
+      \ created project root directory.\")\n    directory_creation_success: bool =\
+      \ Field(..., description=\"Indicates whether the project root directory was\
+      \ successfully created.\")\n\n\nclass CreateTestDirectoryOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for create_test_directory node outputs.\"\"\"\n  \
+      \  test_directory_path: str = Field(..., description=\"The path to the newly\
+      \ created test directory.\")\n    is_created_successfully: bool = Field(...,\
+      \ description=\"Indicates whether the test directory was created successfully.\"\
+      )\n\n\ndef create_test_directory(define_project_root_directory_input: DefineProjectRootDirectoryOutput,\
+      \ **kwargs) -> CreateTestDirectoryOutput:\n    \"\"\"Creates the test code directory\
+      \ within the project's root directory, ensuring a structured and organized environment\
+      \ for testing activities.\n\n    Args:\n        define_project_root_directory_input:\
+      \ Input from the 'define_project_root_directory' node.\n        **kwargs: Additional\
+      \ keyword arguments.\n\n    Returns:\n        CreateTestDirectoryOutput: Object\
+      \ containing outputs for this node.\n    \"\"\"\n    # TODO: Implement this\
+      \ function\n\n    # Return stub output with placeholder values\n    return CreateTestDirectoryOutput(\n\
+      \        test_directory_path=\"\",\n        is_created_successfully=False,\n\
+      \    )"
     name: create_test_directory
     nodes_depended_on:
     - define_project_root_directory
@@ -1438,12 +1838,34 @@ nodes:
       files and resources. Ensure that the directory structure is consistent with
       best practices in software development, including proper naming conventions
       and organization to facilitate easy navigation and maintenance.
+    shims: []
   create_unit_tests_directory:
     agent: false
+    code_node_type: stub
     description: Creates the unit tests directory within the test directory of the
       compiler project. This step ensures that there is a dedicated space for organizing
       and managing unit test files, facilitating easier maintenance and execution
       of tests.
+    implementation: "from pydantic import BaseModel, Field\n\n\nclass CreateTestDirectoryOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for create_test_directory node outputs.\"\"\"\n  \
+      \  test_directory_path: str = Field(..., description=\"The path to the newly\
+      \ created test directory.\")\n    is_created_successfully: bool = Field(...,\
+      \ description=\"Indicates whether the test directory was created successfully.\"\
+      )\n\n\nclass CreateUnitTestsDirectoryOutput(BaseModel):\n    \"\"\"Pydantic\
+      \ model for create_unit_tests_directory node outputs.\"\"\"\n    directory_path:\
+      \ str = Field(..., description=\"The path to the created unit tests directory.\"\
+      )\n    creation_success: bool = Field(..., description=\"Indicates whether the\
+      \ directory was successfully created.\")\n\n\ndef create_unit_tests_directory(create_test_directory_input:\
+      \ CreateTestDirectoryOutput, **kwargs) -> CreateUnitTestsDirectoryOutput:\n\
+      \    \"\"\"Creates the unit tests directory within the test directory of the\
+      \ compiler project. This step ensures that there is a dedicated space for organizing\
+      \ and managing unit test files, facilitating easier maintenance and execution\
+      \ of tests.\n\n    Args:\n        create_test_directory_input: Input from the\
+      \ 'create_test_directory' node.\n        **kwargs: Additional keyword arguments.\n\
+      \n    Returns:\n        CreateUnitTestsDirectoryOutput: Object containing outputs\
+      \ for this node.\n    \"\"\"\n    # TODO: Implement this function\n\n    # Return\
+      \ stub output with placeholder values\n    return CreateUnitTestsDirectoryOutput(\n\
+      \        directory_path=\"\",\n        creation_success=False,\n    )"
     name: create_unit_tests_directory
     nodes_depended_on:
     - create_test_directory
@@ -1507,12 +1929,39 @@ nodes:
       test files and scripts associated with the compiler project. Ensure that the
       directory structure is consistent with industry best practices and adheres to
       the project's coding standards.
+    shims: []
   create_user_guide_directory:
     agent: false
+    code_node_type: stub
     description: This node creates a dedicated directory for user guides within the
       existing documentation directory. It follows a systematic approach to ensure
       that all user-related materials are properly segmented and easily locatable,
       maintaining the integrity and clarity of the project's documentation hierarchy.
+    implementation: "from pydantic import BaseModel, Field\n\n\nclass CreateDocsDirectoryOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for create_docs_directory node outputs.\"\"\"\n  \
+      \  docs_directory_path: str = Field(..., description=\"The path to the created\
+      \ documentation directory.\")\n    is_success: bool = Field(..., description=\"\
+      Indicates whether the creation of the documentation directory was successful.\"\
+      )\n\n\nclass CreateUserGuideDirectoryOutput(BaseModel):\n    \"\"\"Pydantic\
+      \ model for create_user_guide_directory node outputs.\"\"\"\n    project_root_path:\
+      \ str = Field(..., description=\"The path to the project root directory.\")\n\
+      \    docs_directory_path: str = Field(..., description=\"The path to the 'docs'\
+      \ directory.\")\n    user_guide_directory_path: str = Field(..., description=\"\
+      The path to the 'user_guide' directory.\")\n    is_success: bool = Field(...,\
+      \ description=\"Whether the creation of the 'user_guide' directory was successful.\"\
+      )\n\n\ndef create_user_guide_directory(create_docs_directory_input: CreateDocsDirectoryOutput,\
+      \ **kwargs) -> CreateUserGuideDirectoryOutput:\n    \"\"\"This node creates\
+      \ a dedicated directory for user guides within the existing documentation directory.\
+      \ It follows a systematic approach to ensure that all user-related materials\
+      \ are properly segmented and easily locatable, maintaining the integrity and\
+      \ clarity of the project's documentation hierarchy.\n\n    Args:\n        create_docs_directory_input:\
+      \ Input from the 'create_docs_directory' node.\n        **kwargs: Additional\
+      \ keyword arguments.\n\n    Returns:\n        CreateUserGuideDirectoryOutput:\
+      \ Object containing outputs for this node.\n    \"\"\"\n    # TODO: Implement\
+      \ this function\n\n    # Return stub output with placeholder values\n    return\
+      \ CreateUserGuideDirectoryOutput(\n        project_root_path=\"\",\n       \
+      \ docs_directory_path=\"\",\n        user_guide_directory_path=\"\",\n     \
+      \   is_success=False,\n    )"
     name: create_user_guide_directory
     nodes_depended_on:
     - create_docs_directory
@@ -1587,11 +2036,29 @@ nodes:
       Then, inside the 'docs' directory, instantiate a subdirectory named 'user_guide'.
       This operation ensures that the user guide content is organized and accessible
       within the project's documentation structure.
+    shims: []
   define_project_root_directory:
     agent: false
+    code_node_type: stub
     description: Establishes the root directory for the project, which will contain
       all necessary files and subdirectories. This step ensures a well-organized structure
       that facilitates easy navigation and management of project assets.
+    implementation: "from pydantic import BaseModel, Field\n\n\nclass DefineProjectRootDirectoryOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for define_project_root_directory node outputs.\"\"\
+      \"\n    project_root_path: str = Field(..., description=\"The path to the newly\
+      \ created project root directory.\")\n    directory_creation_success: bool =\
+      \ Field(..., description=\"Indicates whether the project root directory was\
+      \ successfully created.\")\n\n\ndef define_project_root_directory(general_input:\
+      \ str, **kwargs) -> DefineProjectRootDirectoryOutput:\n    \"\"\"Establishes\
+      \ the root directory for the project, which will contain all necessary files\
+      \ and subdirectories. This step ensures a well-organized structure that facilitates\
+      \ easy navigation and management of project assets.\n\n    Args:\n        general_input:\
+      \ General input string for the root node.\n        **kwargs: Additional keyword\
+      \ arguments.\n\n    Returns:\n        DefineProjectRootDirectoryOutput: Object\
+      \ containing outputs for this node.\n    \"\"\"\n    # TODO: Implement this\
+      \ function\n\n    # Return stub output with placeholder values\n    return DefineProjectRootDirectoryOutput(\n\
+      \        project_root_path=\"\",\n        directory_creation_success=False,\n\
+      \    )"
     name: define_project_root_directory
     nodes_depended_on: []
     nodes_dependent_on: []
@@ -1676,10 +2143,39 @@ nodes:
       on your local machine or remote server. Ensure the directory is accessible and
       has appropriate permissions for read, write, and execute operations. This directory
       will serve as the root for all project files and directories.
+    shims: []
   fix_test_issues:
     agent: false
+    code_node_type: stub
     description: Fixes any issues identified in the test reports by implementing targeted
       solutions and re-running the affected tests to ensure resolution.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass ReviewTestReportsOutput(BaseModel):\n    \"\"\"Pydantic model for\
+      \ review_test_reports node outputs.\"\"\"\n    test_report_summary: str = Field(...,\
+      \ description=\"A summary of the test report, including key findings and recommendations.\"\
+      )\n    identified_issues: List[str] = Field(..., description=\"A list of identified\
+      \ issues from the test reports, including error messages and stack traces.\"\
+      )\n    issue_timestamps: List[str] = Field(..., description=\"A list of timestamps\
+      \ corresponding to the identified issues.\")\n    issue_contexts: List[str]\
+      \ = Field(..., description=\"A list of contexts or additional information related\
+      \ to each identified issue.\")\n    is_approved: bool = Field(..., description=\"\
+      Whether the final test report has been approved based on the review criteria.\"\
+      )\n\n\nclass FixTestIssuesOutput(BaseModel):\n    \"\"\"Pydantic model for fix_test_issues\
+      \ node outputs.\"\"\"\n    issues_fixed_count: int = Field(..., description=\"\
+      Number of issues fixed during the process.\")\n    test_rerun_results: bool\
+      \ = Field(..., description=\"List indicating whether each test was successfully\
+      \ rerun after fixing issues.\")\n    all_issues_resolved: bool = Field(...,\
+      \ description=\"Boolean indicating if all identified issues were resolved.\"\
+      )\n\n\ndef fix_test_issues(review_test_reports_input: ReviewTestReportsOutput,\
+      \ **kwargs) -> FixTestIssuesOutput:\n    \"\"\"Fixes any issues identified in\
+      \ the test reports by implementing targeted solutions and re-running the affected\
+      \ tests to ensure resolution.\n\n    Args:\n        review_test_reports_input:\
+      \ Input from the 'review_test_reports' node.\n        **kwargs: Additional keyword\
+      \ arguments.\n\n    Returns:\n        FixTestIssuesOutput: Object containing\
+      \ outputs for this node.\n    \"\"\"\n    # TODO: Implement this function\n\n\
+      \    # Return stub output with placeholder values\n    return FixTestIssuesOutput(\n\
+      \        issues_fixed_count=0,\n        test_rerun_results=False,\n        all_issues_resolved=False,\n\
+      \    )"
     name: fix_test_issues
     nodes_depended_on:
     - review_test_reports
@@ -1783,12 +2279,58 @@ nodes:
       targeted fixes in the relevant code files, ensuring that all changes are thoroughly
       tested and validated. Re-run the affected tests to confirm that the issues have
       been resolved and that the system behaves as expected.
+    shims: []
   generate_final_test_report:
     agent: false
+    code_node_type: stub
     description: Generates a detailed final test report that summarizes the results
       of the re-ran unit and integration tests. This report includes pass/fail rates,
       error messages, stack traces, and any remaining issues, providing a thorough
       analysis of the testing process.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass ReRunTestsOutput(BaseModel):\n    \"\"\"Pydantic model for re_run_tests\
+      \ node outputs.\"\"\"\n    test_status: str = Field(..., description=\"Status\
+      \ of the test run (e.g., 'success', 'failure')\")\n    pass_count: int = Field(...,\
+      \ description=\"Number of passing tests\")\n    fail_count: int = Field(...,\
+      \ description=\"Number of failing tests\")\n    error_messages: List[str] =\
+      \ Field(..., description=\"List of error messages from failed tests\")\n   \
+      \ stack_traces: List[str] = Field(..., description=\"List of stack traces from\
+      \ failed tests\")\n    performance_metrics: List[float] = Field(..., description=\"\
+      List of performance metrics for each test case\")\n    test_coverage: float\
+      \ = Field(..., description=\"Percentage of code covered by tests\")\n    is_all_tests_passed:\
+      \ bool = Field(..., description=\"Whether all tests passed successfully\")\n\
+      \n\nclass GenerateFinalTestReportOutput(BaseModel):\n    \"\"\"Pydantic model\
+      \ for generate_final_test_report node outputs.\"\"\"\n    test_report_path:\
+      \ str = Field(..., description=\"The file path where the generated test report\
+      \ is saved.\")\n    total_tests: int = Field(..., description=\"Total number\
+      \ of tests run.\")\n    passed_tests: int = Field(..., description=\"Number\
+      \ of tests that passed.\")\n    failed_tests: int = Field(..., description=\"\
+      Number of tests that failed.\")\n    error_messages: List[str] = Field(...,\
+      \ description=\"List of error messages from the failed tests.\")\n    stack_traces:\
+      \ List[str] = Field(..., description=\"List of stack traces from the failed\
+      \ tests.\")\n    remaining_issues: List[str] = Field(..., description=\"List\
+      \ of remaining issues identified in the test reports.\")\n    pass_fail_rates:\
+      \ List[float] = Field(..., description=\"List of pass/fail rates for different\
+      \ types of tests (e.g., unit tests, integration tests).\")\n    performance_metrics:\
+      \ List[float] = Field(..., description=\"List of performance metrics such as\
+      \ execution time and resource utilization for the tests.\")\n    patterns_trends:\
+      \ List[str] = Field(..., description=\"List of patterns and trends identified\
+      \ in the test results.\")\n    improvement_areas: List[str] = Field(..., description=\"\
+      List of potential areas for improvement based on the test results.\")\n\n\n\
+      def generate_final_test_report(re_run_tests_input: ReRunTestsOutput, **kwargs)\
+      \ -> GenerateFinalTestReportOutput:\n    \"\"\"Generates a detailed final test\
+      \ report that summarizes the results of the re-ran unit and integration tests.\
+      \ This report includes pass/fail rates, error messages, stack traces, and any\
+      \ remaining issues, providing a thorough analysis of the testing process.\n\n\
+      \    Args:\n        re_run_tests_input: Input from the 're_run_tests' node.\n\
+      \        **kwargs: Additional keyword arguments.\n\n    Returns:\n        GenerateFinalTestReportOutput:\
+      \ Object containing outputs for this node.\n    \"\"\"\n    # TODO: Implement\
+      \ this function\n\n    # Return stub output with placeholder values\n    return\
+      \ GenerateFinalTestReportOutput(\n        test_report_path=\"\",\n        total_tests=0,\n\
+      \        passed_tests=0,\n        failed_tests=0,\n        error_messages=[],\n\
+      \        stack_traces=[],\n        remaining_issues=[],\n        pass_fail_rates=[],\n\
+      \        performance_metrics=[],\n        patterns_trends=[],\n        improvement_areas=[],\n\
+      \    )"
     name: generate_final_test_report
     nodes_depended_on:
     - re_run_tests
@@ -1921,10 +2463,57 @@ nodes:
       report is structured in a clear, concise manner, with sections dedicated to
       each type of test and its outcomes. Incorporate visual aids such as charts and
       graphs to enhance readability and understanding.
+    shims: []
   generate_integration_test_report:
     agent: false
+    code_node_type: stub
     description: Generates a detailed report from the integration tests, providing
       a thorough analysis of their outcomes and performance metrics.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass RunIntegrationTestsOutput(BaseModel):\n    \"\"\"Pydantic model for\
+      \ run_integration_tests node outputs.\"\"\"\n    test_results_summary: str =\
+      \ Field(..., description=\"A summary of the integration test results.\")\n \
+      \   pass_rate: float = Field(..., description=\"The pass rate of the integration\
+      \ tests, represented as a percentage (0.0 to 1.0).\")\n    fail_rate: float\
+      \ = Field(..., description=\"The fail rate of the integration tests, represented\
+      \ as a percentage (0.0 to 1.0).\")\n    error_messages: List[str] = Field(...,\
+      \ description=\"A list of error messages from the failed integration tests.\"\
+      )\n    stack_traces: List[str] = Field(..., description=\"A list of stack traces\
+      \ corresponding to the error messages from the failed integration tests.\")\n\
+      \    performance_metrics: List[float] = Field(..., description=\"A list of performance\
+      \ metrics such as execution time and resource utilization for each test case.\"\
+      )\n    test_coverage: float = Field(..., description=\"The code coverage achieved\
+      \ by the integration tests, represented as a percentage (0.0 to 1.0).\")\n \
+      \   bottlenecks: List[str] = Field(..., description=\"A list of identified bottlenecks\
+      \ or areas for improvement in the integration tests.\")\n    all_success: bool\
+      \ = Field(..., description=\"Whether all integration tests were successful.\"\
+      )\n\n\nclass GenerateIntegrationTestReportOutput(BaseModel):\n    \"\"\"Pydantic\
+      \ model for generate_integration_test_report node outputs.\"\"\"\n    test_pass_rate:\
+      \ float = Field(..., description=\"The percentage of tests that passed.\")\n\
+      \    test_fail_rate: float = Field(..., description=\"The percentage of tests\
+      \ that failed.\")\n    error_messages: List[str] = Field(..., description=\"\
+      A list of error messages from the failed tests.\")\n    stack_traces: List[str]\
+      \ = Field(..., description=\"A list of stack traces from the failed tests.\"\
+      )\n    issues_found: List[str] = Field(..., description=\"A list of issues identified\
+      \ during the integration tests.\")\n    test_coverage: float = Field(..., description=\"\
+      The overall code coverage achieved by the integration tests.\")\n    execution_time:\
+      \ float = Field(..., description=\"The average execution time of the integration\
+      \ tests in seconds.\")\n    resource_utilization: float = Field(..., description=\"\
+      The average resource utilization (CPU/Memory) during the integration tests.\"\
+      )\n    bottlenecks: List[str] = Field(..., description=\"A list of potential\
+      \ bottlenecks or areas for improvement identified during the integration tests.\"\
+      )\n\n\ndef generate_integration_test_report(run_integration_tests_input: RunIntegrationTestsOutput,\
+      \ **kwargs) -> GenerateIntegrationTestReportOutput:\n    \"\"\"Generates a detailed\
+      \ report from the integration tests, providing a thorough analysis of their\
+      \ outcomes and performance metrics.\n\n    Args:\n        run_integration_tests_input:\
+      \ Input from the 'run_integration_tests' node.\n        **kwargs: Additional\
+      \ keyword arguments.\n\n    Returns:\n        GenerateIntegrationTestReportOutput:\
+      \ Object containing outputs for this node.\n    \"\"\"\n    # TODO: Implement\
+      \ this function\n\n    # Return stub output with placeholder values\n    return\
+      \ GenerateIntegrationTestReportOutput(\n        test_pass_rate=0.0,\n      \
+      \  test_fail_rate=0.0,\n        error_messages=[],\n        stack_traces=[],\n\
+      \        issues_found=[],\n        test_coverage=0.0,\n        execution_time=0.0,\n\
+      \        resource_utilization=0.0,\n        bottlenecks=[],\n    )"
     name: generate_integration_test_report
     nodes_depended_on:
     - run_integration_tests
@@ -2044,12 +2633,52 @@ nodes:
       coverage, performance metrics such as execution time and resource utilization,
       and any potential bottlenecks or areas for improvement. Ensure the report is
       structured in a way that facilitates easy understanding and actionable recommendations.
+    shims: []
   generate_unit_test_report:
     agent: false
+    code_node_type: stub
     description: Generates a detailed and informative report summarizing the results
       of the unit tests, including pass/fail rates, error messages, and performance
       statistics. This report serves as a critical tool for identifying and addressing
       issues in the codebase.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass RunUnitTestsOutput(BaseModel):\n    \"\"\"Pydantic model for run_unit_tests\
+      \ node outputs.\"\"\"\n    test_results_summary: str = Field(..., description=\"\
+      A summary of the test results, including pass/fail rates and any critical issues.\"\
+      )\n    code_coverage_percentage: float = Field(..., description=\"The percentage\
+      \ of code covered by the unit tests.\")\n    performance_benchmarks: List[str]\
+      \ = Field(..., description=\"List of performance benchmarks for each test case,\
+      \ including execution time and resource utilization.\")\n    all_tests_passed:\
+      \ bool = Field(..., description=\"Whether all unit tests passed without any\
+      \ failures.\")\n\n\nclass GenerateUnitTestReportOutput(BaseModel):\n    \"\"\
+      \"Pydantic model for generate_unit_test_report node outputs.\"\"\"\n    test_report_path:\
+      \ str = Field(..., description=\"The file path where the generated unit test\
+      \ report is saved.\")\n    total_tests_run: int = Field(..., description=\"\
+      The total number of unit tests run.\")\n    tests_passed: int = Field(..., description=\"\
+      The number of unit tests that passed.\")\n    tests_failed: int = Field(...,\
+      \ description=\"The number of unit tests that failed.\")\n    pass_rate: float\
+      \ = Field(..., description=\"The percentage of tests that passed.\")\n    fail_rate:\
+      \ float = Field(..., description=\"The percentage of tests that failed.\")\n\
+      \    error_messages: List[str] = Field(..., description=\"A list of error messages\
+      \ from the failed tests.\")\n    stack_traces: List[str] = Field(..., description=\"\
+      A list of stack traces from the failed tests.\")\n    performance_statistics:\
+      \ List[float] = Field(..., description=\"A list of performance statistics for\
+      \ each test case, such as execution time.\")\n    issues_summarized: bool =\
+      \ Field(..., description=\"Whether the issues identified during the test execution\
+      \ have been summarized in the report.\")\n\n\ndef generate_unit_test_report(run_unit_tests_input:\
+      \ RunUnitTestsOutput, **kwargs) -> GenerateUnitTestReportOutput:\n    \"\"\"\
+      Generates a detailed and informative report summarizing the results of the unit\
+      \ tests, including pass/fail rates, error messages, and performance statistics.\
+      \ This report serves as a critical tool for identifying and addressing issues\
+      \ in the codebase.\n\n    Args:\n        run_unit_tests_input: Input from the\
+      \ 'run_unit_tests' node.\n        **kwargs: Additional keyword arguments.\n\n\
+      \    Returns:\n        GenerateUnitTestReportOutput: Object containing outputs\
+      \ for this node.\n    \"\"\"\n    # TODO: Implement this function\n\n    # Return\
+      \ stub output with placeholder values\n    return GenerateUnitTestReportOutput(\n\
+      \        test_report_path=\"\",\n        total_tests_run=0,\n        tests_passed=0,\n\
+      \        tests_failed=0,\n        pass_rate=0.0,\n        fail_rate=0.0,\n \
+      \       error_messages=[],\n        stack_traces=[],\n        performance_statistics=[],\n\
+      \        issues_summarized=False,\n    )"
     name: generate_unit_test_report
     nodes_depended_on:
     - run_unit_tests
@@ -2165,13 +2794,79 @@ nodes:
       the test execution, providing insights into potential bugs or areas for improvement
       in the codebase. Ensure the report is structured in a clear and concise manner,
       suitable for both technical and non-technical stakeholders.
+    shims: []
   link_backend_with_other_components:
     agent: false
+    code_node_type: stub
     description: This node is responsible for linking the compiled backend code with
       the compiled parser, lexer, and optimizer codes. It ensures that all necessary
       dependencies are resolved and that the integration process is seamless and efficient.
       The node also includes steps for static analysis, dependency verification, and
       comprehensive testing to validate the functionality of the integrated system.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass CompileParserCodeOutput(BaseModel):\n    \"\"\"Pydantic model for\
+      \ compile_parser_code node outputs.\"\"\"\n    compilation_status: bool = Field(...,\
+      \ description=\"Whether the compilation was successful.\")\n    object_file_path:\
+      \ str = Field(..., description=\"The path to the generated object file or library.\"\
+      )\n    error_messages: List[str] = Field(..., description=\"List of error messages\
+      \ encountered during the compilation process.\")\n    warning_messages: List[str]\
+      \ = Field(..., description=\"List of warning messages encountered during the\
+      \ compilation process.\")\n    optimization_flags_used: List[str] = Field(...,\
+      \ description=\"List of optimization flags used during the compilation process.\"\
+      )\n\n\nclass CompileLexerCodeOutput(BaseModel):\n    \"\"\"Pydantic model for\
+      \ compile_lexer_code node outputs.\"\"\"\n    compilation_status: bool = Field(...,\
+      \ description=\"Whether the compilation was successful.\")\n    object_file_path:\
+      \ str = Field(..., description=\"Path to the generated object file or static\
+      \ library.\")\n    error_messages: str = Field(..., description=\"List of error\
+      \ messages encountered during compilation.\")\n    warning_messages: str = Field(...,\
+      \ description=\"List of warning messages encountered during compilation.\")\n\
+      \    compilation_time: float = Field(..., description=\"Time taken for the compilation\
+      \ process in seconds.\")\n\n\nclass CompileOptimizerCodeOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for compile_optimizer_code node outputs.\"\"\"\n \
+      \   compiled_file_path: str = Field(..., description=\"The path to the compiled\
+      \ object file or library.\")\n    compilation_success: bool = Field(..., description=\"\
+      Whether the compilation was successful.\")\n    error_messages: str = Field(...,\
+      \ description=\"List of error messages encountered during the compilation process.\"\
+      )\n    warning_messages: str = Field(..., description=\"List of warning messages\
+      \ generated during the compilation process.\")\n    optimization_flags_used:\
+      \ str = Field(..., description=\"List of optimization flags used during the\
+      \ compilation process.\")\n\n\nclass CompileBackendCodeOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for compile_backend_code node outputs.\"\"\"\n   \
+      \ compilation_status: bool = Field(..., description=\"Whether the compilation\
+      \ was successful.\")\n    object_file_path: str = Field(..., description=\"\
+      Path to the generated object file or library.\")\n    unit_test_pass_rate: float\
+      \ = Field(..., description=\"Pass rate of the unit tests for the compiled backend\
+      \ code.\")\n    static_analysis_issues: List[str] = Field(..., description=\"\
+      List of issues identified by static analysis tools during compilation.\")\n\n\
+      \nclass LinkBackendWithOtherComponentsOutput(BaseModel):\n    \"\"\"Pydantic\
+      \ model for link_backend_with_other_components node outputs.\"\"\"\n    integration_status:\
+      \ bool = Field(..., description=\"Whether the integration process was successful.\"\
+      )\n    static_analysis_results: str = Field(..., description=\"List of results\
+      \ from static analysis tools, indicating any identified issues or conflicts.\"\
+      )\n    dependency_verification_results: bool = Field(..., description=\"List\
+      \ of boolean values indicating whether each dependency was verified successfully.\"\
+      )\n    testing_outcomes: str = Field(..., description=\"List of outcomes from\
+      \ the comprehensive testing phase, including pass/fail rates and any noted issues.\"\
+      )\n\n\ndef link_backend_with_other_components(compile_parser_code_input: CompileParserCodeOutput,\
+      \ compile_lexer_code_input: CompileLexerCodeOutput, compile_optimizer_code_input:\
+      \ CompileOptimizerCodeOutput, compile_backend_code_input: CompileBackendCodeOutput,\
+      \ **kwargs) -> LinkBackendWithOtherComponentsOutput:\n    \"\"\"This node is\
+      \ responsible for linking the compiled backend code with the compiled parser,\
+      \ lexer, and optimizer codes. It ensures that all necessary dependencies are\
+      \ resolved and that the integration process is seamless and efficient. The node\
+      \ also includes steps for static analysis, dependency verification, and comprehensive\
+      \ testing to validate the functionality of the integrated system.\n\n    Args:\n\
+      \        compile_parser_code_input: Input from the 'compile_parser_code' node.\n\
+      \        compile_lexer_code_input: Input from the 'compile_lexer_code' node.\n\
+      \        compile_optimizer_code_input: Input from the 'compile_optimizer_code'\
+      \ node.\n        compile_backend_code_input: Input from the 'compile_backend_code'\
+      \ node.\n        **kwargs: Additional keyword arguments.\n\n    Returns:\n \
+      \       LinkBackendWithOtherComponentsOutput: Object containing outputs for\
+      \ this node.\n    \"\"\"\n    # TODO: Implement this function\n\n    # Return\
+      \ stub output with placeholder values\n    return LinkBackendWithOtherComponentsOutput(\n\
+      \        integration_status=False,\n        static_analysis_results=\"\",\n\
+      \        dependency_verification_results=False,\n        testing_outcomes=\"\
+      \",\n    )"
     name: link_backend_with_other_components
     nodes_depended_on:
     - compile_parser_code
@@ -2281,12 +2976,73 @@ nodes:
       by each compilation step and ensure they are correctly linked in the specified
       order. Perform thorough testing to confirm that the integrated system functions
       as expected and meets the required performance standards.
+    shims: []
   link_lexer_with_other_components:
     agent: false
+    code_node_type: stub
     description: This node integrates the compiled lexer code with the parser, optimizer,
       and backend components, ensuring seamless communication and dependency resolution
       between them. It prepares the system for further processing by creating a cohesive
       unit that can be used in subsequent steps of the workflow.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass CompileParserCodeOutput(BaseModel):\n    \"\"\"Pydantic model for\
+      \ compile_parser_code node outputs.\"\"\"\n    compilation_status: bool = Field(...,\
+      \ description=\"Whether the compilation was successful.\")\n    object_file_path:\
+      \ str = Field(..., description=\"The path to the generated object file or library.\"\
+      )\n    error_messages: List[str] = Field(..., description=\"List of error messages\
+      \ encountered during the compilation process.\")\n    warning_messages: List[str]\
+      \ = Field(..., description=\"List of warning messages encountered during the\
+      \ compilation process.\")\n    optimization_flags_used: List[str] = Field(...,\
+      \ description=\"List of optimization flags used during the compilation process.\"\
+      )\n\n\nclass CompileLexerCodeOutput(BaseModel):\n    \"\"\"Pydantic model for\
+      \ compile_lexer_code node outputs.\"\"\"\n    compilation_status: bool = Field(...,\
+      \ description=\"Whether the compilation was successful.\")\n    object_file_path:\
+      \ str = Field(..., description=\"Path to the generated object file or static\
+      \ library.\")\n    error_messages: str = Field(..., description=\"List of error\
+      \ messages encountered during compilation.\")\n    warning_messages: str = Field(...,\
+      \ description=\"List of warning messages encountered during compilation.\")\n\
+      \    compilation_time: float = Field(..., description=\"Time taken for the compilation\
+      \ process in seconds.\")\n\n\nclass CompileOptimizerCodeOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for compile_optimizer_code node outputs.\"\"\"\n \
+      \   compiled_file_path: str = Field(..., description=\"The path to the compiled\
+      \ object file or library.\")\n    compilation_success: bool = Field(..., description=\"\
+      Whether the compilation was successful.\")\n    error_messages: str = Field(...,\
+      \ description=\"List of error messages encountered during the compilation process.\"\
+      )\n    warning_messages: str = Field(..., description=\"List of warning messages\
+      \ generated during the compilation process.\")\n    optimization_flags_used:\
+      \ str = Field(..., description=\"List of optimization flags used during the\
+      \ compilation process.\")\n\n\nclass CompileBackendCodeOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for compile_backend_code node outputs.\"\"\"\n   \
+      \ compilation_status: bool = Field(..., description=\"Whether the compilation\
+      \ was successful.\")\n    object_file_path: str = Field(..., description=\"\
+      Path to the generated object file or library.\")\n    unit_test_pass_rate: float\
+      \ = Field(..., description=\"Pass rate of the unit tests for the compiled backend\
+      \ code.\")\n    static_analysis_issues: List[str] = Field(..., description=\"\
+      List of issues identified by static analysis tools during compilation.\")\n\n\
+      \nclass LinkLexerWithOtherComponentsOutput(BaseModel):\n    \"\"\"Pydantic model\
+      \ for link_lexer_with_other_components node outputs.\"\"\"\n    integration_status:\
+      \ bool = Field(..., description=\"Whether the integration process was successful.\"\
+      )\n    linked_components: str = Field(..., description=\"List of components\
+      \ that were successfully linked.\")\n    test_results: bool = Field(..., description=\"\
+      List of test results indicating whether each component functions correctly after\
+      \ integration.\")\n\n\ndef link_lexer_with_other_components(compile_parser_code_input:\
+      \ CompileParserCodeOutput, compile_lexer_code_input: CompileLexerCodeOutput,\
+      \ compile_optimizer_code_input: CompileOptimizerCodeOutput, compile_backend_code_input:\
+      \ CompileBackendCodeOutput, **kwargs) -> LinkLexerWithOtherComponentsOutput:\n\
+      \    \"\"\"This node integrates the compiled lexer code with the parser, optimizer,\
+      \ and backend components, ensuring seamless communication and dependency resolution\
+      \ between them. It prepares the system for further processing by creating a\
+      \ cohesive unit that can be used in subsequent steps of the workflow.\n\n  \
+      \  Args:\n        compile_parser_code_input: Input from the 'compile_parser_code'\
+      \ node.\n        compile_lexer_code_input: Input from the 'compile_lexer_code'\
+      \ node.\n        compile_optimizer_code_input: Input from the 'compile_optimizer_code'\
+      \ node.\n        compile_backend_code_input: Input from the 'compile_backend_code'\
+      \ node.\n        **kwargs: Additional keyword arguments.\n\n    Returns:\n \
+      \       LinkLexerWithOtherComponentsOutput: Object containing outputs for this\
+      \ node.\n    \"\"\"\n    # TODO: Implement this function\n\n    # Return stub\
+      \ output with placeholder values\n    return LinkLexerWithOtherComponentsOutput(\n\
+      \        integration_status=False,\n        linked_components=\"\",\n      \
+      \  test_results=False,\n    )"
     name: link_lexer_with_other_components
     nodes_depended_on:
     - compile_parser_code
@@ -2385,12 +3141,76 @@ nodes:
       techniques to resolve all dependencies, ensuring that the final binary or library
       is both efficient and robust. Verify the compatibility and interoperability
       of the linked components through comprehensive testing.
+    shims: []
   link_optimizer_with_other_components:
     agent: false
+    code_node_type: stub
     description: Link the compiled optimizer code with the parser, lexer, and backend
       components to create a cohesive and functional system. This step ensures that
       the optimizer can effectively interact with other parts of the application,
       facilitating smooth data flow and processing.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass CompileParserCodeOutput(BaseModel):\n    \"\"\"Pydantic model for\
+      \ compile_parser_code node outputs.\"\"\"\n    compilation_status: bool = Field(...,\
+      \ description=\"Whether the compilation was successful.\")\n    object_file_path:\
+      \ str = Field(..., description=\"The path to the generated object file or library.\"\
+      )\n    error_messages: List[str] = Field(..., description=\"List of error messages\
+      \ encountered during the compilation process.\")\n    warning_messages: List[str]\
+      \ = Field(..., description=\"List of warning messages encountered during the\
+      \ compilation process.\")\n    optimization_flags_used: List[str] = Field(...,\
+      \ description=\"List of optimization flags used during the compilation process.\"\
+      )\n\n\nclass CompileLexerCodeOutput(BaseModel):\n    \"\"\"Pydantic model for\
+      \ compile_lexer_code node outputs.\"\"\"\n    compilation_status: bool = Field(...,\
+      \ description=\"Whether the compilation was successful.\")\n    object_file_path:\
+      \ str = Field(..., description=\"Path to the generated object file or static\
+      \ library.\")\n    error_messages: str = Field(..., description=\"List of error\
+      \ messages encountered during compilation.\")\n    warning_messages: str = Field(...,\
+      \ description=\"List of warning messages encountered during compilation.\")\n\
+      \    compilation_time: float = Field(..., description=\"Time taken for the compilation\
+      \ process in seconds.\")\n\n\nclass CompileOptimizerCodeOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for compile_optimizer_code node outputs.\"\"\"\n \
+      \   compiled_file_path: str = Field(..., description=\"The path to the compiled\
+      \ object file or library.\")\n    compilation_success: bool = Field(..., description=\"\
+      Whether the compilation was successful.\")\n    error_messages: str = Field(...,\
+      \ description=\"List of error messages encountered during the compilation process.\"\
+      )\n    warning_messages: str = Field(..., description=\"List of warning messages\
+      \ generated during the compilation process.\")\n    optimization_flags_used:\
+      \ str = Field(..., description=\"List of optimization flags used during the\
+      \ compilation process.\")\n\n\nclass CompileBackendCodeOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for compile_backend_code node outputs.\"\"\"\n   \
+      \ compilation_status: bool = Field(..., description=\"Whether the compilation\
+      \ was successful.\")\n    object_file_path: str = Field(..., description=\"\
+      Path to the generated object file or library.\")\n    unit_test_pass_rate: float\
+      \ = Field(..., description=\"Pass rate of the unit tests for the compiled backend\
+      \ code.\")\n    static_analysis_issues: List[str] = Field(..., description=\"\
+      List of issues identified by static analysis tools during compilation.\")\n\n\
+      \nclass LinkOptimizerWithOtherComponentsOutput(BaseModel):\n    \"\"\"Pydantic\
+      \ model for link_optimizer_with_other_components node outputs.\"\"\"\n    integration_status:\
+      \ bool = Field(..., description=\"Whether the integration process was successful.\"\
+      )\n    linked_components: List[str] = Field(..., description=\"List of components\
+      \ that were successfully linked.\")\n    static_analysis_results: List[bool]\
+      \ = Field(..., description=\"Results of static analysis checks for each component.\"\
+      )\n    performance_metrics: List[float] = Field(..., description=\"Performance\
+      \ metrics (e.g., execution time) for the integrated system.\")\n    documentation_generated:\
+      \ bool = Field(..., description=\"Whether detailed documentation for the linked\
+      \ components was generated.\")\n\n\ndef link_optimizer_with_other_components(compile_parser_code_input:\
+      \ CompileParserCodeOutput, compile_lexer_code_input: CompileLexerCodeOutput,\
+      \ compile_optimizer_code_input: CompileOptimizerCodeOutput, compile_backend_code_input:\
+      \ CompileBackendCodeOutput, **kwargs) -> LinkOptimizerWithOtherComponentsOutput:\n\
+      \    \"\"\"Link the compiled optimizer code with the parser, lexer, and backend\
+      \ components to create a cohesive and functional system. This step ensures that\
+      \ the optimizer can effectively interact with other parts of the application,\
+      \ facilitating smooth data flow and processing.\n\n    Args:\n        compile_parser_code_input:\
+      \ Input from the 'compile_parser_code' node.\n        compile_lexer_code_input:\
+      \ Input from the 'compile_lexer_code' node.\n        compile_optimizer_code_input:\
+      \ Input from the 'compile_optimizer_code' node.\n        compile_backend_code_input:\
+      \ Input from the 'compile_backend_code' node.\n        **kwargs: Additional\
+      \ keyword arguments.\n\n    Returns:\n        LinkOptimizerWithOtherComponentsOutput:\
+      \ Object containing outputs for this node.\n    \"\"\"\n    # TODO: Implement\
+      \ this function\n\n    # Return stub output with placeholder values\n    return\
+      \ LinkOptimizerWithOtherComponentsOutput(\n        integration_status=False,\n\
+      \        linked_components=[],\n        static_analysis_results=[],\n      \
+      \  performance_metrics=[],\n        documentation_generated=False,\n    )"
     name: link_optimizer_with_other_components
     nodes_depended_on:
     - compile_parser_code
@@ -2519,14 +3339,82 @@ nodes:
       and compatibility between the different modules. Optimize the linking process
       to minimize overhead and ensure efficient execution. Generate detailed documentation
       for the linked components, including API references and usage examples.
+    shims: []
   link_parser_with_other_components:
     agent: false
+    code_node_type: stub
     description: This node integrates the compiled parser code with the lexer, optimizer,
       and backend components, ensuring a seamless and efficient workflow. It involves
       linking the parser code against the respective object files or libraries from
       the lexer, optimizer, and backend compilation steps, using best practices to
       optimize performance and maintain compatibility. The resulting linked binary
       or library is then tested for correctness and functionality.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass CompileParserCodeOutput(BaseModel):\n    \"\"\"Pydantic model for\
+      \ compile_parser_code node outputs.\"\"\"\n    compilation_status: bool = Field(...,\
+      \ description=\"Whether the compilation was successful.\")\n    object_file_path:\
+      \ str = Field(..., description=\"The path to the generated object file or library.\"\
+      )\n    error_messages: List[str] = Field(..., description=\"List of error messages\
+      \ encountered during the compilation process.\")\n    warning_messages: List[str]\
+      \ = Field(..., description=\"List of warning messages encountered during the\
+      \ compilation process.\")\n    optimization_flags_used: List[str] = Field(...,\
+      \ description=\"List of optimization flags used during the compilation process.\"\
+      )\n\n\nclass CompileLexerCodeOutput(BaseModel):\n    \"\"\"Pydantic model for\
+      \ compile_lexer_code node outputs.\"\"\"\n    compilation_status: bool = Field(...,\
+      \ description=\"Whether the compilation was successful.\")\n    object_file_path:\
+      \ str = Field(..., description=\"Path to the generated object file or static\
+      \ library.\")\n    error_messages: str = Field(..., description=\"List of error\
+      \ messages encountered during compilation.\")\n    warning_messages: str = Field(...,\
+      \ description=\"List of warning messages encountered during compilation.\")\n\
+      \    compilation_time: float = Field(..., description=\"Time taken for the compilation\
+      \ process in seconds.\")\n\n\nclass CompileOptimizerCodeOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for compile_optimizer_code node outputs.\"\"\"\n \
+      \   compiled_file_path: str = Field(..., description=\"The path to the compiled\
+      \ object file or library.\")\n    compilation_success: bool = Field(..., description=\"\
+      Whether the compilation was successful.\")\n    error_messages: str = Field(...,\
+      \ description=\"List of error messages encountered during the compilation process.\"\
+      )\n    warning_messages: str = Field(..., description=\"List of warning messages\
+      \ generated during the compilation process.\")\n    optimization_flags_used:\
+      \ str = Field(..., description=\"List of optimization flags used during the\
+      \ compilation process.\")\n\n\nclass CompileBackendCodeOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for compile_backend_code node outputs.\"\"\"\n   \
+      \ compilation_status: bool = Field(..., description=\"Whether the compilation\
+      \ was successful.\")\n    object_file_path: str = Field(..., description=\"\
+      Path to the generated object file or library.\")\n    unit_test_pass_rate: float\
+      \ = Field(..., description=\"Pass rate of the unit tests for the compiled backend\
+      \ code.\")\n    static_analysis_issues: List[str] = Field(..., description=\"\
+      List of issues identified by static analysis tools during compilation.\")\n\n\
+      \nclass LinkParserWithOtherComponentsOutput(BaseModel):\n    \"\"\"Pydantic\
+      \ model for link_parser_with_other_components node outputs.\"\"\"\n    linked_binary_path:\
+      \ str = Field(..., description=\"The path to the linked binary or library file.\"\
+      )\n    integration_test_results: bool = Field(..., description=\"A list of boolean\
+      \ values indicating the success (True) or failure (False) of each integration\
+      \ test case.\")\n    performance_metrics: float = Field(..., description=\"\
+      A list of floating-point numbers representing performance metrics such as execution\
+      \ time and resource utilization for the linked components.\")\n    static_analysis_results:\
+      \ str = Field(..., description=\"A list of strings containing results from static\
+      \ analysis tools, including any warnings or errors identified during the linking\
+      \ process.\")\n\n\ndef link_parser_with_other_components(compile_parser_code_input:\
+      \ CompileParserCodeOutput, compile_lexer_code_input: CompileLexerCodeOutput,\
+      \ compile_optimizer_code_input: CompileOptimizerCodeOutput, compile_backend_code_input:\
+      \ CompileBackendCodeOutput, **kwargs) -> LinkParserWithOtherComponentsOutput:\n\
+      \    \"\"\"This node integrates the compiled parser code with the lexer, optimizer,\
+      \ and backend components, ensuring a seamless and efficient workflow. It involves\
+      \ linking the parser code against the respective object files or libraries from\
+      \ the lexer, optimizer, and backend compilation steps, using best practices\
+      \ to optimize performance and maintain compatibility. The resulting linked binary\
+      \ or library is then tested for correctness and functionality.\n\n    Args:\n\
+      \        compile_parser_code_input: Input from the 'compile_parser_code' node.\n\
+      \        compile_lexer_code_input: Input from the 'compile_lexer_code' node.\n\
+      \        compile_optimizer_code_input: Input from the 'compile_optimizer_code'\
+      \ node.\n        compile_backend_code_input: Input from the 'compile_backend_code'\
+      \ node.\n        **kwargs: Additional keyword arguments.\n\n    Returns:\n \
+      \       LinkParserWithOtherComponentsOutput: Object containing outputs for this\
+      \ node.\n    \"\"\"\n    # TODO: Implement this function\n\n    # Return stub\
+      \ output with placeholder values\n    return LinkParserWithOtherComponentsOutput(\n\
+      \        linked_binary_path=\"\",\n        integration_test_results=False,\n\
+      \        performance_metrics=0.0,\n        static_analysis_results=\"\",\n \
+      \   )"
     name: link_parser_with_other_components
     nodes_depended_on:
     - compile_parser_code
@@ -2643,12 +3531,54 @@ nodes:
       and ensure compatibility across all modules. Verify the integrity of the linked
       binary or library through rigorous testing to confirm that it functions as expected
       within the overall system architecture.
+    shims: []
   package_compiler:
     agent: false
+    code_node_type: stub
     description: Prepare the compiler for distribution by packaging it into a suitable
       format. This involves compressing the binary files, libraries, and documentation,
       ensuring data integrity through checksums, and providing comprehensive installation
       guides.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass PrepareForReleaseOutput(BaseModel):\n    \"\"\"Pydantic model for\
+      \ prepare_for_release node outputs.\"\"\"\n    release_readiness_status: bool\
+      \ = Field(..., description=\"Whether the compiler is ready for release after\
+      \ thorough review and validation.\")\n    performance_metrics: float = Field(...,\
+      \ description=\"List of performance metrics collected during the final integration\
+      \ test.\")\n    code_optimization_level: float = Field(..., description=\"A\
+      \ measure of how much the code has been optimized, ranging from 0 (no optimization)\
+      \ to 1 (fully optimized).\")\n    dependencies_linked_correctly: bool = Field(...,\
+      \ description=\"Whether all dependencies have been correctly linked during the\
+      \ preparation process.\")\n    stakeholder_notification_sent: bool = Field(...,\
+      \ description=\"Whether notifications about the release readiness status have\
+      \ been sent to all relevant stakeholders.\")\n\n\nclass PackageCompilerOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for package_compiler node outputs.\"\"\"\n    package_format:\
+      \ str = Field(..., description=\"The format of the packaged compiler (e.g.,\
+      \ 'tarball', 'ZIP').\")\n    binaries_included: List[str] = Field(..., description=\"\
+      List of binary files included in the package.\")\n    libraries_included: List[str]\
+      \ = Field(..., description=\"List of library files included in the package.\"\
+      )\n    documentation_included: List[str] = Field(..., description=\"List of\
+      \ documentation files included in the package.\")\n    checksums_generated:\
+      \ List[str] = Field(..., description=\"List of checksums generated for the packaged\
+      \ files.\")\n    installation_instructions: str = Field(..., description=\"\
+      Text-based installation instructions provided with the package.\")\n    setup_scripts_included:\
+      \ List[str] = Field(..., description=\"List of interactive setup scripts included\
+      \ in the package.\")\n    versioning_information: str = Field(..., description=\"\
+      Versioning information included in the package.\")\n    release_notes: str =\
+      \ Field(..., description=\"Release notes included in the package.\")\n\n\ndef\
+      \ package_compiler(prepare_for_release_input: PrepareForReleaseOutput, **kwargs)\
+      \ -> PackageCompilerOutput:\n    \"\"\"Prepare the compiler for distribution\
+      \ by packaging it into a suitable format. This involves compressing the binary\
+      \ files, libraries, and documentation, ensuring data integrity through checksums,\
+      \ and providing comprehensive installation guides.\n\n    Args:\n        prepare_for_release_input:\
+      \ Input from the 'prepare_for_release' node.\n        **kwargs: Additional keyword\
+      \ arguments.\n\n    Returns:\n        PackageCompilerOutput: Object containing\
+      \ outputs for this node.\n    \"\"\"\n    # TODO: Implement this function\n\n\
+      \    # Return stub output with placeholder values\n    return PackageCompilerOutput(\n\
+      \        package_format=\"\",\n        binaries_included=[],\n        libraries_included=[],\n\
+      \        documentation_included=[],\n        checksums_generated=[],\n     \
+      \   installation_instructions=\"\",\n        setup_scripts_included=[],\n  \
+      \      versioning_information=\"\",\n        release_notes=\"\",\n    )"
     name: package_compiler
     nodes_depended_on:
     - prepare_for_release
@@ -2842,12 +3772,48 @@ nodes:
       Document the installation process and dependencies in detail, providing both
       text-based instructions and interactive setup scripts. Include versioning information
       and release notes to facilitate tracking and understanding of changes.
+    shims: []
   prepare_for_release:
     agent: false
+    code_node_type: stub
     description: Prepare the compiler for release by ensuring all components are linked
       correctly, optimized for performance, and validated through rigorous testing.
       This step also involves documenting any changes or improvements made during
       the preparation process.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass ApproveFinalTestReportOutput(BaseModel):\n    \"\"\"Pydantic model\
+      \ for approve_final_test_report node outputs.\"\"\"\n    report_approved: bool\
+      \ = Field(..., description=\"Whether the final test report has been approved.\"\
+      )\n    critical_issues_remaining: List[str] = Field(..., description=\"List\
+      \ of critical issues identified in the report that were not resolved.\")\n \
+      \   pass_fail_rates_meet_thresholds: bool = Field(..., description=\"Whether\
+      \ the pass/fail rates in the report meet the specified thresholds.\")\n    error_message_accuracy:\
+      \ bool = Field(..., description=\"Whether the error messages in the report are\
+      \ accurate.\")\n    issue_documentation_completeness: bool = Field(..., description=\"\
+      Whether the issue documentation in the report is complete.\")\n\n\nclass PrepareForReleaseOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for prepare_for_release node outputs.\"\"\"\n    release_readiness_status:\
+      \ bool = Field(..., description=\"Whether the compiler is ready for release\
+      \ after thorough review and validation.\")\n    performance_metrics: float =\
+      \ Field(..., description=\"List of performance metrics collected during the\
+      \ final integration test.\")\n    code_optimization_level: float = Field(...,\
+      \ description=\"A measure of how much the code has been optimized, ranging from\
+      \ 0 (no optimization) to 1 (fully optimized).\")\n    dependencies_linked_correctly:\
+      \ bool = Field(..., description=\"Whether all dependencies have been correctly\
+      \ linked during the preparation process.\")\n    stakeholder_notification_sent:\
+      \ bool = Field(..., description=\"Whether notifications about the release readiness\
+      \ status have been sent to all relevant stakeholders.\")\n\n\ndef prepare_for_release(approve_final_test_report_input:\
+      \ ApproveFinalTestReportOutput, **kwargs) -> PrepareForReleaseOutput:\n    \"\
+      \"\"Prepare the compiler for release by ensuring all components are linked correctly,\
+      \ optimized for performance, and validated through rigorous testing. This step\
+      \ also involves documenting any changes or improvements made during the preparation\
+      \ process.\n\n    Args:\n        approve_final_test_report_input: Input from\
+      \ the 'approve_final_test_report' node.\n        **kwargs: Additional keyword\
+      \ arguments.\n\n    Returns:\n        PrepareForReleaseOutput: Object containing\
+      \ outputs for this node.\n    \"\"\"\n    # TODO: Implement this function\n\n\
+      \    # Return stub output with placeholder values\n    return PrepareForReleaseOutput(\n\
+      \        release_readiness_status=False,\n        performance_metrics=0.0,\n\
+      \        code_optimization_level=0.0,\n        dependencies_linked_correctly=False,\n\
+      \        stakeholder_notification_sent=False,\n    )"
     name: prepare_for_release
     nodes_depended_on:
     - approve_final_test_report
@@ -2979,11 +3945,48 @@ nodes:
       across different environments and configurations. Document any necessary adjustments
       or optimizations in the release notes and ensure that all stakeholders are informed
       of the readiness status.
+    shims: []
   publish_compiler:
     agent: false
+    code_node_type: stub
     description: Publish the compiler to the intended audience through various distribution
       channels such as repositories, websites, or email. This step ensures that the
       compiled software is accessible and verifiable for users and stakeholders.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass PackageCompilerOutput(BaseModel):\n    \"\"\"Pydantic model for package_compiler\
+      \ node outputs.\"\"\"\n    package_format: str = Field(..., description=\"The\
+      \ format of the packaged compiler (e.g., 'tarball', 'ZIP').\")\n    binaries_included:\
+      \ List[str] = Field(..., description=\"List of binary files included in the\
+      \ package.\")\n    libraries_included: List[str] = Field(..., description=\"\
+      List of library files included in the package.\")\n    documentation_included:\
+      \ List[str] = Field(..., description=\"List of documentation files included\
+      \ in the package.\")\n    checksums_generated: List[str] = Field(..., description=\"\
+      List of checksums generated for the packaged files.\")\n    installation_instructions:\
+      \ str = Field(..., description=\"Text-based installation instructions provided\
+      \ with the package.\")\n    setup_scripts_included: List[str] = Field(..., description=\"\
+      List of interactive setup scripts included in the package.\")\n    versioning_information:\
+      \ str = Field(..., description=\"Versioning information included in the package.\"\
+      )\n    release_notes: str = Field(..., description=\"Release notes included\
+      \ in the package.\")\n\n\nclass PublishCompilerOutput(BaseModel):\n    \"\"\"\
+      Pydantic model for publish_compiler node outputs.\"\"\"\n    distribution_channel:\
+      \ str = Field(..., description=\"The channel used for distribution (e.g., 'repository',\
+      \ 'website', 'email')\")\n    upload_status: bool = Field(..., description=\"\
+      Whether the upload was successful\")\n    file_paths: str = Field(..., description=\"\
+      List of file paths for the uploaded files\")\n    checksums: str = Field(...,\
+      \ description=\"List of checksums for the uploaded files to verify integrity\"\
+      )\n    digital_signatures: str = Field(..., description=\"List of digital signatures\
+      \ for the uploaded files to ensure security\")\n\n\ndef publish_compiler(package_compiler_input:\
+      \ PackageCompilerOutput, **kwargs) -> PublishCompilerOutput:\n    \"\"\"Publish\
+      \ the compiler to the intended audience through various distribution channels\
+      \ such as repositories, websites, or email. This step ensures that the compiled\
+      \ software is accessible and verifiable for users and stakeholders.\n\n    Args:\n\
+      \        package_compiler_input: Input from the 'package_compiler' node.\n \
+      \       **kwargs: Additional keyword arguments.\n\n    Returns:\n        PublishCompilerOutput:\
+      \ Object containing outputs for this node.\n    \"\"\"\n    # TODO: Implement\
+      \ this function\n\n    # Return stub output with placeholder values\n    return\
+      \ PublishCompilerOutput(\n        distribution_channel=\"\",\n        upload_status=False,\n\
+      \        file_paths=\"\",\n        checksums=\"\",\n        digital_signatures=\"\
+      \",\n    )"
     name: publish_compiler
     nodes_depended_on:
     - package_compiler
@@ -3090,12 +4093,43 @@ nodes:
       of the compiler, and implement automated deployment pipelines to streamline
       the process. Verify the integrity of the uploaded files using checksums and
       digital signatures to ensure data integrity and security.
+    shims: []
   publish_developer_guide:
     agent: false
+    code_node_type: stub
     description: Publishes the developer guide for the compiler to the appropriate
       platforms, ensuring it is accessible and comprehensive. This involves uploading
       the document to a repository, website, or sending it via email, while also maintaining
       version control and historical records.
+    implementation: "from pydantic import BaseModel, Field\n\n\nclass WriteDeveloperGuideOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for write_developer_guide node outputs.\"\"\"\n  \
+      \  guide_title: str = Field(..., description=\"The title of the developer guide.\"\
+      )\n    guide_version: str = Field(..., description=\"The version number of the\
+      \ developer guide.\")\n    guide_creation_date: str = Field(..., description=\"\
+      The date when the developer guide was created.\")\n    guide_file_path: str\
+      \ = Field(..., description=\"The file path where the developer guide is saved.\"\
+      )\n    guide_content_summary: str = Field(..., description=\"A summary of the\
+      \ content included in the developer guide.\")\n    guide_is_comprehensive: bool\
+      \ = Field(..., description=\"Whether the developer guide is considered comprehensive\
+      \ and covers all necessary aspects.\")\n\n\nclass PublishDeveloperGuideOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for publish_developer_guide node outputs.\"\"\"\n\
+      \    guide_url: str = Field(..., description=\"URL where the developer guide\
+      \ is published\")\n    publication_date: str = Field(..., description=\"Date\
+      \ when the developer guide was published\")\n    published_by: str = Field(...,\
+      \ description=\"Name of the person or team who published the developer guide\"\
+      )\n    is_publication_successful: bool = Field(..., description=\"Whether the\
+      \ publication of the developer guide was successful\")\n\n\ndef publish_developer_guide(write_developer_guide_input:\
+      \ WriteDeveloperGuideOutput, **kwargs) -> PublishDeveloperGuideOutput:\n   \
+      \ \"\"\"Publishes the developer guide for the compiler to the appropriate platforms,\
+      \ ensuring it is accessible and comprehensive. This involves uploading the document\
+      \ to a repository, website, or sending it via email, while also maintaining\
+      \ version control and historical records.\n\n    Args:\n        write_developer_guide_input:\
+      \ Input from the 'write_developer_guide' node.\n        **kwargs: Additional\
+      \ keyword arguments.\n\n    Returns:\n        PublishDeveloperGuideOutput: Object\
+      \ containing outputs for this node.\n    \"\"\"\n    # TODO: Implement this\
+      \ function\n\n    # Return stub output with placeholder values\n    return PublishDeveloperGuideOutput(\n\
+      \        guide_url=\"\",\n        publication_date=\"\",\n        published_by=\"\
+      \",\n        is_publication_successful=False,\n    )"
     name: publish_developer_guide
     nodes_depended_on:
     - write_developer_guide
@@ -3206,10 +4240,45 @@ nodes:
       is accessible and up-to-date, incorporating detailed information about the compiler's
       architecture, coding standards, and development process. Utilize version control
       systems to track changes and maintain historical versions for reference.
+    shims: []
   publish_user_guide:
     agent: false
+    code_node_type: stub
     description: Publishes the user guide for the compiler to the appropriate channels,
       ensuring it is readily available and comprehensive for the target audience.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass WriteUserGuideOutput(BaseModel):\n    \"\"\"Pydantic model for write_user_guide\
+      \ node outputs.\"\"\"\n    guide_title: str = Field(..., description=\"The title\
+      \ of the user guide.\")\n    installation_instructions: List[str] = Field(...,\
+      \ description=\"A list of step-by-step instructions for installing the compiler.\"\
+      )\n    configuration_steps: List[str] = Field(..., description=\"A list of steps\
+      \ for configuring the compiler.\")\n    usage_procedures: List[str] = Field(...,\
+      \ description=\"A list of procedures for using the compiler.\")\n    troubleshooting_tips:\
+      \ List[str] = Field(..., description=\"A list of troubleshooting tips for common\
+      \ issues encountered while using the compiler.\")\n    best_practices: List[str]\
+      \ = Field(..., description=\"A list of best practices for optimizing the use\
+      \ of the compiler.\")\n    screenshots_included: List[bool] = Field(..., description=\"\
+      A list indicating whether each section of the guide includes screenshots.\"\
+      )\n    code_examples_included: List[bool] = Field(..., description=\"A list\
+      \ indicating whether each section of the guide includes code examples.\")\n\
+      \    guide_file_path: str = Field(..., description=\"The file path where the\
+      \ user guide is saved.\")\n\n\nclass PublishUserGuideOutput(BaseModel):\n  \
+      \  \"\"\"Pydantic model for publish_user_guide node outputs.\"\"\"\n    publication_status:\
+      \ str = Field(..., description=\"Status of the publication process (e.g., 'success',\
+      \ 'failure')\")\n    published_channels: List[str] = Field(..., description=\"\
+      List of channels through which the user guide was published (e.g., 'repository',\
+      \ 'website', 'email')\")\n    user_feedback: List[str] = Field(..., description=\"\
+      List of feedback received from users after publishing the guide\")\n\n\ndef\
+      \ publish_user_guide(write_user_guide_input: WriteUserGuideOutput, **kwargs)\
+      \ -> PublishUserGuideOutput:\n    \"\"\"Publishes the user guide for the compiler\
+      \ to the appropriate channels, ensuring it is readily available and comprehensive\
+      \ for the target audience.\n\n    Args:\n        write_user_guide_input: Input\
+      \ from the 'write_user_guide' node.\n        **kwargs: Additional keyword arguments.\n\
+      \n    Returns:\n        PublishUserGuideOutput: Object containing outputs for\
+      \ this node.\n    \"\"\"\n    # TODO: Implement this function\n\n    # Return\
+      \ stub output with placeholder values\n    return PublishUserGuideOutput(\n\
+      \        publication_status=\"\",\n        published_channels=[],\n        user_feedback=[],\n\
+      \    )"
     name: publish_user_guide
     nodes_depended_on:
     - write_user_guide
@@ -3307,12 +4376,45 @@ nodes:
       and easily navigable, with clear instructions for installing, configuring, and
       using the compiler. Include detailed technical specifications, troubleshooting
       tips, and best practices to enhance user experience and support.
+    shims: []
   re_run_tests:
     agent: false
+    code_node_type: stub
     description: Re-runs the unit and integration tests after addressing issues documented
       in the test reports. This step ensures that the application is functioning correctly
       and meets the required quality standards. It also provides new test reports
       for further analysis and validation.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass FixTestIssuesOutput(BaseModel):\n    \"\"\"Pydantic model for fix_test_issues\
+      \ node outputs.\"\"\"\n    issues_fixed_count: int = Field(..., description=\"\
+      Number of issues fixed during the process.\")\n    test_rerun_results: bool\
+      \ = Field(..., description=\"List indicating whether each test was successfully\
+      \ rerun after fixing issues.\")\n    all_issues_resolved: bool = Field(...,\
+      \ description=\"Boolean indicating if all identified issues were resolved.\"\
+      )\n\n\nclass ReRunTestsOutput(BaseModel):\n    \"\"\"Pydantic model for re_run_tests\
+      \ node outputs.\"\"\"\n    test_status: str = Field(..., description=\"Status\
+      \ of the test run (e.g., 'success', 'failure')\")\n    pass_count: int = Field(...,\
+      \ description=\"Number of passing tests\")\n    fail_count: int = Field(...,\
+      \ description=\"Number of failing tests\")\n    error_messages: List[str] =\
+      \ Field(..., description=\"List of error messages from failed tests\")\n   \
+      \ stack_traces: List[str] = Field(..., description=\"List of stack traces from\
+      \ failed tests\")\n    performance_metrics: List[float] = Field(..., description=\"\
+      List of performance metrics for each test case\")\n    test_coverage: float\
+      \ = Field(..., description=\"Percentage of code covered by tests\")\n    is_all_tests_passed:\
+      \ bool = Field(..., description=\"Whether all tests passed successfully\")\n\
+      \n\ndef re_run_tests(fix_test_issues_input: FixTestIssuesOutput, **kwargs) ->\
+      \ ReRunTestsOutput:\n    \"\"\"Re-runs the unit and integration tests after\
+      \ addressing issues documented in the test reports. This step ensures that the\
+      \ application is functioning correctly and meets the required quality standards.\
+      \ It also provides new test reports for further analysis and validation.\n\n\
+      \    Args:\n        fix_test_issues_input: Input from the 'fix_test_issues'\
+      \ node.\n        **kwargs: Additional keyword arguments.\n\n    Returns:\n \
+      \       ReRunTestsOutput: Object containing outputs for this node.\n    \"\"\
+      \"\n    # TODO: Implement this function\n\n    # Return stub output with placeholder\
+      \ values\n    return ReRunTestsOutput(\n        test_status=\"\",\n        pass_count=0,\n\
+      \        fail_count=0,\n        error_messages=[],\n        stack_traces=[],\n\
+      \        performance_metrics=[],\n        test_coverage=0.0,\n        is_all_tests_passed=False,\n\
+      \    )"
     name: re_run_tests
     nodes_depended_on:
     - fix_test_issues
@@ -3427,11 +4529,68 @@ nodes:
       for easy review and automated parsing. Ensure that the tests cover all critical
       paths and edge cases, and incorporate any necessary fixes or optimizations identified
       during the issue resolution process.
+    shims: []
   review_test_reports:
     agent: false
+    code_node_type: stub
     description: Conducts a thorough examination of the unit and integration test
       reports to identify and document any issues, ensuring that all critical information
       is captured and analyzed for continuous improvement.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass GenerateUnitTestReportOutput(BaseModel):\n    \"\"\"Pydantic model\
+      \ for generate_unit_test_report node outputs.\"\"\"\n    test_report_path: str\
+      \ = Field(..., description=\"The file path where the generated unit test report\
+      \ is saved.\")\n    total_tests_run: int = Field(..., description=\"The total\
+      \ number of unit tests run.\")\n    tests_passed: int = Field(..., description=\"\
+      The number of unit tests that passed.\")\n    tests_failed: int = Field(...,\
+      \ description=\"The number of unit tests that failed.\")\n    pass_rate: float\
+      \ = Field(..., description=\"The percentage of tests that passed.\")\n    fail_rate:\
+      \ float = Field(..., description=\"The percentage of tests that failed.\")\n\
+      \    error_messages: List[str] = Field(..., description=\"A list of error messages\
+      \ from the failed tests.\")\n    stack_traces: List[str] = Field(..., description=\"\
+      A list of stack traces from the failed tests.\")\n    performance_statistics:\
+      \ List[float] = Field(..., description=\"A list of performance statistics for\
+      \ each test case, such as execution time.\")\n    issues_summarized: bool =\
+      \ Field(..., description=\"Whether the issues identified during the test execution\
+      \ have been summarized in the report.\")\n\n\nclass GenerateIntegrationTestReportOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for generate_integration_test_report node outputs.\"\
+      \"\"\n    test_pass_rate: float = Field(..., description=\"The percentage of\
+      \ tests that passed.\")\n    test_fail_rate: float = Field(..., description=\"\
+      The percentage of tests that failed.\")\n    error_messages: List[str] = Field(...,\
+      \ description=\"A list of error messages from the failed tests.\")\n    stack_traces:\
+      \ List[str] = Field(..., description=\"A list of stack traces from the failed\
+      \ tests.\")\n    issues_found: List[str] = Field(..., description=\"A list of\
+      \ issues identified during the integration tests.\")\n    test_coverage: float\
+      \ = Field(..., description=\"The overall code coverage achieved by the integration\
+      \ tests.\")\n    execution_time: float = Field(..., description=\"The average\
+      \ execution time of the integration tests in seconds.\")\n    resource_utilization:\
+      \ float = Field(..., description=\"The average resource utilization (CPU/Memory)\
+      \ during the integration tests.\")\n    bottlenecks: List[str] = Field(...,\
+      \ description=\"A list of potential bottlenecks or areas for improvement identified\
+      \ during the integration tests.\")\n\n\nclass ReviewTestReportsOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for review_test_reports node outputs.\"\"\"\n    test_report_summary:\
+      \ str = Field(..., description=\"A summary of the test report, including key\
+      \ findings and recommendations.\")\n    identified_issues: List[str] = Field(...,\
+      \ description=\"A list of identified issues from the test reports, including\
+      \ error messages and stack traces.\")\n    issue_timestamps: List[str] = Field(...,\
+      \ description=\"A list of timestamps corresponding to the identified issues.\"\
+      )\n    issue_contexts: List[str] = Field(..., description=\"A list of contexts\
+      \ or additional information related to each identified issue.\")\n    is_approved:\
+      \ bool = Field(..., description=\"Whether the final test report has been approved\
+      \ based on the review criteria.\")\n\n\ndef review_test_reports(generate_unit_test_report_input:\
+      \ GenerateUnitTestReportOutput, generate_integration_test_report_input: GenerateIntegrationTestReportOutput,\
+      \ **kwargs) -> ReviewTestReportsOutput:\n    \"\"\"Conducts a thorough examination\
+      \ of the unit and integration test reports to identify and document any issues,\
+      \ ensuring that all critical information is captured and analyzed for continuous\
+      \ improvement.\n\n    Args:\n        generate_unit_test_report_input: Input\
+      \ from the 'generate_unit_test_report' node.\n        generate_integration_test_report_input:\
+      \ Input from the 'generate_integration_test_report' node.\n        **kwargs:\
+      \ Additional keyword arguments.\n\n    Returns:\n        ReviewTestReportsOutput:\
+      \ Object containing outputs for this node.\n    \"\"\"\n    # TODO: Implement\
+      \ this function\n\n    # Return stub output with placeholder values\n    return\
+      \ ReviewTestReportsOutput(\n        test_report_summary=\"\",\n        identified_issues=[],\n\
+      \        issue_timestamps=[],\n        issue_contexts=[],\n        is_approved=False,\n\
+      \    )"
     name: review_test_reports
     nodes_depended_on:
     - generate_unit_test_report
@@ -3559,11 +4718,51 @@ nodes:
       context. Additionally, analyze the test results to identify patterns, trends,
       and potential areas for improvement. Provide a comprehensive summary of the
       findings, including recommendations for further testing or debugging.
+    shims: []
   run_integration_tests:
     agent: false
+    code_node_type: stub
     description: Run the integration tests for the entire compiler to verify the correct
       interaction between its components. This step ensures that the compiler functions
       as expected across different modules and scenarios.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass WriteIntegrationTestsOutput(BaseModel):\n    \"\"\"Pydantic model\
+      \ for write_integration_tests node outputs.\"\"\"\n    test_files_count: int\
+      \ = Field(..., description=\"Number of integration test files written.\")\n\
+      \    test_coverage_percentage: float = Field(..., description=\"Percentage of\
+      \ codebase covered by integration tests.\")\n    test_framework_used: str =\
+      \ Field(..., description=\"The testing framework used to develop the integration\
+      \ tests.\")\n    test_files_paths: str = Field(..., description=\"List of paths\
+      \ to the written integration test files.\")\n\n\nclass RunIntegrationTestsOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for run_integration_tests node outputs.\"\"\"\n  \
+      \  test_results_summary: str = Field(..., description=\"A summary of the integration\
+      \ test results.\")\n    pass_rate: float = Field(..., description=\"The pass\
+      \ rate of the integration tests, represented as a percentage (0.0 to 1.0).\"\
+      )\n    fail_rate: float = Field(..., description=\"The fail rate of the integration\
+      \ tests, represented as a percentage (0.0 to 1.0).\")\n    error_messages: List[str]\
+      \ = Field(..., description=\"A list of error messages from the failed integration\
+      \ tests.\")\n    stack_traces: List[str] = Field(..., description=\"A list of\
+      \ stack traces corresponding to the error messages from the failed integration\
+      \ tests.\")\n    performance_metrics: List[float] = Field(..., description=\"\
+      A list of performance metrics such as execution time and resource utilization\
+      \ for each test case.\")\n    test_coverage: float = Field(..., description=\"\
+      The code coverage achieved by the integration tests, represented as a percentage\
+      \ (0.0 to 1.0).\")\n    bottlenecks: List[str] = Field(..., description=\"A\
+      \ list of identified bottlenecks or areas for improvement in the integration\
+      \ tests.\")\n    all_success: bool = Field(..., description=\"Whether all integration\
+      \ tests were successful.\")\n\n\ndef run_integration_tests(write_integration_tests_input:\
+      \ WriteIntegrationTestsOutput, **kwargs) -> RunIntegrationTestsOutput:\n   \
+      \ \"\"\"Run the integration tests for the entire compiler to verify the correct\
+      \ interaction between its components. This step ensures that the compiler functions\
+      \ as expected across different modules and scenarios.\n\n    Args:\n       \
+      \ write_integration_tests_input: Input from the 'write_integration_tests' node.\n\
+      \        **kwargs: Additional keyword arguments.\n\n    Returns:\n        RunIntegrationTestsOutput:\
+      \ Object containing outputs for this node.\n    \"\"\"\n    # TODO: Implement\
+      \ this function\n\n    # Return stub output with placeholder values\n    return\
+      \ RunIntegrationTestsOutput(\n        test_results_summary=\"\",\n        pass_rate=0.0,\n\
+      \        fail_rate=0.0,\n        error_messages=[],\n        stack_traces=[],\n\
+      \        performance_metrics=[],\n        test_coverage=0.0,\n        bottlenecks=[],\n\
+      \        all_success=False,\n    )"
     name: run_integration_tests
     nodes_depended_on:
     - write_integration_tests
@@ -3702,12 +4901,45 @@ nodes:
       coverage metrics, and performance benchmarks. This report should be comprehensive,
       providing insights into the system's behavior under various conditions and identifying
       any potential issues or bottlenecks.
+    shims: []
   run_unit_tests:
     agent: false
+    code_node_type: stub
     description: Run the unit tests for the parser, lexer, optimizer, and backend
       to validate their correctness and performance. Utilize a reliable testing framework
       to execute these tests and produce a thorough report that can be used for further
       analysis and improvement.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass WriteUnitTestsOutput(BaseModel):\n    \"\"\"Pydantic model for write_unit_tests\
+      \ node outputs.\"\"\"\n    test_files_count: int = Field(..., description=\"\
+      Number of unit test files written.\")\n    test_coverage_percentage: float =\
+      \ Field(..., description=\"Percentage of code covered by the unit tests.\")\n\
+      \    test_cases_passed: str = Field(..., description=\"List of names of unit\
+      \ test cases that passed.\")\n    test_cases_failed: str = Field(..., description=\"\
+      List of names of unit test cases that failed.\")\n    test_execution_time: float\
+      \ = Field(..., description=\"Total time taken to execute all unit tests in seconds.\"\
+      )\n    test_results_summary: str = Field(..., description=\"Summary of the unit\
+      \ test results, including pass/fail rates and any critical issues identified.\"\
+      )\n\n\nclass RunUnitTestsOutput(BaseModel):\n    \"\"\"Pydantic model for run_unit_tests\
+      \ node outputs.\"\"\"\n    test_results_summary: str = Field(..., description=\"\
+      A summary of the test results, including pass/fail rates and any critical issues.\"\
+      )\n    code_coverage_percentage: float = Field(..., description=\"The percentage\
+      \ of code covered by the unit tests.\")\n    performance_benchmarks: List[str]\
+      \ = Field(..., description=\"List of performance benchmarks for each test case,\
+      \ including execution time and resource utilization.\")\n    all_tests_passed:\
+      \ bool = Field(..., description=\"Whether all unit tests passed without any\
+      \ failures.\")\n\n\ndef run_unit_tests(write_unit_tests_input: WriteUnitTestsOutput,\
+      \ **kwargs) -> RunUnitTestsOutput:\n    \"\"\"Run the unit tests for the parser,\
+      \ lexer, optimizer, and backend to validate their correctness and performance.\
+      \ Utilize a reliable testing framework to execute these tests and produce a\
+      \ thorough report that can be used for further analysis and improvement.\n\n\
+      \    Args:\n        write_unit_tests_input: Input from the 'write_unit_tests'\
+      \ node.\n        **kwargs: Additional keyword arguments.\n\n    Returns:\n \
+      \       RunUnitTestsOutput: Object containing outputs for this node.\n    \"\
+      \"\"\n    # TODO: Implement this function\n\n    # Return stub output with placeholder\
+      \ values\n    return RunUnitTestsOutput(\n        test_results_summary=\"\"\
+      ,\n        code_coverage_percentage=0.0,\n        performance_benchmarks=[],\n\
+      \        all_tests_passed=False,\n    )"
     name: run_unit_tests
     nodes_depended_on:
     - write_unit_tests
@@ -3841,12 +5073,37 @@ nodes:
       code coverage metrics, and performance benchmarks. This report should be formatted
       for easy readability and integration into continuous integration/continuous
       deployment (CI/CD) pipelines.
+    shims: []
   write_backend_code:
     agent: false
+    code_node_type: stub
     description: Develops and implements the backend code within the specified directory,
       focusing on the generation of target code from an optimized intermediate representation.
       This involves writing efficient, scalable, and well-documented functions that
       adhere to industry standards and best practices.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass CreateBackendDirectoryOutput(BaseModel):\n    \"\"\"Pydantic model\
+      \ for create_backend_directory node outputs.\"\"\"\n    backend_directory_path:\
+      \ str = Field(..., description=\"The path to the created backend directory.\"\
+      )\n    is_success: bool = Field(..., description=\"Whether the creation of the\
+      \ backend directory was successful.\")\n\n\nclass WriteBackendCodeOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for write_backend_code node outputs.\"\"\"\n    code_files_generated:\
+      \ List[str] = Field(..., description=\"List of file names of the generated backend\
+      \ code files.\")\n    unit_tests_generated: List[str] = Field(..., description=\"\
+      List of file names of the generated unit tests for the backend code.\")\n  \
+      \  code_validity: bool = Field(..., description=\"Whether the generated backend\
+      \ code is valid and meets the quality assurance criteria.\")\n\n\ndef write_backend_code(create_backend_directory_input:\
+      \ CreateBackendDirectoryOutput, **kwargs) -> WriteBackendCodeOutput:\n    \"\
+      \"\"Develops and implements the backend code within the specified directory,\
+      \ focusing on the generation of target code from an optimized intermediate representation.\
+      \ This involves writing efficient, scalable, and well-documented functions that\
+      \ adhere to industry standards and best practices.\n\n    Args:\n        create_backend_directory_input:\
+      \ Input from the 'create_backend_directory' node.\n        **kwargs: Additional\
+      \ keyword arguments.\n\n    Returns:\n        WriteBackendCodeOutput: Object\
+      \ containing outputs for this node.\n    \"\"\"\n    # TODO: Implement this\
+      \ function\n\n    # Return stub output with placeholder values\n    return WriteBackendCodeOutput(\n\
+      \        code_files_generated=[],\n        unit_tests_generated=[],\n      \
+      \  code_validity=False,\n    )"
     name: write_backend_code
     nodes_depended_on:
     - create_backend_directory
@@ -3992,12 +5249,44 @@ nodes:
       function thoroughly, providing clear explanations of their purpose, parameters,
       and return values. Integrate unit tests to validate the correctness and reliability
       of the generated code.
+    shims: []
   write_developer_guide:
     agent: false
+    code_node_type: stub
     description: Develops and writes a thorough developer guide for the compiler,
       detailing its architecture, coding standards, and development process. This
       guide serves as a critical resource for new developers and contributors, ensuring
       they have a deep understanding of the system's design and operational requirements.
+    implementation: "from pydantic import BaseModel, Field\n\n\nclass CreateDeveloperGuideDirectoryOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for create_developer_guide_directory node outputs.\"\
+      \"\"\n    docs_directory_path: str = Field(..., description=\"The path to the\
+      \ 'docs' directory.\")\n    developer_guide_directory_path: str = Field(...,\
+      \ description=\"The path to the 'developer_guide' directory.\")\n    is_created:\
+      \ bool = Field(..., description=\"Whether the 'developer_guide' directory was\
+      \ successfully created.\")\n\n\nclass WriteDeveloperGuideOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for write_developer_guide node outputs.\"\"\"\n  \
+      \  guide_title: str = Field(..., description=\"The title of the developer guide.\"\
+      )\n    guide_version: str = Field(..., description=\"The version number of the\
+      \ developer guide.\")\n    guide_creation_date: str = Field(..., description=\"\
+      The date when the developer guide was created.\")\n    guide_file_path: str\
+      \ = Field(..., description=\"The file path where the developer guide is saved.\"\
+      )\n    guide_content_summary: str = Field(..., description=\"A summary of the\
+      \ content included in the developer guide.\")\n    guide_is_comprehensive: bool\
+      \ = Field(..., description=\"Whether the developer guide is considered comprehensive\
+      \ and covers all necessary aspects.\")\n\n\ndef write_developer_guide(create_developer_guide_directory_input:\
+      \ CreateDeveloperGuideDirectoryOutput, **kwargs) -> WriteDeveloperGuideOutput:\n\
+      \    \"\"\"Develops and writes a thorough developer guide for the compiler,\
+      \ detailing its architecture, coding standards, and development process. This\
+      \ guide serves as a critical resource for new developers and contributors, ensuring\
+      \ they have a deep understanding of the system's design and operational requirements.\n\
+      \n    Args:\n        create_developer_guide_directory_input: Input from the\
+      \ 'create_developer_guide_directory' node.\n        **kwargs: Additional keyword\
+      \ arguments.\n\n    Returns:\n        WriteDeveloperGuideOutput: Object containing\
+      \ outputs for this node.\n    \"\"\"\n    # TODO: Implement this function\n\n\
+      \    # Return stub output with placeholder values\n    return WriteDeveloperGuideOutput(\n\
+      \        guide_title=\"\",\n        guide_version=\"\",\n        guide_creation_date=\"\
+      \",\n        guide_file_path=\"\",\n        guide_content_summary=\"\",\n  \
+      \      guide_is_comprehensive=False,\n    )"
     name: write_developer_guide
     nodes_depended_on:
     - create_developer_guide_directory
@@ -4111,13 +5400,40 @@ nodes:
       testing strategies, and deployment guidelines. Ensure the guide is structured
       to facilitate easy navigation and understanding, with clear sections dedicated
       to each aspect of the compiler's architecture and development lifecycle.
+    shims: []
   write_integration_tests:
     agent: false
+    code_node_type: stub
     description: Write integration tests for the entire compiler to ensure that different
       components interact correctly and reliably. This involves creating a suite of
       tests that cover various scenarios and edge cases, using a testing framework
       to structure and execute the tests. The tests will be placed in the 'integration_tests'
       directory, which is created by the preceding node.
+    implementation: "from pydantic import BaseModel, Field\n\n\nclass CreateIntegrationTestsDirectoryOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for create_integration_tests_directory node outputs.\"\
+      \"\"\n    directory_path: str = Field(..., description=\"The path to the created\
+      \ 'integration_tests' directory.\")\n    creation_success: bool = Field(...,\
+      \ description=\"Indicates whether the directory was successfully created.\"\
+      )\n\n\nclass WriteIntegrationTestsOutput(BaseModel):\n    \"\"\"Pydantic model\
+      \ for write_integration_tests node outputs.\"\"\"\n    test_files_count: int\
+      \ = Field(..., description=\"Number of integration test files written.\")\n\
+      \    test_coverage_percentage: float = Field(..., description=\"Percentage of\
+      \ codebase covered by integration tests.\")\n    test_framework_used: str =\
+      \ Field(..., description=\"The testing framework used to develop the integration\
+      \ tests.\")\n    test_files_paths: str = Field(..., description=\"List of paths\
+      \ to the written integration test files.\")\n\n\ndef write_integration_tests(create_integration_tests_directory_input:\
+      \ CreateIntegrationTestsDirectoryOutput, **kwargs) -> WriteIntegrationTestsOutput:\n\
+      \    \"\"\"Write integration tests for the entire compiler to ensure that different\
+      \ components interact correctly and reliably. This involves creating a suite\
+      \ of tests that cover various scenarios and edge cases, using a testing framework\
+      \ to structure and execute the tests. The tests will be placed in the 'integration_tests'\
+      \ directory, which is created by the preceding node.\n\n    Args:\n        create_integration_tests_directory_input:\
+      \ Input from the 'create_integration_tests_directory' node.\n        **kwargs:\
+      \ Additional keyword arguments.\n\n    Returns:\n        WriteIntegrationTestsOutput:\
+      \ Object containing outputs for this node.\n    \"\"\"\n    # TODO: Implement\
+      \ this function\n\n    # Return stub output with placeholder values\n    return\
+      \ WriteIntegrationTestsOutput(\n        test_files_count=0,\n        test_coverage_percentage=0.0,\n\
+      \        test_framework_used=\"\",\n        test_files_paths=\"\",\n    )"
     name: write_integration_tests
     nodes_depended_on:
     - create_integration_tests_directory
@@ -4263,13 +5579,42 @@ nodes:
       which has been created by the previous step. Each test should be designed to
       verify the correct behavior of individual components as well as their interactions,
       using mock objects and stubs where necessary to isolate and test specific functionalities.
+    shims: []
   write_lexer_code:
     agent: false
+    code_node_type: stub
     description: Develops and writes the lexer code, which is responsible for breaking
       down input code into meaningful tokens. This step ensures that the lexer is
       capable of accurately identifying and categorizing different elements of the
       code, such as keywords, identifiers, literals, and operators, while maintaining
       high standards of efficiency and reliability.
+    implementation: "from pydantic import BaseModel, Field\n\n\nclass CreateLexerDirectoryOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for create_lexer_directory node outputs.\"\"\"\n \
+      \   lexer_directory_path: str = Field(..., description=\"The path to the newly\
+      \ created lexer directory.\")\n    is_success: bool = Field(..., description=\"\
+      Indicates whether the creation of the lexer directory was successful.\")\n\n\
+      \nclass WriteLexerCodeOutput(BaseModel):\n    \"\"\"Pydantic model for write_lexer_code\
+      \ node outputs.\"\"\"\n    lexer_code_path: str = Field(..., description=\"\
+      The path to the compiled lexer code.\")\n    token_types: str = Field(..., description=\"\
+      A list of token types defined in the lexer code.\")\n    error_handling_methods:\
+      \ str = Field(..., description=\"A list of error handling methods implemented\
+      \ in the lexer code.\")\n    logging_level: str = Field(..., description=\"\
+      The logging level set in the lexer code for debugging purposes.\")\n    code_coverage_percentage:\
+      \ float = Field(..., description=\"The percentage of code coverage achieved\
+      \ by the unit tests for the lexer code.\")\n\n\ndef write_lexer_code(create_lexer_directory_input:\
+      \ CreateLexerDirectoryOutput, **kwargs) -> WriteLexerCodeOutput:\n    \"\"\"\
+      Develops and writes the lexer code, which is responsible for breaking down input\
+      \ code into meaningful tokens. This step ensures that the lexer is capable of\
+      \ accurately identifying and categorizing different elements of the code, such\
+      \ as keywords, identifiers, literals, and operators, while maintaining high\
+      \ standards of efficiency and reliability.\n\n    Args:\n        create_lexer_directory_input:\
+      \ Input from the 'create_lexer_directory' node.\n        **kwargs: Additional\
+      \ keyword arguments.\n\n    Returns:\n        WriteLexerCodeOutput: Object containing\
+      \ outputs for this node.\n    \"\"\"\n    # TODO: Implement this function\n\n\
+      \    # Return stub output with placeholder values\n    return WriteLexerCodeOutput(\n\
+      \        lexer_code_path=\"\",\n        token_types=\"\",\n        error_handling_methods=\"\
+      \",\n        logging_level=\"\",\n        code_coverage_percentage=0.0,\n  \
+      \  )"
     name: write_lexer_code
     nodes_depended_on:
     - create_lexer_directory
@@ -4367,13 +5712,45 @@ nodes:
       practices and best practices to enhance readability, maintainability, and performance.
       Incorporate error handling mechanisms to manage unexpected input gracefully
       and provide detailed logging for debugging purposes.
+    shims: []
   write_optimizer_code:
     agent: false
+    code_node_type: stub
     description: Develop and write the optimizer code within the specified directory,
       ensuring it includes sophisticated functions for optimizing compiled code through
       various techniques such as loop unrolling, dead code elimination, constant folding,
       and instruction scheduling. This step is crucial for enhancing the performance
       and efficiency of the compiled code.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass CreateOptimizerDirectoryOutput(BaseModel):\n    \"\"\"Pydantic model\
+      \ for create_optimizer_directory node outputs.\"\"\"\n    directory_path: str\
+      \ = Field(..., description=\"The path to the created 'optimizer' directory.\"\
+      )\n    creation_success: bool = Field(..., description=\"Indicates whether the\
+      \ directory was successfully created.\")\n\n\nclass WriteOptimizerCodeOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for write_optimizer_code node outputs.\"\"\"\n   \
+      \ optimizer_code_path: str = Field(..., description=\"The path to the written\
+      \ optimizer code.\")\n    optimization_techniques_used: List[str] = Field(...,\
+      \ description=\"A list of optimization techniques used in the optimizer code.\"\
+      )\n    code_modularity_score: float = Field(..., description=\"A score indicating\
+      \ the modularity of the written optimizer code, ranging from 0 to 1.\")\n  \
+      \  code_efficiency_score: float = Field(..., description=\"A score indicating\
+      \ the efficiency of the written optimizer code, ranging from 0 to 1.\")\n  \
+      \  code_documentation_status: bool = Field(..., description=\"Whether the optimizer\
+      \ code is well-documented.\")\n\n\ndef write_optimizer_code(create_optimizer_directory_input:\
+      \ CreateOptimizerDirectoryOutput, **kwargs) -> WriteOptimizerCodeOutput:\n \
+      \   \"\"\"Develop and write the optimizer code within the specified directory,\
+      \ ensuring it includes sophisticated functions for optimizing compiled code\
+      \ through various techniques such as loop unrolling, dead code elimination,\
+      \ constant folding, and instruction scheduling. This step is crucial for enhancing\
+      \ the performance and efficiency of the compiled code.\n\n    Args:\n      \
+      \  create_optimizer_directory_input: Input from the 'create_optimizer_directory'\
+      \ node.\n        **kwargs: Additional keyword arguments.\n\n    Returns:\n \
+      \       WriteOptimizerCodeOutput: Object containing outputs for this node.\n\
+      \    \"\"\"\n    # TODO: Implement this function\n\n    # Return stub output\
+      \ with placeholder values\n    return WriteOptimizerCodeOutput(\n        optimizer_code_path=\"\
+      \",\n        optimization_techniques_used=[],\n        code_modularity_score=0.0,\n\
+      \        code_efficiency_score=0.0,\n        code_documentation_status=False,\n\
+      \    )"
     name: write_optimizer_code
     nodes_depended_on:
     - create_optimizer_directory
@@ -4516,13 +5893,41 @@ nodes:
       data for informed decision-making. The code should be modular, allowing for
       easy extension and maintenance, and adhere to best practices in software engineering,
       such as writing clean, efficient, and well-documented code.
+    shims: []
   write_parser_code:
     agent: false
+    code_node_type: stub
     description: Write the parser code in the 'parser' directory, focusing on creating
       functions that accurately parse different parts of the language syntax. This
       involves implementing lexical analysis, syntactic parsing, and semantic interpretation
       modules. The code should be modular, efficient, and easy to extend or modify
       as needed.
+    implementation: "from pydantic import BaseModel, Field\n\n\nclass CreateParserDirectoryOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for create_parser_directory node outputs.\"\"\"\n\
+      \    parser_directory_path: str = Field(..., description=\"The path to the newly\
+      \ created 'parser' directory.\")\n    is_created: bool = Field(..., description=\"\
+      Whether the 'parser' directory was successfully created.\")\n\n\nclass WriteParserCodeOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for write_parser_code node outputs.\"\"\"\n    parser_code_path:\
+      \ str = Field(..., description=\"The file path where the parser code has been\
+      \ written.\")\n    code_lines_written: int = Field(..., description=\"The number\
+      \ of lines of code written for the parser.\")\n    is_modular: bool = Field(...,\
+      \ description=\"Whether the parser code is modular and follows best practices.\"\
+      )\n    is_efficient: bool = Field(..., description=\"Whether the parser code\
+      \ is efficient and optimized for performance.\")\n    is_well_documented: bool\
+      \ = Field(..., description=\"Whether the parser code is well-documented with\
+      \ clear explanations and examples.\")\n\n\ndef write_parser_code(create_parser_directory_input:\
+      \ CreateParserDirectoryOutput, **kwargs) -> WriteParserCodeOutput:\n    \"\"\
+      \"Write the parser code in the 'parser' directory, focusing on creating functions\
+      \ that accurately parse different parts of the language syntax. This involves\
+      \ implementing lexical analysis, syntactic parsing, and semantic interpretation\
+      \ modules. The code should be modular, efficient, and easy to extend or modify\
+      \ as needed.\n\n    Args:\n        create_parser_directory_input: Input from\
+      \ the 'create_parser_directory' node.\n        **kwargs: Additional keyword\
+      \ arguments.\n\n    Returns:\n        WriteParserCodeOutput: Object containing\
+      \ outputs for this node.\n    \"\"\"\n    # TODO: Implement this function\n\n\
+      \    # Return stub output with placeholder values\n    return WriteParserCodeOutput(\n\
+      \        parser_code_path=\"\",\n        code_lines_written=0,\n        is_modular=False,\n\
+      \        is_efficient=False,\n        is_well_documented=False,\n    )"
     name: write_parser_code
     nodes_depended_on:
     - create_parser_directory
@@ -4691,13 +6096,44 @@ nodes:
       enhance readability, maintainability, and performance. Implement error handling
       and logging mechanisms to facilitate debugging and monitoring. Ensure the code
       adheres to best coding standards and is well-documented for future reference.
+    shims: []
   write_unit_tests:
     agent: false
+    code_node_type: stub
     description: Write unit tests for the parser, lexer, optimizer, and backend components
       to ensure their functionality and reliability. These tests will be placed in
       the 'unit_tests' directory, which is created by the previous node. The goal
       is to achieve comprehensive coverage, including edge cases and error handling,
       to maintain high-quality software development practices.
+    implementation: "from pydantic import BaseModel, Field\n\n\nclass CreateUnitTestsDirectoryOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for create_unit_tests_directory node outputs.\"\"\"\
+      \n    directory_path: str = Field(..., description=\"The path to the created\
+      \ unit tests directory.\")\n    creation_success: bool = Field(..., description=\"\
+      Indicates whether the directory was successfully created.\")\n\n\nclass WriteUnitTestsOutput(BaseModel):\n\
+      \    \"\"\"Pydantic model for write_unit_tests node outputs.\"\"\"\n    test_files_count:\
+      \ int = Field(..., description=\"Number of unit test files written.\")\n   \
+      \ test_coverage_percentage: float = Field(..., description=\"Percentage of code\
+      \ covered by the unit tests.\")\n    test_cases_passed: str = Field(..., description=\"\
+      List of names of unit test cases that passed.\")\n    test_cases_failed: str\
+      \ = Field(..., description=\"List of names of unit test cases that failed.\"\
+      )\n    test_execution_time: float = Field(..., description=\"Total time taken\
+      \ to execute all unit tests in seconds.\")\n    test_results_summary: str =\
+      \ Field(..., description=\"Summary of the unit test results, including pass/fail\
+      \ rates and any critical issues identified.\")\n\n\ndef write_unit_tests(create_unit_tests_directory_input:\
+      \ CreateUnitTestsDirectoryOutput, **kwargs) -> WriteUnitTestsOutput:\n    \"\
+      \"\"Write unit tests for the parser, lexer, optimizer, and backend components\
+      \ to ensure their functionality and reliability. These tests will be placed\
+      \ in the 'unit_tests' directory, which is created by the previous node. The\
+      \ goal is to achieve comprehensive coverage, including edge cases and error\
+      \ handling, to maintain high-quality software development practices.\n\n   \
+      \ Args:\n        create_unit_tests_directory_input: Input from the 'create_unit_tests_directory'\
+      \ node.\n        **kwargs: Additional keyword arguments.\n\n    Returns:\n \
+      \       WriteUnitTestsOutput: Object containing outputs for this node.\n   \
+      \ \"\"\"\n    # TODO: Implement this function\n\n    # Return stub output with\
+      \ placeholder values\n    return WriteUnitTestsOutput(\n        test_files_count=0,\n\
+      \        test_coverage_percentage=0.0,\n        test_cases_passed=\"\",\n  \
+      \      test_cases_failed=\"\",\n        test_execution_time=0.0,\n        test_results_summary=\"\
+      \",\n    )"
     name: write_unit_tests
     nodes_depended_on:
     - create_unit_tests_directory
@@ -4826,12 +6262,52 @@ nodes:
       to verify the correctness of outputs and handle exceptions gracefully to ensure
       that all potential error conditions are tested. Document each test case with
       clear and concise comments explaining its purpose and expected behavior.
+    shims: []
   write_user_guide:
     agent: false
+    code_node_type: stub
     description: Creates a comprehensive user guide for the compiler, detailing installation,
       configuration, and usage procedures. This guide serves as a primary resource
       for new users and provides valuable insights for experienced ones, ensuring
       they can effectively utilize the compiler's features and functionalities.
+    implementation: "from pydantic import BaseModel, Field\nfrom typing import List\n\
+      \n\nclass CreateUserGuideDirectoryOutput(BaseModel):\n    \"\"\"Pydantic model\
+      \ for create_user_guide_directory node outputs.\"\"\"\n    project_root_path:\
+      \ str = Field(..., description=\"The path to the project root directory.\")\n\
+      \    docs_directory_path: str = Field(..., description=\"The path to the 'docs'\
+      \ directory.\")\n    user_guide_directory_path: str = Field(..., description=\"\
+      The path to the 'user_guide' directory.\")\n    is_success: bool = Field(...,\
+      \ description=\"Whether the creation of the 'user_guide' directory was successful.\"\
+      )\n\n\nclass WriteUserGuideOutput(BaseModel):\n    \"\"\"Pydantic model for\
+      \ write_user_guide node outputs.\"\"\"\n    guide_title: str = Field(..., description=\"\
+      The title of the user guide.\")\n    installation_instructions: List[str] =\
+      \ Field(..., description=\"A list of step-by-step instructions for installing\
+      \ the compiler.\")\n    configuration_steps: List[str] = Field(..., description=\"\
+      A list of steps for configuring the compiler.\")\n    usage_procedures: List[str]\
+      \ = Field(..., description=\"A list of procedures for using the compiler.\"\
+      )\n    troubleshooting_tips: List[str] = Field(..., description=\"A list of\
+      \ troubleshooting tips for common issues encountered while using the compiler.\"\
+      )\n    best_practices: List[str] = Field(..., description=\"A list of best practices\
+      \ for optimizing the use of the compiler.\")\n    screenshots_included: List[bool]\
+      \ = Field(..., description=\"A list indicating whether each section of the guide\
+      \ includes screenshots.\")\n    code_examples_included: List[bool] = Field(...,\
+      \ description=\"A list indicating whether each section of the guide includes\
+      \ code examples.\")\n    guide_file_path: str = Field(..., description=\"The\
+      \ file path where the user guide is saved.\")\n\n\ndef write_user_guide(create_user_guide_directory_input:\
+      \ CreateUserGuideDirectoryOutput, **kwargs) -> WriteUserGuideOutput:\n    \"\
+      \"\"Creates a comprehensive user guide for the compiler, detailing installation,\
+      \ configuration, and usage procedures. This guide serves as a primary resource\
+      \ for new users and provides valuable insights for experienced ones, ensuring\
+      \ they can effectively utilize the compiler's features and functionalities.\n\
+      \n    Args:\n        create_user_guide_directory_input: Input from the 'create_user_guide_directory'\
+      \ node.\n        **kwargs: Additional keyword arguments.\n\n    Returns:\n \
+      \       WriteUserGuideOutput: Object containing outputs for this node.\n   \
+      \ \"\"\"\n    # TODO: Implement this function\n\n    # Return stub output with\
+      \ placeholder values\n    return WriteUserGuideOutput(\n        guide_title=\"\
+      \",\n        installation_instructions=[],\n        configuration_steps=[],\n\
+      \        usage_procedures=[],\n        troubleshooting_tips=[],\n        best_practices=[],\n\
+      \        screenshots_included=[],\n        code_examples_included=[],\n    \
+      \    guide_file_path=\"\",\n    )"
     name: write_user_guide
     nodes_depended_on:
     - create_user_guide_directory
@@ -4977,3 +6453,4 @@ nodes:
       headings and subheadings, and includes screenshots and code examples where appropriate.
       Additionally, provide troubleshooting tips and best practices to help users
       resolve common issues and optimize their experience.
+    shims: []
