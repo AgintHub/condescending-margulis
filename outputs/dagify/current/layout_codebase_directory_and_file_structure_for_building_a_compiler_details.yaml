@@ -1,0 +1,444 @@
+dag_type: plain_text
+description: A workflow for laying out the codebase directory and file structure for
+  building a compiler, ensuring that each step is independent and can be executed
+  concurrently where possible.
+name: layout_codebase_directory_and_file_structure_for_building_a_compiler
+nodes:
+  approve_final_test_report:
+    agent: false
+    description: Approve the final test report.
+    name: approve_final_test_report
+    nodes_depended_on:
+    - generate_final_test_report
+    nodes_dependent_on:
+    - prepare_for_release
+    prompt: Review the final test report and approve it if all tests pass and no critical
+      issues remain.
+  compile_backend_code:
+    agent: false
+    description: Compile the backend code.
+    name: compile_backend_code
+    nodes_depended_on:
+    - write_backend_code
+    nodes_dependent_on:
+    - link_backend_with_other_components
+    prompt: Compile the backend code in the 'backend' directory. Ensure it produces
+      an object file or library.
+  compile_lexer_code:
+    agent: false
+    description: Compile the lexer code.
+    name: compile_lexer_code
+    nodes_depended_on:
+    - write_lexer_code
+    nodes_dependent_on:
+    - link_lexer_with_other_components
+    prompt: Compile the lexer code in the 'lexer' directory. Ensure it produces an
+      object file or library.
+  compile_optimizer_code:
+    agent: false
+    description: Compile the optimizer code.
+    name: compile_optimizer_code
+    nodes_depended_on:
+    - write_optimizer_code
+    nodes_dependent_on:
+    - link_optimizer_with_other_components
+    prompt: Compile the optimizer code in the 'optimizer' directory. Ensure it produces
+      an object file or library.
+  compile_parser_code:
+    agent: false
+    description: Compile the parser code.
+    name: compile_parser_code
+    nodes_depended_on:
+    - write_parser_code
+    nodes_dependent_on:
+    - link_parser_with_other_components
+    prompt: Compile the parser code in the 'parser' directory. Ensure it produces
+      an object file or library.
+  create_backend_directory:
+    agent: false
+    description: Create the backend directory within the source code directory.
+    name: create_backend_directory
+    nodes_depended_on:
+    - create_src_directory
+    nodes_dependent_on:
+    - write_backend_code
+    prompt: Inside the 'src' directory, create a subdirectory named 'backend'.
+  create_build_directory:
+    agent: false
+    description: Create the build directory.
+    name: create_build_directory
+    nodes_depended_on:
+    - define_project_root_directory
+    nodes_dependent_on:
+    - compile_source_code
+    - run_tests
+    prompt: Inside the 'compiler_project' directory, create a subdirectory named 'build'.
+  create_developer_guide_directory:
+    agent: false
+    description: Create the developer guide directory within the documentation directory.
+    name: create_developer_guide_directory
+    nodes_depended_on:
+    - create_docs_directory
+    nodes_dependent_on:
+    - write_developer_guide
+    prompt: Inside the 'docs' directory, create a subdirectory named 'developer_guide'.
+  create_docs_directory:
+    agent: false
+    description: Create the documentation directory.
+    name: create_docs_directory
+    nodes_depended_on:
+    - define_project_root_directory
+    nodes_dependent_on:
+    - create_user_guide_directory
+    - create_developer_guide_directory
+    prompt: Inside the 'compiler_project' directory, create a subdirectory named 'docs'.
+  create_integration_tests_directory:
+    agent: false
+    description: Create the integration tests directory within the test directory.
+    name: create_integration_tests_directory
+    nodes_depended_on:
+    - create_test_directory
+    nodes_dependent_on:
+    - write_integration_tests
+    prompt: Inside the 'test' directory, create a subdirectory named 'integration_tests'.
+  create_lexer_directory:
+    agent: false
+    description: Create the lexer directory within the source code directory.
+    name: create_lexer_directory
+    nodes_depended_on:
+    - create_src_directory
+    nodes_dependent_on:
+    - write_lexer_code
+    prompt: Inside the 'src' directory, create a subdirectory named 'lexer'.
+  create_optimizer_directory:
+    agent: false
+    description: Create the optimizer directory within the source code directory.
+    name: create_optimizer_directory
+    nodes_depended_on:
+    - create_src_directory
+    nodes_dependent_on:
+    - write_optimizer_code
+    prompt: Inside the 'src' directory, create a subdirectory named 'optimizer'.
+  create_parser_directory:
+    agent: false
+    description: Create the parser directory within the source code directory.
+    name: create_parser_directory
+    nodes_depended_on:
+    - create_src_directory
+    nodes_dependent_on:
+    - write_parser_code
+    prompt: Inside the 'src' directory, create a subdirectory named 'parser'.
+  create_src_directory:
+    agent: false
+    description: Create the source code directory.
+    name: create_src_directory
+    nodes_depended_on:
+    - define_project_root_directory
+    nodes_dependent_on:
+    - create_parser_directory
+    - create_lexer_directory
+    - create_optimizer_directory
+    - create_backend_directory
+    prompt: Inside the 'compiler_project' directory, create a subdirectory named 'src'.
+  create_test_directory:
+    agent: false
+    description: Create the test code directory.
+    name: create_test_directory
+    nodes_depended_on:
+    - define_project_root_directory
+    nodes_dependent_on:
+    - create_unit_tests_directory
+    - create_integration_tests_directory
+    prompt: Inside the 'compiler_project' directory, create a subdirectory named 'test'.
+  create_unit_tests_directory:
+    agent: false
+    description: Create the unit tests directory within the test directory.
+    name: create_unit_tests_directory
+    nodes_depended_on:
+    - create_test_directory
+    nodes_dependent_on:
+    - write_unit_tests
+    prompt: Inside the 'test' directory, create a subdirectory named 'unit_tests'.
+  create_user_guide_directory:
+    agent: false
+    description: Create the user guide directory within the documentation directory.
+    name: create_user_guide_directory
+    nodes_depended_on:
+    - create_docs_directory
+    nodes_dependent_on:
+    - write_user_guide
+    prompt: Inside the 'docs' directory, create a subdirectory named 'user_guide'.
+  define_project_root_directory:
+    agent: false
+    description: Create the root directory for the project.
+    name: define_project_root_directory
+    nodes_depended_on: []
+    nodes_dependent_on:
+    - create_src_directory
+    - create_test_directory
+    - create_docs_directory
+    - create_build_directory
+    prompt: Create a directory named 'compiler_project' in your preferred location
+      on your local machine or remote server.
+  fix_test_issues:
+    agent: false
+    description: Fix any issues identified in the test reports.
+    name: fix_test_issues
+    nodes_depended_on:
+    - review_test_reports
+    nodes_dependent_on:
+    - re_run_tests
+    prompt: Address the issues documented in the test reports. Update the relevant
+      code files and re-run the tests.
+  generate_final_test_report:
+    agent: false
+    description: Generate a final test report.
+    name: generate_final_test_report
+    nodes_depended_on:
+    - re_run_tests
+    nodes_dependent_on:
+    - approve_final_test_report
+    prompt: Generate a final test report summarizing the results of the re-ran tests.
+      Include pass/fail rates, error messages, and any remaining issues.
+  generate_integration_test_report:
+    agent: false
+    description: Generate a report from the integration tests.
+    name: generate_integration_test_report
+    nodes_depended_on:
+    - run_integration_tests
+    nodes_dependent_on:
+    - review_test_reports
+    prompt: Generate a report summarizing the results of the integration tests. Include
+      pass/fail rates, error messages, and any issues found.
+  generate_unit_test_report:
+    agent: false
+    description: Generate a report from the unit tests.
+    name: generate_unit_test_report
+    nodes_depended_on:
+    - run_unit_tests
+    nodes_dependent_on:
+    - review_test_reports
+    prompt: Generate a report summarizing the results of the unit tests. Include pass/fail
+      rates, error messages, and any issues found.
+  link_backend_with_other_components:
+    agent: false
+    description: Link the backend code with other components.
+    name: link_backend_with_other_components
+    nodes_depended_on:
+    - compile_parser_code
+    - compile_lexer_code
+    - compile_optimizer_code
+    - compile_backend_code
+    nodes_dependent_on:
+    - finalize_linking
+    prompt: Link the backend code with the parser, lexer, and optimizer codes. Ensure
+      all necessary dependencies are resolved.
+  link_lexer_with_other_components:
+    agent: false
+    description: Link the lexer code with other components.
+    name: link_lexer_with_other_components
+    nodes_depended_on:
+    - compile_parser_code
+    - compile_lexer_code
+    - compile_optimizer_code
+    - compile_backend_code
+    nodes_dependent_on:
+    - finalize_linking
+    prompt: Link the lexer code with the parser, optimizer, and backend codes. Ensure
+      all necessary dependencies are resolved.
+  link_optimizer_with_other_components:
+    agent: false
+    description: Link the optimizer code with other components.
+    name: link_optimizer_with_other_components
+    nodes_depended_on:
+    - compile_parser_code
+    - compile_lexer_code
+    - compile_optimizer_code
+    - compile_backend_code
+    nodes_dependent_on:
+    - finalize_linking
+    prompt: Link the optimizer code with the parser, lexer, and backend codes. Ensure
+      all necessary dependencies are resolved.
+  link_parser_with_other_components:
+    agent: false
+    description: Link the parser code with other components.
+    name: link_parser_with_other_components
+    nodes_depended_on:
+    - compile_parser_code
+    - compile_lexer_code
+    - compile_optimizer_code
+    - compile_backend_code
+    nodes_dependent_on:
+    - finalize_linking
+    prompt: Link the parser code with the lexer, optimizer, and backend codes. Ensure
+      all necessary dependencies are resolved.
+  package_compiler:
+    agent: false
+    description: Package the compiler for distribution.
+    name: package_compiler
+    nodes_depended_on:
+    - prepare_for_release
+    nodes_dependent_on:
+    - publish_compiler
+    prompt: Package the compiler into a distributable format such as a tarball or
+      ZIP file. Include all necessary binaries and documentation.
+  prepare_for_release:
+    agent: false
+    description: Prepare the compiler for release.
+    name: prepare_for_release
+    nodes_depended_on:
+    - approve_final_test_report
+    nodes_dependent_on:
+    - package_compiler
+    prompt: Prepare the compiler for release by ensuring all components are linked
+      correctly and the final test report is approved.
+  publish_compiler:
+    agent: false
+    description: Publish the compiler to the intended audience.
+    name: publish_compiler
+    nodes_depended_on:
+    - package_compiler
+    nodes_dependent_on: []
+    prompt: Publish the packaged compiler to the intended audience. This could involve
+      uploading it to a repository, website, or distributing it via email.
+  publish_developer_guide:
+    agent: false
+    description: Publish the developer guide.
+    name: publish_developer_guide
+    nodes_depended_on:
+    - write_developer_guide
+    nodes_dependent_on: []
+    prompt: Publish the developer guide to the intended audience. This could involve
+      uploading it to a repository, website, or distributing it via email.
+  publish_user_guide:
+    agent: false
+    description: Publish the user guide.
+    name: publish_user_guide
+    nodes_depended_on:
+    - write_user_guide
+    nodes_dependent_on: []
+    prompt: Publish the user guide to the intended audience. This could involve uploading
+      it to a repository, website, or distributing it via email.
+  re_run_tests:
+    agent: false
+    description: Re-run the tests after fixing issues.
+    name: re_run_tests
+    nodes_depended_on:
+    - fix_test_issues
+    nodes_dependent_on:
+    - generate_final_test_report
+    prompt: Re-run the unit and integration tests to ensure all issues have been resolved.
+      Generate new test reports.
+  review_test_reports:
+    agent: false
+    description: Review the test reports for any issues.
+    name: review_test_reports
+    nodes_depended_on:
+    - generate_unit_test_report
+    - generate_integration_test_report
+    nodes_dependent_on:
+    - fix_test_issues
+    prompt: Review the unit and integration test reports. Identify any failures or
+      errors and document them.
+  run_integration_tests:
+    agent: false
+    description: Run the integration tests.
+    name: run_integration_tests
+    nodes_depended_on:
+    - write_integration_tests
+    nodes_dependent_on:
+    - generate_integration_test_report
+    prompt: Run the integration tests located in the 'integration_tests' directory.
+      Use the testing framework to execute all tests and generate a report.
+  run_unit_tests:
+    agent: false
+    description: Run the unit tests.
+    name: run_unit_tests
+    nodes_depended_on:
+    - write_unit_tests
+    nodes_dependent_on:
+    - generate_unit_test_report
+    prompt: Run the unit tests located in the 'unit_tests' directory. Use the testing
+      framework to execute all tests and generate a report.
+  write_backend_code:
+    agent: false
+    description: Write the backend code.
+    name: write_backend_code
+    nodes_depended_on:
+    - create_backend_directory
+    nodes_dependent_on:
+    - compile_backend_code
+    prompt: Write the backend code in the 'backend' directory. Ensure it includes
+      functions for generating target code from optimized intermediate representation.
+  write_developer_guide:
+    agent: false
+    description: Write the developer guide for the compiler.
+    name: write_developer_guide
+    nodes_depended_on:
+    - create_developer_guide_directory
+    nodes_dependent_on:
+    - publish_developer_guide
+    prompt: Write the developer guide in the 'developer_guide' directory. Include
+      detailed information about the architecture, coding standards, and development
+      process.
+  write_integration_tests:
+    agent: false
+    description: Write integration tests for the entire compiler.
+    name: write_integration_tests
+    nodes_depended_on:
+    - create_integration_tests_directory
+    nodes_dependent_on:
+    - run_integration_tests
+    prompt: Write integration tests for the entire compiler in the 'integration_tests'
+      directory. Test the interaction between different components of the compiler.
+  write_lexer_code:
+    agent: false
+    description: Write the lexer code.
+    name: write_lexer_code
+    nodes_depended_on:
+    - create_lexer_directory
+    nodes_dependent_on:
+    - compile_lexer_code
+    prompt: Write the lexer code in the 'lexer' directory. Ensure it includes functions
+      for tokenizing input code.
+  write_optimizer_code:
+    agent: false
+    description: Write the optimizer code.
+    name: write_optimizer_code
+    nodes_depended_on:
+    - create_optimizer_directory
+    nodes_dependent_on:
+    - compile_optimizer_code
+    prompt: Write the optimizer code in the 'optimizer' directory. Ensure it includes
+      functions for optimizing compiled code.
+  write_parser_code:
+    agent: false
+    description: Write the parser code.
+    name: write_parser_code
+    nodes_depended_on:
+    - create_parser_directory
+    nodes_dependent_on:
+    - compile_parser_code
+    prompt: Write the parser code in the 'parser' directory. Ensure it includes functions
+      for parsing different parts of the language syntax.
+  write_unit_tests:
+    agent: false
+    description: Write unit tests for the parser, lexer, optimizer, and backend.
+    name: write_unit_tests
+    nodes_depended_on:
+    - create_unit_tests_directory
+    nodes_dependent_on:
+    - run_unit_tests
+    prompt: Write unit tests for the parser, lexer, optimizer, and backend in the
+      'unit_tests' directory. Use a testing framework like JUnit or PyTest to ensure
+      comprehensive coverage.
+  write_user_guide:
+    agent: false
+    description: Write the user guide for the compiler.
+    name: write_user_guide
+    nodes_depended_on:
+    - create_user_guide_directory
+    nodes_dependent_on:
+    - publish_user_guide
+    prompt: Write the user guide in the 'user_guide' directory. Include instructions
+      for installing, configuring, and using the compiler.

@@ -1,0 +1,78 @@
+dag_type: plain_text
+description: Develop a clear, step-by-step explanation of quantum mechanics for a
+  general audience.
+name: explain_quantum_mechanics
+nodes:
+  apply_quantum_mechanics_to_real_life:
+    agent: false
+    description: Explain practical applications and implications of quantum mechanics
+      in everyday life.
+    name: apply_quantum_mechanics_to_real_life
+    nodes_depended_on:
+    - discuss_measurement_problem
+    nodes_dependent_on: []
+    prompt: Highlight the relevance of quantum mechanics to real-world phenomena,
+      such as computing, materials science, and medical imaging.
+  define_classical_world:
+    agent: false
+    description: Define the classical understanding of the physical world.
+    name: define_classical_world
+    nodes_depended_on: []
+    nodes_dependent_on: []
+    prompt: Describe the classical worldview and its reliance on determinism and locality.
+  describe_particle_behavior:
+    agent: false
+    description: Describe the behavior of particles in the quantum world.
+    name: describe_particle_behavior
+    nodes_depended_on:
+    - introduce_quantum_concepts
+    nodes_dependent_on: []
+    prompt: Outline the characteristics of particles in the quantum world, including
+      wave-like behavior, quantization, and probabilistic outcomes.
+  describe_quantum_teleportation:
+    agent: false
+    description: Describe the concept of quantum teleportation.
+    name: describe_quantum_teleportation
+    nodes_depended_on:
+    - introduce_quantum_states
+    nodes_dependent_on: []
+    prompt: Explain the process of quantum teleportation, highlighting its implications
+      for quantum communication and cryptography.
+  discuss_measurement_problem:
+    agent: false
+    description: Discuss the implications of measurement in quantum mechanics.
+    name: discuss_measurement_problem
+    nodes_depended_on:
+    - explain_schrödinger_equation
+    nodes_dependent_on: []
+    prompt: Explore the consequences of measurement in quantum mechanics, including
+      wave function collapse and the role of observation.
+  explain_schrödinger_equation:
+    agent: false
+    description: Explain the Schrödinger equation and its significance.
+    name: explain_schrödinger_equation
+    nodes_depended_on:
+    - introduce_quantum_concepts
+    nodes_dependent_on: []
+    prompt: Derive and explain the Schrödinger equation, demonstrating its role in
+      predicting the quantum behavior of particles.
+  introduce_quantum_concepts:
+    agent: false
+    description: 'Introduce basic quantum concepts: wave-particle duality, superposition,
+      entanglement, and uncertainty principle.'
+    name: introduce_quantum_concepts
+    nodes_depended_on:
+    - define_classical_world
+    nodes_dependent_on: []
+    prompt: Explain the fundamental principles that distinguish quantum mechanics
+      from classical physics. Focus on wave-particle duality, superposition, entanglement,
+      and the uncertainty principle.
+  introduce_quantum_states:
+    agent: false
+    description: Define and explain quantum states and their properties.
+    name: introduce_quantum_states
+    nodes_depended_on:
+    - describe_particle_behavior
+    nodes_dependent_on: []
+    prompt: Describe the characteristics of quantum states, including superposition,
+      entanglement, and the use of wave functions to represent states.
