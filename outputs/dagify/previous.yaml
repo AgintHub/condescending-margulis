@@ -1,4 +1,4 @@
-dag_type: plain_text
+dag_type: typed
 description: Generated workflow from UI.
 name: layout_codebase_directory_and_file_structure_for_building_a_compiler
 nodes:
@@ -10,6 +10,23 @@ nodes:
     nodes_depended_on:
     - generate_final_test_report
     nodes_dependent_on: []
+    output_structure:
+    - description: Whether the final test report has been approved.
+      key: report_approved
+      type: bool
+    - description: List of critical issues identified in the report that were not
+        resolved.
+      key: critical_issues_remaining
+      type: List[str]
+    - description: Whether the pass/fail rates in the report meet the specified thresholds.
+      key: pass_fail_rates_meet_thresholds
+      type: bool
+    - description: Whether the error messages in the report are accurate.
+      key: error_message_accuracy
+      type: bool
+    - description: Whether the issue documentation in the report is complete.
+      key: issue_documentation_completeness
+      type: bool
     prompt: Review the final test report generated from the re-ran tests. Ensure that
       all critical issues have been addressed and that the pass/fail rates meet the
       specified thresholds. Verify the accuracy of error messages and the completeness
@@ -25,6 +42,19 @@ nodes:
     nodes_depended_on:
     - write_backend_code
     nodes_dependent_on: []
+    output_structure:
+    - description: Whether the compilation was successful.
+      key: compilation_status
+      type: bool
+    - description: Path to the generated object file or library.
+      key: object_file_path
+      type: str
+    - description: Pass rate of the unit tests for the compiled backend code.
+      key: unit_test_pass_rate
+      type: float
+    - description: List of issues identified by static analysis tools during compilation.
+      key: static_analysis_issues
+      type: List[str]
     prompt: Compile the backend code located in the 'backend' directory. Ensure that
       the compilation process generates an object file or library, which includes
       optimized functions for generating target code from the intermediate representation.
@@ -41,6 +71,22 @@ nodes:
     nodes_depended_on:
     - write_lexer_code
     nodes_dependent_on: []
+    output_structure:
+    - description: Whether the compilation was successful.
+      key: compilation_status
+      type: bool
+    - description: Path to the generated object file or static library.
+      key: object_file_path
+      type: str
+    - description: List of error messages encountered during compilation.
+      key: error_messages
+      type: List[str]
+    - description: List of warning messages encountered during compilation.
+      key: warning_messages
+      type: List[str]
+    - description: Time taken for the compilation process in seconds.
+      key: compilation_time
+      type: float
     prompt: Compile the lexer code located in the 'lexer' directory using a C++ compiler
       with optimization flags enabled. Ensure the compilation process generates an
       object file or static library that is compatible with the subsequent steps in
@@ -57,6 +103,22 @@ nodes:
     nodes_depended_on:
     - write_optimizer_code
     nodes_dependent_on: []
+    output_structure:
+    - description: The path to the compiled object file or library.
+      key: compiled_file_path
+      type: str
+    - description: Whether the compilation was successful.
+      key: compilation_success
+      type: bool
+    - description: List of error messages encountered during the compilation process.
+      key: error_messages
+      type: List[str]
+    - description: List of warning messages generated during the compilation process.
+      key: warning_messages
+      type: List[str]
+    - description: List of optimization flags used during the compilation process.
+      key: optimization_flags_used
+      type: List[str]
     prompt: Compile the optimizer code located in the 'optimizer' directory using
       a high-performance compiler with optimization flags enabled. Ensure the compilation
       process generates an object file or library that is compatible with the project's
@@ -74,6 +136,22 @@ nodes:
     nodes_depended_on:
     - write_parser_code
     nodes_dependent_on: []
+    output_structure:
+    - description: Whether the compilation was successful.
+      key: compilation_status
+      type: bool
+    - description: The path to the generated object file or library.
+      key: object_file_path
+      type: str
+    - description: List of error messages encountered during the compilation process.
+      key: error_messages
+      type: List[str]
+    - description: List of warning messages encountered during the compilation process.
+      key: warning_messages
+      type: List[str]
+    - description: List of optimization flags used during the compilation process.
+      key: optimization_flags_used
+      type: List[str]
     prompt: Compile the parser code located in the 'parser' directory using a state-of-the-art
       compiler with optimization flags enabled. Ensure the compilation process generates
       an efficient object file or library that supports dynamic linking and is compatible
@@ -90,6 +168,13 @@ nodes:
     nodes_depended_on:
     - create_src_directory
     nodes_dependent_on: []
+    output_structure:
+    - description: The path to the created backend directory.
+      key: backend_directory_path
+      type: str
+    - description: Whether the creation of the backend directory was successful.
+      key: is_success
+      type: bool
     prompt: Within the 'src' directory, create a subdirectory named 'backend'. This
       directory will serve as the primary container for all backend-related files
       and directories, including server-side logic, database interactions, and API
@@ -106,6 +191,17 @@ nodes:
     nodes_depended_on:
     - define_project_root_directory
     nodes_dependent_on: []
+    output_structure:
+    - description: The path to the newly created build directory.
+      key: build_directory_path
+      type: str
+    - description: Whether the build directory is empty after creation.
+      key: is_empty
+      type: bool
+    - description: Whether the appropriate permissions have been set on the build
+        directory.
+      key: permissions_set
+      type: bool
     prompt: Within the 'compiler_project' directory, create a subdirectory named 'build'.
       This subdirectory will serve as the primary workspace for compiling and building
       project project's source code. Ensure that the 'build' directory is created
@@ -122,6 +218,16 @@ nodes:
     nodes_depended_on:
     - create_docs_directory
     nodes_dependent_on: []
+    output_structure:
+    - description: The path to the 'docs' directory.
+      key: docs_directory_path
+      type: str
+    - description: The path to the 'developer_guide' directory.
+      key: developer_guide_directory_path
+      type: str
+    - description: Whether the 'developer_guide' directory was successfully created.
+      key: is_created
+      type: bool
     prompt: Within the 'compiler_project' directory, create a subdirectory named 'docs'.
       Then, within the 'docs' directory, instantiate a subdirectory named 'developer_guide'.
       This operation ensures that the project's documentation structure is properly
@@ -135,6 +241,14 @@ nodes:
     nodes_depended_on:
     - define_project_root_directory
     nodes_dependent_on: []
+    output_structure:
+    - description: The path to the created documentation directory.
+      key: docs_directory_path
+      type: str
+    - description: Indicates whether the creation of the documentation directory was
+        successful.
+      key: is_success
+      type: bool
     prompt: Within the 'compiler_project' directory, create a subdirectory named 'docs'.
       This directory will serve as the primary repository for all project-related
       documentation, including user guides, technical specifications, and development
@@ -150,6 +264,13 @@ nodes:
     nodes_depended_on:
     - create_test_directory
     nodes_dependent_on: []
+    output_structure:
+    - description: The path to the created 'integration_tests' directory.
+      key: directory_path
+      type: str
+    - description: Indicates whether the directory was successfully created.
+      key: creation_success
+      type: bool
     prompt: Within the 'test' directory, create a subdirectory named 'integration_tests'.
       This subdirectory will serve as the designated location for storing all integration
       test scripts and resources, ensuring they are organized and accessible for further
@@ -164,6 +285,13 @@ nodes:
     nodes_depended_on:
     - create_src_directory
     nodes_dependent_on: []
+    output_structure:
+    - description: The path to the newly created lexer directory.
+      key: lexer_directory_path
+      type: str
+    - description: Indicates whether the creation of the lexer directory was successful.
+      key: is_success
+      type: bool
     prompt: Within the 'src' directory, create a subdirectory named 'lexer'. This
       directory will serve as the container for all lexer-related files and modules,
       ensuring a structured and organized project hierarchy.
@@ -178,6 +306,13 @@ nodes:
     nodes_depended_on:
     - create_src_directory
     nodes_dependent_on: []
+    output_structure:
+    - description: The path to the created 'optimizer' directory.
+      key: directory_path
+      type: str
+    - description: Indicates whether the directory was successfully created.
+      key: creation_success
+      type: bool
     prompt: Within the 'src' directory, create a subdirectory named 'optimizer'. This
       directory will serve as the primary location for storing all optimizer-related
       files and scripts, ensuring they are organized and accessible within the project
@@ -193,6 +328,13 @@ nodes:
     nodes_depended_on:
     - create_src_directory
     nodes_dependent_on: []
+    output_structure:
+    - description: The path to the newly created 'parser' directory.
+      key: parser_directory_path
+      type: str
+    - description: Whether the 'parser' directory was successfully created.
+      key: is_created
+      type: bool
     prompt: Within the 'src' directory, create a subdirectory named 'parser'. This
       subdirectory will serve as the primary location for storing all parser-related
       files and modules, ensuring a structured and organized project hierarchy.
@@ -205,6 +347,13 @@ nodes:
     nodes_depended_on:
     - define_project_root_directory
     nodes_dependent_on: []
+    output_structure:
+    - description: The path to the newly created 'src' directory.
+      key: src_directory_path
+      type: str
+    - description: Indicates whether the creation of the 'src' directory was successful.
+      key: is_success
+      type: bool
     prompt: Within the 'compiler_project' directory, create a subdirectory named 'src'.
       This subdirectory will serve as the primary location for storing all source
       code files related to the project. Ensure that the directory structure is consistent
@@ -218,6 +367,13 @@ nodes:
     nodes_depended_on:
     - define_project_root_directory
     nodes_dependent_on: []
+    output_structure:
+    - description: The path to the newly created test directory.
+      key: test_directory_path
+      type: str
+    - description: Indicates whether the test directory was created successfully.
+      key: is_created_successfully
+      type: bool
     prompt: Within the 'compiler_project' directory, create a subdirectory named 'test'.
       This directory will serve as the designated location for storing all test code
       files and resources. Ensure that the directory structure is consistent with
@@ -233,6 +389,13 @@ nodes:
     nodes_depended_on:
     - create_test_directory
     nodes_dependent_on: []
+    output_structure:
+    - description: The path to the created unit tests directory.
+      key: directory_path
+      type: str
+    - description: Indicates whether the directory was successfully created.
+      key: creation_success
+      type: bool
     prompt: Within the 'test' directory, create a subdirectory named 'unit_tests'.
       This subdirectory will serve as the designated location for storing all unit
       test files and scripts associated with the compiler project. Ensure that the
@@ -248,6 +411,19 @@ nodes:
     nodes_depended_on:
     - create_docs_directory
     nodes_dependent_on: []
+    output_structure:
+    - description: The path to the project root directory.
+      key: project_root_path
+      type: str
+    - description: The path to the 'docs' directory.
+      key: docs_directory_path
+      type: str
+    - description: The path to the 'user_guide' directory.
+      key: user_guide_directory_path
+      type: str
+    - description: Whether the creation of the 'user_guide' directory was successful.
+      key: is_success
+      type: bool
     prompt: Within the 'compiler_project' directory, create a subdirectory named 'docs'.
       Then, inside the 'docs' directory, instantiate a subdirectory named 'user_guide'.
       This operation ensures that the user guide content is organized and accessible
@@ -260,6 +436,13 @@ nodes:
     name: define_project_root_directory
     nodes_depended_on: []
     nodes_dependent_on: []
+    output_structure:
+    - description: The path to the newly created project root directory.
+      key: project_root_path
+      type: str
+    - description: Indicates whether the project root directory was successfully created.
+      key: directory_creation_success
+      type: bool
     prompt: Create a directory named 'compiler_project' in your preferred location
       on your local machine or remote server. Ensure the directory is accessible and
       has appropriate permissions for read, write, and execute operations. This directory
@@ -272,6 +455,17 @@ nodes:
     nodes_depended_on:
     - review_test_reports
     nodes_dependent_on: []
+    output_structure:
+    - description: Number of issues fixed during the process.
+      key: issues_fixed_count
+      type: int
+    - description: List indicating whether each test was successfully rerun after
+        fixing issues.
+      key: test_rerun_results
+      type: List[bool]
+    - description: Boolean indicating if all identified issues were resolved.
+      key: all_issues_resolved
+      type: bool
     prompt: Conduct a thorough analysis of the identified and integration test reports
       to identify any failures or errors. Utilize advanced debugging techniques and
       static code analysis tools to pinpoint the root causes of these issues. Implement
@@ -288,6 +482,42 @@ nodes:
     nodes_depended_on:
     - re_run_tests
     nodes_dependent_on: []
+    output_structure:
+    - description: The file path where the generated test report is saved.
+      key: test_report_path
+      type: str
+    - description: Total number of tests run.
+      key: total_tests
+      type: int
+    - description: Number of tests that passed.
+      key: passed_tests
+      type: int
+    - description: Number of tests that failed.
+      key: failed_tests
+      type: int
+    - description: List of error messages from the failed tests.
+      key: error_messages
+      type: List[str]
+    - description: List of stack traces from the failed tests.
+      key: stack_traces
+      type: List[str]
+    - description: List of remaining issues identified in the test reports.
+      key: remaining_issues
+      type: List[str]
+    - description: List of pass/fail rates for different types of tests (e.g., unit
+        tests, integration tests).
+      key: pass_fail_rates
+      type: List[float]
+    - description: List of performance metrics such as execution time and resource
+        utilization for the tests.
+      key: performance_metrics
+      type: List[float]
+    - description: List of patterns and trends identified in the test results.
+      key: patterns_trends
+      type: List[str]
+    - description: List of potential areas for improvement based on the test results.
+      key: improvement_areas
+      type: List[str]
     prompt: Generate a comprehensive final test report summarizing the results of
       the re-ran unit and integration tests. Include detailed pass/fail rates, error
       messages, stack traces, and any remaining issues. Utilize advanced analytics
@@ -303,6 +533,36 @@ nodes:
     nodes_depended_on:
     - run_integration_tests
     nodes_dependent_on: []
+    output_structure:
+    - description: The percentage of tests that passed.
+      key: test_pass_rate
+      type: float
+    - description: The percentage of tests that failed.
+      key: test_fail_rate
+      type: float
+    - description: A list of error messages from the failed tests.
+      key: error_messages
+      type: List[str]
+    - description: A list of stack traces from the failed tests.
+      key: stack_traces
+      type: List[str]
+    - description: A list of issues identified during the integration tests.
+      key: issues_found
+      type: List[str]
+    - description: The overall code coverage achieved by the integration tests.
+      key: test_coverage
+      type: float
+    - description: The average execution time of the integration tests in seconds.
+      key: execution_time
+      type: float
+    - description: The average resource utilization (CPU/Memory) during the integration
+        tests.
+      key: resource_utilization
+      type: float
+    - description: A list of potential bottlenecks or areas for improvement identified
+        during the integration tests.
+      key: bottlenecks
+      type: List[str]
     prompt: Generate a comprehensive report summarizing the results of the integration
       tests. This report should include detailed pass/fail rates, error messages,
       stack traces, and any issues found. Additionally, provide insights into test
@@ -319,6 +579,39 @@ nodes:
     nodes_depended_on:
     - run_unit_tests
     nodes_dependent_on: []
+    output_structure:
+    - description: The file path where the generated unit test report is saved.
+      key: test_report_path
+      type: str
+    - description: The total number of unit tests run.
+      key: total_tests_run
+      type: int
+    - description: The number of unit tests that passed.
+      key: tests_passed
+      type: int
+    - description: The number of unit tests that failed.
+      key: tests_failed
+      type: int
+    - description: The percentage of tests that passed.
+      key: pass_rate
+      type: float
+    - description: The percentage of tests that failed.
+      key: fail_rate
+      type: float
+    - description: A list of error messages from the failed tests.
+      key: error_messages
+      type: List[str]
+    - description: A list of stack traces from the failed tests.
+      key: stack_traces
+      type: List[str]
+    - description: A list of performance statistics for each test case, such as execution
+        time.
+      key: performance_statistics
+      type: List[float]
+    - description: Whether the issues identified during the test execution have been
+        summarized in the report.
+      key: issues_summarized
+      type: bool
     prompt: Generate a comprehensive unit test report by analyzing the output from
       the 'unit_tests' directory. This report should include detailed metrics such
       as pass/fail rates, error messages, stack traces, and performance statistics
@@ -340,6 +633,22 @@ nodes:
     - compile_optimizer_code
     - compile_backend_code
     nodes_dependent_on: []
+    output_structure:
+    - description: Whether the integration process was successful.
+      key: integration_status
+      type: bool
+    - description: List of results from static analysis tools, indicating any identified
+        issues or conflicts.
+      key: static_analysis_results
+      type: List[str]
+    - description: List of boolean values indicating whether each dependency was verified
+        successfully.
+      key: dependency_verification_results
+      type: List[bool]
+    - description: List of outcomes from the comprehensive testing phase, including
+        pass/fail rates and any noted issues.
+      key: testing_outcomes
+      type: List[str]
     prompt: Integrate the compiled backend code with the compiled parser, lexer, and
       optimizer codes. Ensure that all necessary dependencies are resolved and that
       the integration process adheres to best practices for modularity and maintainability.
@@ -361,6 +670,17 @@ nodes:
     - compile_optimizer_code
     - compile_backend_code
     nodes_dependent_on: []
+    output_structure:
+    - description: Whether the integration process was successful.
+      key: integration_status
+      type: bool
+    - description: List of components that were successfully linked.
+      key: linked_components
+      type: List[str]
+    - description: List of test results indicating whether each component functions
+        correctly after integration.
+      key: test_results
+      type: List[bool]
     prompt: Integrate the compiled lexer code with the parser, optimizer, and backend
       components. Ensure that the lexer's tokenization capabilities are seamlessly
       connected to the parser's syntax analysis, the optimizer's performance enhancement
@@ -381,6 +701,22 @@ nodes:
     - compile_optimizer_code
     - compile_backend_code
     nodes_dependent_on: []
+    output_structure:
+    - description: Whether the integration process was successful.
+      key: integration_status
+      type: bool
+    - description: List of components that were successfully linked.
+      key: linked_components
+      type: List[str]
+    - description: Results of static analysis checks for each component.
+      key: static_analysis_results
+      type: List[bool]
+    - description: Performance metrics (e.g., execution time) for the integrated system.
+      key: performance_metrics
+      type: List[float]
+    - description: Whether detailed documentation for the linked components was generated.
+      key: documentation_generated
+      type: bool
     prompt: Integrate the compiled optimizer code with the parser, lexer, and backend
       components. Ensure that the integration process is seamless and that all necessary
       dependencies are resolved. Utilize static analysis tools to verify type safety
@@ -402,6 +738,22 @@ nodes:
     - compile_optimizer_code
     - compile_backend_code
     nodes_dependent_on: []
+    output_structure:
+    - description: The path to the linked binary or library file.
+      key: linked_binary_path
+      type: str
+    - description: A list of boolean values indicating the success (True) or failure
+        (False) of each integration test case.
+      key: integration_test_results
+      type: List[bool]
+    - description: A list of floating-point numbers representing performance metrics
+        such as execution time and resource utilization for the linked components.
+      key: performance_metrics
+      type: List[float]
+    - description: A list of strings containing results from static analysis tools,
+        including any warnings or errors identified during the linking process.
+      key: static_analysis_results
+      type: List[str]
     prompt: Integrate the compiled parser code with the lexer, optimizer, and backend
       components. Ensure that the parser code is correctly linked against the object
       files or libraries produced by the lexer, optimizer, and backend compilation
@@ -419,6 +771,34 @@ nodes:
     nodes_depended_on:
     - prepare_for_release
     nodes_dependent_on: []
+    output_structure:
+    - description: The format of the packaged compiler (e.g., 'tarball', 'ZIP').
+      key: package_format
+      type: str
+    - description: List of binary files included in the package.
+      key: binaries_included
+      type: List[str]
+    - description: List of library files included in the package.
+      key: libraries_included
+      type: List[str]
+    - description: List of documentation files included in the package.
+      key: documentation_included
+      type: List[str]
+    - description: List of checksums generated for the packaged files.
+      key: checksums_generated
+      type: List[str]
+    - description: Text-based installation instructions provided with the package.
+      key: installation_instructions
+      type: str
+    - description: List of interactive setup scripts included in the package.
+      key: setup_scripts_included
+      type: List[str]
+    - description: Versioning information included in the package.
+      key: versioning_information
+      type: str
+    - description: Release notes included in the package.
+      key: release_notes
+      type: str
     prompt: Package the compiler into a distributable format such as a tarball or
       ZIP file. Ensure that all necessary binaries, libraries, and documentation are
       included. Compress the package using gzip for efficient storage and transmission.
@@ -436,6 +816,27 @@ nodes:
     nodes_depended_on:
     - approve_final_test_report
     nodes_dependent_on: []
+    output_structure:
+    - description: Whether the compiler is ready for release after thorough review
+        and validation.
+      key: release_readiness_status
+      type: bool
+    - description: List of performance metrics collected during the final integration
+        test.
+      key: performance_metrics
+      type: List[float]
+    - description: A measure of how much the code has been optimized, ranging from
+        0 (no optimization) to 1 (fully optimized).
+      key: code_optimization_level
+      type: float
+    - description: Whether all dependencies have been correctly linked during the
+        preparation process.
+      key: dependencies_linked_correctly
+      type: bool
+    - description: Whether notifications about the release readiness status have been
+        sent to all relevant stakeholders.
+      key: stakeholder_notification_sent
+      type: bool
     prompt: Ensure the compiler is ready for release by performing a comprehensive
       review of all components, including static and dynamic analysis, code optimization,
       and performance tuning. Verify that all dependencies are correctly linked and
@@ -453,6 +854,23 @@ nodes:
     nodes_depended_on:
     - package_compiler
     nodes_dependent_on: []
+    output_structure:
+    - description: The channel used for distribution (e.g., 'repository', 'website',
+        'email')
+      key: distribution_channel
+      type: str
+    - description: Whether the upload was successful
+      key: upload_status
+      type: bool
+    - description: List of file paths for the uploaded files
+      key: file_paths
+      type: List[str]
+    - description: List of checksums for the uploaded files to verify integrity
+      key: checksums
+      type: List[str]
+    - description: List of digital signatures for the uploaded files to ensure security
+      key: digital_signatures
+      type: List[str]
     prompt: Publish the packaged compiler to the intended audience by uploading it
       to a secure repository, hosting it on a dedicated website, or distributing it
       via email. Ensure that the package includes all necessary binaries, documentation,
@@ -470,6 +888,19 @@ nodes:
     nodes_depended_on:
     - write_developer_guide
     nodes_dependent_on: []
+    output_structure:
+    - description: URL where the developer guide is published
+      key: guide_url
+      type: str
+    - description: Date when the developer guide was published
+      key: publication_date
+      type: str
+    - description: Name of the person or team who published the developer guide
+      key: published_by
+      type: str
+    - description: Whether the publication of the developer guide was successful
+      key: is_publication_successful
+      type: bool
     prompt: Publish the developer guide to the intended audience by uploading it to
       a designated repository, website, or distributing it via email. Ensure the document
       is accessible and up-to-date, incorporating detailed information about the compiler's
@@ -483,6 +914,17 @@ nodes:
     nodes_depended_on:
     - write_user_guide
     nodes_dependent_on: []
+    output_structure:
+    - description: Status of the publication process (e.g., 'success', 'failure')
+      key: publication_status
+      type: str
+    - description: List of channels through which the user guide was published (e.g.,
+        'repository', 'website', 'email')
+      key: published_channels
+      type: List[str]
+    - description: List of feedback received from users after publishing the guide
+      key: user_feedback
+      type: List[str]
     prompt: Publish the user guide to the intended audience by uploading it to a designated
       repository, website, or distributing it via email. Ensure the document is accessible
       and easily navigable, with clear instructions for installing, configuring, and
@@ -498,6 +940,31 @@ nodes:
     nodes_depended_on:
     - fix_test_issues
     nodes_dependent_on: []
+    output_structure:
+    - description: Status of the test run (e.g., 'success', 'failure')
+      key: test_status
+      type: str
+    - description: Number of passing tests
+      key: pass_count
+      type: int
+    - description: Number of failing tests
+      key: fail_count
+      type: int
+    - description: List of error messages from failed tests
+      key: error_messages
+      type: List[str]
+    - description: List of stack traces from failed tests
+      key: stack_traces
+      type: List[str]
+    - description: List of performance metrics for each test case
+      key: performance_metrics
+      type: List[float]
+    - description: Percentage of code covered by tests
+      key: test_coverage
+      type: float
+    - description: Whether all tests passed successfully
+      key: is_all_tests_passed
+      type: bool
     prompt: Re-run the unit and integration tests to ensure all issues have been resolved.
       Utilize a comprehensive test suite that includes static analysis, dynamic analysis,
       and performance testing. Generate detailed test reports in HTML and JSON formats
@@ -514,6 +981,25 @@ nodes:
     - generate_unit_test_report
     - generate_integration_test_report
     nodes_dependent_on: []
+    output_structure:
+    - description: A summary of the test report, including key findings and recommendations.
+      key: test_report_summary
+      type: str
+    - description: A list of identified issues from the test reports, including error
+        messages and stack traces.
+      key: identified_issues
+      type: List[str]
+    - description: A list of timestamps corresponding to the identified issues.
+      key: issue_timestamps
+      type: List[str]
+    - description: A list of contexts or additional information related to each identified
+        issue.
+      key: issue_contexts
+      type: List[str]
+    - description: Whether the final test report has been approved based on the review
+        criteria.
+      key: is_approved
+      type: bool
     prompt: Review the unit and integration test reports in detail. Identify any failures,
       errors, or anomalies, including specific error messages, stack traces, and performance
       metrics. Document these issues with precise descriptions, timestamps, and relevant
@@ -529,6 +1015,40 @@ nodes:
     nodes_depended_on:
     - write_integration_tests
     nodes_dependent_on: []
+    output_structure:
+    - description: A summary of the integration test results.
+      key: test_results_summary
+      type: str
+    - description: The pass rate of the integration tests, represented as a percentage
+        (0.0 to 1.0).
+      key: pass_rate
+      type: float
+    - description: The fail rate of the integration tests, represented as a percentage
+        (0.0 to 1.0).
+      key: fail_rate
+      type: float
+    - description: A list of error messages from the failed integration tests.
+      key: error_messages
+      type: List[str]
+    - description: A list of stack traces corresponding to the error messages from
+        the failed integration tests.
+      key: stack_traces
+      type: List[str]
+    - description: A list of performance metrics such as execution time and resource
+        utilization for each test case.
+      key: performance_metrics
+      type: List[float]
+    - description: The code coverage achieved by the integration tests, represented
+        as a percentage (0.0 to 1.0).
+      key: test_coverage
+      type: float
+    - description: A list of identified bottlenecks or areas for improvement in the
+        integration tests.
+      key: bottlenecks
+      type: List[str]
+    - description: Whether all integration tests were successful.
+      key: all_success
+      type: bool
     prompt: Execute the integration tests located in the 'integration_tests' directory
       using the specified testing framework. Ensure that all tests are run in a controlled
       environment to accurately assess the interaction between different components
@@ -546,6 +1066,21 @@ nodes:
     nodes_depended_on:
     - write_unit_tests
     nodes_dependent_on: []
+    output_structure:
+    - description: A summary of the test results, including pass/fail rates and any
+        critical issues.
+      key: test_results_summary
+      type: str
+    - description: The percentage of code covered by the unit tests.
+      key: code_coverage_percentage
+      type: float
+    - description: List of performance benchmarks for each test case, including execution
+        time and resource utilization.
+      key: performance_benchmarks
+      type: List[str]
+    - description: Whether all unit tests passed without any failures.
+      key: all_tests_passed
+      type: bool
     prompt: Execute the unit tests located in the 'unit_tests' directory using a robust
       testing framework such as JUnit or PyTest. Ensure comprehensive coverage by
       running all tests and generating a detailed report that includes test results,
@@ -562,6 +1097,18 @@ nodes:
     nodes_depended_on:
     - create_backend_directory
     nodes_dependent_on: []
+    output_structure:
+    - description: List of file names of the generated backend code files.
+      key: code_files_generated
+      type: List[str]
+    - description: List of file names of the generated unit tests for the backend
+        code.
+      key: unit_tests_generated
+      type: List[str]
+    - description: Whether the generated backend code is valid and meets the quality
+        assurance criteria.
+      key: code_validity
+      type: bool
     prompt: Within the 'backend' directory, meticulously craft the backend code to
       encompass a comprehensive suite of functions designed for generating target
       code from an optimized intermediate representation. Ensure the implementation
@@ -581,6 +1128,26 @@ nodes:
     nodes_depended_on:
     - create_developer_guide_directory
     nodes_dependent_on: []
+    output_structure:
+    - description: The title of the developer guide.
+      key: guide_title
+      type: str
+    - description: The version number of the developer guide.
+      key: guide_version
+      type: str
+    - description: The date when the developer guide was created.
+      key: guide_creation_date
+      type: str
+    - description: The file path where the developer guide is saved.
+      key: guide_file_path
+      type: str
+    - description: A summary of the content included in the developer guide.
+      key: guide_content_summary
+      type: str
+    - description: Whether the developer guide is considered comprehensive and covers
+        all necessary aspects.
+      key: guide_is_comprehensive
+      type: bool
     prompt: Within the 'developer_guide' directory, meticulously craft a comprehensive
       developer guide for the compiler. This document should encompass detailed architectural
       diagrams and explanations, rigorous coding standards and best practices, and
@@ -599,6 +1166,19 @@ nodes:
     nodes_depended_on:
     - create_integration_tests_directory
     nodes_dependent_on: []
+    output_structure:
+    - description: Number of integration test files written.
+      key: test_files_count
+      type: int
+    - description: Percentage of codebase covered by integration tests.
+      key: test_coverage_percentage
+      type: float
+    - description: The testing framework used to develop the integration tests.
+      key: test_framework_used
+      type: str
+    - description: List of paths to the written integration test files.
+      key: test_files_paths
+      type: List[str]
     prompt: Develop a comprehensive set of integration tests for the entire compiler,
       ensuring that all components interact seamlessly. These tests should cover various
       scenarios and edge cases to validate the overall functionality and reliability
@@ -618,6 +1198,27 @@ nodes:
     nodes_depended_on:
     - create_lexer_directory
     nodes_dependent_on: []
+    output_structure:
+    - description: 'The path to the compiled lexer code."
+
+        ."
+
+        .'
+      key: lexer_code_path
+      type: str
+    - description: A list of token types defined in the lexer code.
+      key: token_types
+      type: List[str]
+    - description: A list of error handling methods implemented in the lexer code.
+      key: error_handling_methods
+      type: List[str]
+    - description: The logging level set in the lexer code for debugging purposes.
+      key: logging_level
+      type: str
+    - description: The percentage of code coverage achieved by the unit tests for
+        the lexer code.
+      key: code_coverage_percentage
+      type: float
     prompt: Within the 'lexer' directory, implement a robust and efficient lexer codebase.
       This should include comprehensive functions for tokenizing input code, ensuring
       accurate and contextually relevant tokenization. Utilize modern programming
@@ -635,6 +1236,24 @@ nodes:
     nodes_depended_on:
     - create_optimizer_directory
     nodes_dependent_on: []
+    output_structure:
+    - description: The path to the written optimizer code.
+      key: optimizer_code_path
+      type: str
+    - description: A list of optimization techniques used in the optimizer code.
+      key: optimization_techniques_used
+      type: List[str]
+    - description: A score indicating the modularity of the written optimizer code,
+        ranging from 0 to 1.
+      key: code_modularity_score
+      type: float
+    - description: A score indicating the efficiency of the written optimizer code,
+        ranging from 0 to 1.
+      key: code_efficiency_score
+      type: float
+    - description: Whether the optimizer code is well-documented.
+      key: code_documentation_status
+      type: bool
     prompt: Within the 'optimizer' directory, implement a comprehensive set of functions
       designed to optimize compiled code. These functions should include advanced
       algorithms for loop unrolling, dead code elimination, constant folding, and
@@ -654,6 +1273,23 @@ nodes:
     nodes_depended_on:
     - create_parser_directory
     nodes_dependent_on: []
+    output_structure:
+    - description: The file path where the parser code has been written.
+      key: parser_code_path
+      type: str
+    - description: The number of lines of code written for the parser.
+      key: code_lines_written
+      type: int
+    - description: Whether the parser code is modular and follows best practices.
+      key: is_modular
+      type: bool
+    - description: Whether the parser code is efficient and optimized for performance.
+      key: is_efficient
+      type: bool
+    - description: Whether the parser code is well-documented with clear explanations
+        and examples.
+      key: is_well_documented
+      type: bool
     prompt: Develop a comprehensive parser codebase within the 'parser' directory,
       ensuring it includes robust functions for parsing various components of the
       language syntax. Utilize modern programming practices and design patterns to
@@ -671,6 +1307,26 @@ nodes:
     nodes_depended_on:
     - create_unit_tests_directory
     nodes_dependent_on: []
+    output_structure:
+    - description: Number of unit test files written.
+      key: test_files_count
+      type: int
+    - description: Percentage of code covered by the unit tests.
+      key: test_coverage_percentage
+      type: float
+    - description: List of names of unit test cases that passed.
+      key: test_cases_passed
+      type: List[str]
+    - description: List of names of unit test cases that failed.
+      key: test_cases_failed
+      type: List[str]
+    - description: Total time taken to execute all unit tests in seconds.
+      key: test_execution_time
+      type: float
+    - description: Summary of the unit test results, including pass/fail rates and
+        any critical issues identified.
+      key: test_results_summary
+      type: str
     prompt: Develop a comprehensive set of unit tests for the parser, lexer, optimizer,
       and backend components. Utilize a robust testing framework such as JUnit (for
       Java) or PyTest (for Python) to ensure thorough coverage. Each test should be
@@ -691,6 +1347,36 @@ nodes:
     nodes_depended_on:
     - create_user_guide_directory
     nodes_dependent_on: []
+    output_structure:
+    - description: The title of the user guide.
+      key: guide_title
+      type: str
+    - description: A list of step-by-step instructions for installing the compiler.
+      key: installation_instructions
+      type: List[str]
+    - description: A list of steps for configuring the compiler.
+      key: configuration_steps
+      type: List[str]
+    - description: A list of procedures for using the compiler.
+      key: usage_procedures
+      type: List[str]
+    - description: A list of troubleshooting tips for common issues encountered while
+        using the compiler.
+      key: troubleshooting_tips
+      type: List[str]
+    - description: A list of best practices for optimizing the use of the compiler.
+      key: best_practices
+      type: List[str]
+    - description: A list indicating whether each section of the guide includes screenshots.
+      key: screenshots_included
+      type: List[bool]
+    - description: A list indicating whether each section of the guide includes code
+        examples.
+      key: code_examples_included
+      type: List[bool]
+    - description: The file path where the user guide is saved.
+      key: guide_file_path
+      type: str
     prompt: Write the user guide for the compiler in the 'user_guide' directory. The
       guide should include detailed instructions for installing, configuring, and
       using the compiler, covering all necessary steps from initial setup to advanced
