@@ -1,444 +1,700 @@
 dag_type: plain_text
-description: A workflow for laying out the codebase directory and file structure for
-  building a compiler, ensuring that each step is independent and can be executed
-  concurrently where possible.
+description: Generated workflow from UI.
 name: layout_codebase_directory_and_file_structure_for_building_a_compiler
 nodes:
   approve_final_test_report:
     agent: false
-    description: Approve the final test report.
+    description: Approves the final test report after a comprehensive review to ensure
+      all tests have passed and no critical issues remain.
     name: approve_final_test_report
     nodes_depended_on:
     - generate_final_test_report
-    nodes_dependent_on:
-    - prepare_for_release
-    prompt: Review the final test report and approve it if all tests pass and no critical
-      issues remain.
+    nodes_dependent_on: []
+    prompt: Review the final test report generated from the re-ran tests. Ensure that
+      all critical issues have been addressed and that the pass/fail rates meet the
+      specified thresholds. Verify the accuracy of error messages and the completeness
+      of issue documentation. Approve the report only if it meets all quality assurance
+      criteria, including thorough analysis of test results, detailed variance decomposition,
+      and robustness diagnostics.
   compile_backend_code:
     agent: false
-    description: Compile the backend code.
+    description: Compiles the backend code written in the previous step, ensuring
+      it is optimized and ready for further processing. The output is an object file
+      or library that can be linked with other components of the system.
     name: compile_backend_code
     nodes_depended_on:
     - write_backend_code
-    nodes_dependent_on:
-    - link_backend_with_other_components
-    prompt: Compile the backend code in the 'backend' directory. Ensure it produces
-      an object file or library.
+    nodes_dependent_on: []
+    prompt: Compile the backend code located in the 'backend' directory. Ensure that
+      the compilation process generates an object file or library, which includes
+      optimized functions for generating target code from the intermediate representation.
+      Utilize advanced compiler flags and optimizations to enhance performance and
+      reduce memory footprint. Verify the correctness of the compiled code through
+      unit tests and static analysis tools.
   compile_lexer_code:
     agent: false
-    description: Compile the lexer code.
+    description: Compiles the lexer code written in the previous step, ensuring it
+      produces an optimized object file or static library suitable for further processing
+      in the workflow. This step involves using a C++ compiler with appropriate flags
+      to enhance performance and reliability of the lexer component.
     name: compile_lexer_code
     nodes_depended_on:
     - write_lexer_code
-    nodes_dependent_on:
-    - link_lexer_with_other_components
-    prompt: Compile the lexer code in the 'lexer' directory. Ensure it produces an
-      object file or library.
+    nodes_dependent_on: []
+    prompt: Compile the lexer code located in the 'lexer' directory using a C++ compiler
+      with optimization flags enabled. Ensure the compilation process generates an
+      object file or static library that is compatible with the subsequent steps in
+      the workflow. Verify that the compiled output includes all necessary functions
+      for tokenizing input code and adheres to the specified coding standards and
+      best practices.
   compile_optimizer_code:
     agent: false
-    description: Compile the optimizer code.
+    description: Compiles the optimizer code written in the previous step, ensuring
+      it produces an object file or library ready for integration into the project.
+      This step involves using advanced compilation techniques to optimize performance
+      and ensure compatibility with the rest of the system.
     name: compile_optimizer_code
     nodes_depended_on:
     - write_optimizer_code
-    nodes_dependent_on:
-    - link_optimizer_with_other_components
-    prompt: Compile the optimizer code in the 'optimizer' directory. Ensure it produces
-      an object file or library.
+    nodes_dependent_on: []
+    prompt: Compile the optimizer code located in the 'optimizer' directory using
+      a high-performance compiler with optimization flags enabled. Ensure the compilation
+      process generates an object file or library that is compatible with the project's
+      build system and can be linked with other components. Verify that the compiled
+      code includes all necessary functions for optimizing compiled code, such as
+      gradient descent, Adam, and RMSprop algorithms, and that it adheres to best
+      practices for numerical stability and efficiency.
   compile_parser_code:
     agent: false
-    description: Compile the parser code.
+    description: Compiles the parser code written in the previous step, ensuring it
+      produces an optimized object file or library suitable for integration into the
+      broader workflow. This step involves using advanced compilation techniques to
+      enhance performance and maintainability.
     name: compile_parser_code
     nodes_depended_on:
     - write_parser_code
-    nodes_dependent_on:
-    - link_parser_with_other_components
-    prompt: Compile the parser code in the 'parser' directory. Ensure it produces
-      an object file or library.
+    nodes_dependent_on: []
+    prompt: Compile the parser code located in the 'parser' directory using a state-of-the-art
+      compiler with optimization flags enabled. Ensure the compilation process generates
+      an efficient object file or library that supports dynamic linking and is compatible
+      with the project's build system. Verify that the compiled code adheres to the
+      specified language standards and includes all necessary parsing functions for
+      different parts of the language syntax.
   create_backend_directory:
     agent: false
-    description: Create the backend directory within the source code directory.
+    description: Create the backend directory within the source code directory. This
+      step is crucial for organizing the project's backend components, ensuring a
+      modular and scalable architecture. The 'backend' directory will be used to store
+      all server-side code, database schemas, and API definitions, among other resources.
     name: create_backend_directory
     nodes_depended_on:
     - create_src_directory
-    nodes_dependent_on:
-    - write_backend_code
-    prompt: Inside the 'src' directory, create a subdirectory named 'backend'.
+    nodes_dependent_on: []
+    prompt: Within the 'src' directory, create a subdirectory named 'backend'. This
+      directory will serve as the primary container for all backend-related files
+      and directories, including server-side logic, database interactions, and API
+      endpoints. Ensure that the directory structure adheres to best practices in
+      software development, such as maintaining a clean separation of concerns and
+      facilitating easy navigation and management of code assets.
   create_build_directory:
     agent: false
-    description: Create the build directory.
+    description: Creates the build directory within the project root directory, which
+      is essential for organizing compiled files and artifacts. This step ensures
+      that the build environment is properly set up and ready for subsequent compilation
+      tasks.
     name: create_build_directory
     nodes_depended_on:
     - define_project_root_directory
-    nodes_dependent_on:
-    - compile_source_code
-    - run_tests
-    prompt: Inside the 'compiler_project' directory, create a subdirectory named 'build'.
+    nodes_dependent_on: []
+    prompt: Within the 'compiler_project' directory, create a subdirectory named 'build'.
+      This subdirectory will serve as the primary workspace for compiling and building
+      project project's source code. Ensure that the 'build' directory is created
+      in a manner that adheres to best practices for directory structure and organization,
+      such as setting appropriate permissions and ensuring it is empty before use.
   create_developer_guide_directory:
     agent: false
-    description: Create the developer guide directory within the documentation directory.
+    description: This node creates the 'developer_guide' directory within the existing
+      'docs' directory. The 'docs' directory is assumed to be already created by the
+      parent node 'create_docs_directory'. This step is crucial for maintaining a
+      structured and accessible documentation hierarchy, facilitating easy navigation
+      and retrieval of developer-specific information.
     name: create_developer_guide_directory
     nodes_depended_on:
     - create_docs_directory
-    nodes_dependent_on:
-    - write_developer_guide
-    prompt: Inside the 'docs' directory, create a subdirectory named 'developer_guide'.
+    nodes_dependent_on: []
+    prompt: Within the 'compiler_project' directory, create a subdirectory named 'docs'.
+      Then, within the 'docs' directory, instantiate a subdirectory named 'developer_guide'.
+      This operation ensures that the project's documentation structure is properly
+      organized and includes a dedicated section for developer guides.
   create_docs_directory:
     agent: false
-    description: Create the documentation directory.
+    description: Creates the documentation directory within the project root directory,
+      ensuring it is properly structured and ready for storing all relevant project
+      documents.
     name: create_docs_directory
     nodes_depended_on:
     - define_project_root_directory
-    nodes_dependent_on:
-    - create_user_guide_directory
-    - create_developer_guide_directory
-    prompt: Inside the 'compiler_project' directory, create a subdirectory named 'docs'.
+    nodes_dependent_on: []
+    prompt: Within the 'compiler_project' directory, create a subdirectory named 'docs'.
+      This directory will serve as the primary repository for all project-related
+      documentation, including user guides, technical specifications, and development
+      logs. Ensure that the directory structure is consistent with best practices
+      in software engineering to facilitate easy navigation and maintenance.
   create_integration_tests_directory:
     agent: false
-    description: Create the integration tests directory within the test directory.
+    description: This node creates the 'integration_tests' directory within the existing
+      'test' directory. The 'integration_tests' directory is crucial for organizing
+      and managing integration test scripts and resources, facilitating their easy
+      access and maintenance throughout the project lifecycle.
     name: create_integration_tests_directory
     nodes_depended_on:
     - create_test_directory
-    nodes_dependent_on:
-    - write_integration_tests
-    prompt: Inside the 'test' directory, create a subdirectory named 'integration_tests'.
+    nodes_dependent_on: []
+    prompt: Within the 'test' directory, create a subdirectory named 'integration_tests'.
+      This subdirectory will serve as the designated location for storing all integration
+      test scripts and resources, ensuring they are organized and accessible for further
+      development and execution.
   create_lexer_directory:
     agent: false
-    description: Create the lexer directory within the source code directory.
+    description: This node creates the lexer directory within the source code directory.
+      The lexer directory is crucial for organizing and managing all files related
+      to the lexical analysis phase of the compiler project, including token definitions,
+      lexer implementations, and any associated utilities or configurations.
     name: create_lexer_directory
     nodes_depended_on:
     - create_src_directory
-    nodes_dependent_on:
-    - write_lexer_code
-    prompt: Inside the 'src' directory, create a subdirectory named 'lexer'.
+    nodes_dependent_on: []
+    prompt: Within the 'src' directory, create a subdirectory named 'lexer'. This
+      directory will serve as the container for all lexer-related files and modules,
+      ensuring a structured and organized project hierarchy.
   create_optimizer_directory:
     agent: false
-    description: Create the optimizer directory within the source code directory.
+    description: This node creates the 'optimizer' directory within the 'src' directory.
+      The 'optimizer' directory is crucial for organizing and managing all files related
+      to the optimization process, including configuration files, logs, and any custom
+      optimizer implementations. It ensures that the project maintains a clean and
+      structured layout, which is essential for efficient development and maintenance.
     name: create_optimizer_directory
     nodes_depended_on:
     - create_src_directory
-    nodes_dependent_on:
-    - write_optimizer_code
-    prompt: Inside the 'src' directory, create a subdirectory named 'optimizer'.
+    nodes_dependent_on: []
+    prompt: Within the 'src' directory, create a subdirectory named 'optimizer'. This
+      directory will serve as the primary location for storing all optimizer-related
+      files and scripts, ensuring they are organized and accessible within the project
+      structure.
   create_parser_directory:
     agent: false
-    description: Create the parser directory within the source code directory.
+    description: This node creates the 'parser' directory within the existing 'src'
+      directory. The 'parser' directory is crucial for organizing and managing all
+      parser-related files and modules, which are essential for parsing and processing
+      data within the compiler project. It ensures that the project structure remains
+      consistent and scalable, facilitating easier maintenance and future development.
     name: create_parser_directory
     nodes_depended_on:
     - create_src_directory
-    nodes_dependent_on:
-    - write_parser_code
-    prompt: Inside the 'src' directory, create a subdirectory named 'parser'.
+    nodes_dependent_on: []
+    prompt: Within the 'src' directory, create a subdirectory named 'parser'. This
+      subdirectory will serve as the primary location for storing all parser-related
+      files and modules, ensuring a structured and organized project hierarchy.
   create_src_directory:
     agent: false
-    description: Create the source code directory.
+    description: Creates the source code directory within the project root directory.
+      This step is crucial for maintaining a clean and organized project structure,
+      facilitating easy access and management of source code files.
     name: create_src_directory
     nodes_depended_on:
     - define_project_root_directory
-    nodes_dependent_on:
-    - create_parser_directory
-    - create_lexer_directory
-    - create_optimizer_directory
-    - create_backend_directory
-    prompt: Inside the 'compiler_project' directory, create a subdirectory named 'src'.
+    nodes_dependent_on: []
+    prompt: Within the 'compiler_project' directory, create a subdirectory named 'src'.
+      This subdirectory will serve as the primary location for storing all source
+      code files related to the project. Ensure that the directory structure is consistent
+      with best practices in software development, including proper naming conventions
+      and organization of files.
   create_test_directory:
     agent: false
-    description: Create the test code directory.
+    description: Creates the test code directory within the project's root directory,
+      ensuring a structured and organized environment for testing activities.
     name: create_test_directory
     nodes_depended_on:
     - define_project_root_directory
-    nodes_dependent_on:
-    - create_unit_tests_directory
-    - create_integration_tests_directory
-    prompt: Inside the 'compiler_project' directory, create a subdirectory named 'test'.
+    nodes_dependent_on: []
+    prompt: Within the 'compiler_project' directory, create a subdirectory named 'test'.
+      This directory will serve as the designated location for storing all test code
+      files and resources. Ensure that the directory structure is consistent with
+      best practices in software development, including proper naming conventions
+      and organization to facilitate easy navigation and maintenance.
   create_unit_tests_directory:
     agent: false
-    description: Create the unit tests directory within the test directory.
+    description: Creates the unit tests directory within the test directory of the
+      compiler project. This step ensures that there is a dedicated space for organizing
+      and managing unit test files, facilitating easier maintenance and execution
+      of tests.
     name: create_unit_tests_directory
     nodes_depended_on:
     - create_test_directory
-    nodes_dependent_on:
-    - write_unit_tests
-    prompt: Inside the 'test' directory, create a subdirectory named 'unit_tests'.
+    nodes_dependent_on: []
+    prompt: Within the 'test' directory, create a subdirectory named 'unit_tests'.
+      This subdirectory will serve as the designated location for storing all unit
+      test files and scripts associated with the compiler project. Ensure that the
+      directory structure is consistent with industry best practices and adheres to
+      the project's coding standards.
   create_user_guide_directory:
     agent: false
-    description: Create the user guide directory within the documentation directory.
+    description: This node creates a dedicated directory for user guides within the
+      existing documentation directory. It follows a systematic approach to ensure
+      that all user-related materials are properly segmented and easily locatable,
+      maintaining the integrity and clarity of the project's documentation hierarchy.
     name: create_user_guide_directory
     nodes_depended_on:
     - create_docs_directory
-    nodes_dependent_on:
-    - write_user_guide
-    prompt: Inside the 'docs' directory, create a subdirectory named 'user_guide'.
+    nodes_dependent_on: []
+    prompt: Within the 'compiler_project' directory, create a subdirectory named 'docs'.
+      Then, inside the 'docs' directory, instantiate a subdirectory named 'user_guide'.
+      This operation ensures that the user guide content is organized and accessible
+      within the project's documentation structure.
   define_project_root_directory:
     agent: false
-    description: Create the root directory for the project.
+    description: Establishes the root directory for the project, which will contain
+      all necessary files and subdirectories. This step ensures a well-organized structure
+      that facilitates easy navigation and management of project assets.
     name: define_project_root_directory
     nodes_depended_on: []
-    nodes_dependent_on:
-    - create_src_directory
-    - create_test_directory
-    - create_docs_directory
-    - create_build_directory
+    nodes_dependent_on: []
     prompt: Create a directory named 'compiler_project' in your preferred location
-      on your local machine or remote server.
+      on your local machine or remote server. Ensure the directory is accessible and
+      has appropriate permissions for read, write, and execute operations. This directory
+      will serve as the root for all project files and directories.
   fix_test_issues:
     agent: false
-    description: Fix any issues identified in the test reports.
+    description: Fixes any issues identified in the test reports by implementing targeted
+      solutions and re-running the affected tests to ensure resolution.
     name: fix_test_issues
     nodes_depended_on:
     - review_test_reports
-    nodes_dependent_on:
-    - re_run_tests
-    prompt: Address the issues documented in the test reports. Update the relevant
-      code files and re-run the tests.
+    nodes_dependent_on: []
+    prompt: Conduct a thorough analysis of the identified and integration test reports
+      to identify any failures or errors. Utilize advanced debugging techniques and
+      static code analysis tools to pinpoint the root causes of these issues. Implement
+      targeted fixes in the relevant code files, ensuring that all changes are thoroughly
+      tested and validated. Re-run the affected tests to confirm that the issues have
+      been resolved and that the system behaves as expected.
   generate_final_test_report:
     agent: false
-    description: Generate a final test report.
+    description: Generates a detailed final test report that summarizes the results
+      of the re-ran unit and integration tests. This report includes pass/fail rates,
+      error messages, stack traces, and any remaining issues, providing a thorough
+      analysis of the testing process.
     name: generate_final_test_report
     nodes_depended_on:
     - re_run_tests
-    nodes_dependent_on:
-    - approve_final_test_report
-    prompt: Generate a final test report summarizing the results of the re-ran tests.
-      Include pass/fail rates, error messages, and any remaining issues.
+    nodes_dependent_on: []
+    prompt: Generate a comprehensive final test report summarizing the results of
+      the re-ran unit and integration tests. Include detailed pass/fail rates, error
+      messages, stack traces, and any remaining issues. Utilize advanced analytics
+      to identify patterns, trends, and potential areas for improvement. Ensure the
+      report is structured in a clear, concise manner, with sections dedicated to
+      each type of test and its outcomes. Incorporate visual aids such as charts and
+      graphs to enhance readability and understanding.
   generate_integration_test_report:
     agent: false
-    description: Generate a report from the integration tests.
+    description: Generates a detailed report from the integration tests, providing
+      a thorough analysis of their outcomes and performance metrics.
     name: generate_integration_test_report
     nodes_depended_on:
     - run_integration_tests
-    nodes_dependent_on:
-    - review_test_reports
-    prompt: Generate a report summarizing the results of the integration tests. Include
-      pass/fail rates, error messages, and any issues found.
+    nodes_dependent_on: []
+    prompt: Generate a comprehensive report summarizing the results of the integration
+      tests. This report should include detailed pass/fail rates, error messages,
+      stack traces, and any issues found. Additionally, provide insights into test
+      coverage, performance metrics such as execution time and resource utilization,
+      and any potential bottlenecks or areas for improvement. Ensure the report is
+      structured in a way that facilitates easy understanding and actionable recommendations.
   generate_unit_test_report:
     agent: false
-    description: Generate a report from the unit tests.
+    description: Generates a detailed and informative report summarizing the results
+      of the unit tests, including pass/fail rates, error messages, and performance
+      statistics. This report serves as a critical tool for identifying and addressing
+      issues in the codebase.
     name: generate_unit_test_report
     nodes_depended_on:
     - run_unit_tests
-    nodes_dependent_on:
-    - review_test_reports
-    prompt: Generate a report summarizing the results of the unit tests. Include pass/fail
-      rates, error messages, and any issues found.
+    nodes_dependent_on: []
+    prompt: Generate a comprehensive unit test report by analyzing the output from
+      the 'unit_tests' directory. This report should include detailed metrics such
+      as pass/fail rates, error messages, stack traces, and performance statistics
+      for each test case. Additionally, summarize any issues or anomalies found during
+      the test execution, providing insights into potential bugs or areas for improvement
+      in the codebase. Ensure the report is structured in a clear and concise manner,
+      suitable for both technical and non-technical stakeholders.
   link_backend_with_other_components:
     agent: false
-    description: Link the backend code with other components.
+    description: This node is responsible for linking the compiled backend code with
+      the compiled parser, lexer, and optimizer codes. It ensures that all necessary
+      dependencies are resolved and that the integration process is seamless and efficient.
+      The node also includes steps for static analysis, dependency verification, and
+      comprehensive testing to validate the functionality of the integrated system.
     name: link_backend_with_other_components
     nodes_depended_on:
     - compile_parser_code
     - compile_lexer_code
     - compile_optimizer_code
     - compile_backend_code
-    nodes_dependent_on:
-    - finalize_linking
-    prompt: Link the backend code with the parser, lexer, and optimizer codes. Ensure
-      all necessary dependencies are resolved.
+    nodes_dependent_on: []
+    prompt: Integrate the compiled backend code with the compiled parser, lexer, and
+      optimizer codes. Ensure that all necessary dependencies are resolved and that
+      the integration process adheres to best practices for modularity and maintainability.
+      Utilize static analysis tools to identify potential conflicts or issues between
+      the components. Verify the compatibility of the object files or libraries produced
+      by each compilation step and ensure they are correctly linked in the specified
+      order. Perform thorough testing to confirm that the integrated system functions
+      as expected and meets the required performance standards.
   link_lexer_with_other_components:
     agent: false
-    description: Link the lexer code with other components.
+    description: This node integrates the compiled lexer code with the parser, optimizer,
+      and backend components, ensuring seamless communication and dependency resolution
+      between them. It prepares the system for further processing by creating a cohesive
+      unit that can be used in subsequent steps of the workflow.
     name: link_lexer_with_other_components
     nodes_depended_on:
     - compile_parser_code
     - compile_lexer_code
     - compile_optimizer_code
     - compile_backend_code
-    nodes_dependent_on:
-    - finalize_linking
-    prompt: Link the lexer code with the parser, optimizer, and backend codes. Ensure
-      all necessary dependencies are resolved.
+    nodes_dependent_on: []
+    prompt: Integrate the compiled lexer code with the parser, optimizer, and backend
+      components. Ensure that the lexer's tokenization capabilities are seamlessly
+      connected to the parser's syntax analysis, the optimizer's performance enhancement
+      mechanisms, and the backend's execution environment. Utilize appropriate linking
+      techniques to resolve all dependencies, ensuring that the final binary or library
+      is both efficient and robust. Verify the compatibility and interoperability
+      of the linked components through comprehensive testing.
   link_optimizer_with_other_components:
     agent: false
-    description: Link the optimizer code with other components.
+    description: Link the compiled optimizer code with the parser, lexer, and backend
+      components to create a cohesive and functional system. This step ensures that
+      the optimizer can effectively interact with other parts of the application,
+      facilitating smooth data flow and processing.
     name: link_optimizer_with_other_components
     nodes_depended_on:
     - compile_parser_code
     - compile_lexer_code
     - compile_optimizer_code
     - compile_backend_code
-    nodes_dependent_on:
-    - finalize_linking
-    prompt: Link the optimizer code with the parser, lexer, and backend codes. Ensure
-      all necessary dependencies are resolved.
+    nodes_dependent_on: []
+    prompt: Integrate the compiled optimizer code with the parser, lexer, and backend
+      components. Ensure that the integration process is seamless and that all necessary
+      dependencies are resolved. Utilize static analysis tools to verify type safety
+      and compatibility between the different modules. Optimize the linking process
+      to minimize overhead and ensure efficient execution. Generate detailed documentation
+      for the linked components, including API references and usage examples.
   link_parser_with_other_components:
     agent: false
-    description: Link the parser code with other components.
+    description: This node integrates the compiled parser code with the lexer, optimizer,
+      and backend components, ensuring a seamless and efficient workflow. It involves
+      linking the parser code against the respective object files or libraries from
+      the lexer, optimizer, and backend compilation steps, using best practices to
+      optimize performance and maintain compatibility. The resulting linked binary
+      or library is then tested for correctness and functionality.
     name: link_parser_with_other_components
     nodes_depended_on:
     - compile_parser_code
     - compile_lexer_code
     - compile_optimizer_code
     - compile_backend_code
-    nodes_dependent_on:
-    - finalize_linking
-    prompt: Link the parser code with the lexer, optimizer, and backend codes. Ensure
-      all necessary dependencies are resolved.
+    nodes_dependent_on: []
+    prompt: Integrate the compiled parser code with the lexer, optimizer, and backend
+      components. Ensure that the parser code is correctly linked against the object
+      files or libraries produced by the lexer, optimizer, and backend compilation
+      steps. Utilize appropriate linking flags and options to optimize performance
+      and ensure compatibility across all modules. Verify the integrity of the linked
+      binary or library through rigorous testing to confirm that it functions as expected
+      within the overall system architecture.
   package_compiler:
     agent: false
-    description: Package the compiler for distribution.
+    description: Prepare the compiler for distribution by packaging it into a suitable
+      format. This involves compressing the binary files, libraries, and documentation,
+      ensuring data integrity through checksums, and providing comprehensive installation
+      guides.
     name: package_compiler
     nodes_depended_on:
     - prepare_for_release
-    nodes_dependent_on:
-    - publish_compiler
+    nodes_dependent_on: []
     prompt: Package the compiler into a distributable format such as a tarball or
-      ZIP file. Include all necessary binaries and documentation.
+      ZIP file. Ensure that all necessary binaries, libraries, and documentation are
+      included. Compress the package using gzip for efficient storage and transmission.
+      Verify the integrity of the packaged files by generating and including checksums.
+      Document the installation process and dependencies in detail, providing both
+      text-based instructions and interactive setup scripts. Include versioning information
+      and release notes to facilitate tracking and understanding of changes.
   prepare_for_release:
     agent: false
-    description: Prepare the compiler for release.
+    description: Prepare the compiler for release by ensuring all components are linked
+      correctly, optimized for performance, and validated through rigorous testing.
+      This step also involves documenting any changes or improvements made during
+      the preparation process.
     name: prepare_for_release
     nodes_depended_on:
     - approve_final_test_report
-    nodes_dependent_on:
-    - package_compiler
-    prompt: Prepare the compiler for release by ensuring all components are linked
-      correctly and the final test report is approved.
+    nodes_dependent_on: []
+    prompt: Ensure the compiler is ready for release by performing a comprehensive
+      review of all components, including static and dynamic analysis, code optimization,
+      and performance tuning. Verify that all dependencies are correctly linked and
+      that the final test report has been thoroughly reviewed and approved. Conduct
+      a final integration test to confirm that the compiler functions as expected
+      across different environments and configurations. Document any necessary adjustments
+      or optimizations in the release notes and ensure that all stakeholders are informed
+      of the readiness status.
   publish_compiler:
     agent: false
-    description: Publish the compiler to the intended audience.
+    description: Publish the compiler to the intended audience through various distribution
+      channels such as repositories, websites, or email. This step ensures that the
+      compiled software is accessible and verifiable for users and stakeholders.
     name: publish_compiler
     nodes_depended_on:
     - package_compiler
     nodes_dependent_on: []
-    prompt: Publish the packaged compiler to the intended audience. This could involve
-      uploading it to a repository, website, or distributing it via email.
+    prompt: Publish the packaged compiler to the intended audience by uploading it
+      to a secure repository, hosting it on a dedicated website, or distributing it
+      via email. Ensure that the package includes all necessary binaries, documentation,
+      and release notes. Utilize version control systems to manage different versions
+      of the compiler, and implement automated deployment pipelines to streamline
+      the process. Verify the integrity of the uploaded files using checksums and
+      digital signatures to ensure data integrity and security.
   publish_developer_guide:
     agent: false
-    description: Publish the developer guide.
+    description: Publishes the developer guide for the compiler to the appropriate
+      platforms, ensuring it is accessible and comprehensive. This involves uploading
+      the document to a repository, website, or sending it via email, while also maintaining
+      version control and historical records.
     name: publish_developer_guide
     nodes_depended_on:
     - write_developer_guide
     nodes_dependent_on: []
-    prompt: Publish the developer guide to the intended audience. This could involve
-      uploading it to a repository, website, or distributing it via email.
+    prompt: Publish the developer guide to the intended audience by uploading it to
+      a designated repository, website, or distributing it via email. Ensure the document
+      is accessible and up-to-date, incorporating detailed information about the compiler's
+      architecture, coding standards, and development process. Utilize version control
+      systems to track changes and maintain historical versions for reference.
   publish_user_guide:
     agent: false
-    description: Publish the user guide.
+    description: Publishes the user guide for the compiler to the appropriate channels,
+      ensuring it is readily available and comprehensive for the target audience.
     name: publish_user_guide
     nodes_depended_on:
     - write_user_guide
     nodes_dependent_on: []
-    prompt: Publish the user guide to the intended audience. This could involve uploading
-      it to a repository, website, or distributing it via email.
+    prompt: Publish the user guide to the intended audience by uploading it to a designated
+      repository, website, or distributing it via email. Ensure the document is accessible
+      and easily navigable, with clear instructions for installing, configuring, and
+      using the compiler. Include detailed technical specifications, troubleshooting
+      tips, and best practices to enhance user experience and support.
   re_run_tests:
     agent: false
-    description: Re-run the tests after fixing issues.
+    description: Re-runs the unit and integration tests after addressing issues documented
+      in the test reports. This step ensures that the application is functioning correctly
+      and meets the required quality standards. It also provides new test reports
+      for further analysis and validation.
     name: re_run_tests
     nodes_depended_on:
     - fix_test_issues
-    nodes_dependent_on:
-    - generate_final_test_report
+    nodes_dependent_on: []
     prompt: Re-run the unit and integration tests to ensure all issues have been resolved.
-      Generate new test reports.
+      Utilize a comprehensive test suite that includes static analysis, dynamic analysis,
+      and performance testing. Generate detailed test reports in HTML and JSON formats
+      for easy review and automated parsing. Ensure that the tests cover all critical
+      paths and edge cases, and incorporate any necessary fixes or optimizations identified
+      during the issue resolution process.
   review_test_reports:
     agent: false
-    description: Review the test reports for any issues.
+    description: Conducts a thorough examination of the unit and integration test
+      reports to identify and document any issues, ensuring that all critical information
+      is captured and analyzed for continuous improvement.
     name: review_test_reports
     nodes_depended_on:
     - generate_unit_test_report
     - generate_integration_test_report
-    nodes_dependent_on:
-    - fix_test_issues
-    prompt: Review the unit and integration test reports. Identify any failures or
-      errors and document them.
+    nodes_dependent_on: []
+    prompt: Review the unit and integration test reports in detail. Identify any failures,
+      errors, or anomalies, including specific error messages, stack traces, and performance
+      metrics. Document these issues with precise descriptions, timestamps, and relevant
+      context. Additionally, analyze the test results to identify patterns, trends,
+      and potential areas for improvement. Provide a comprehensive summary of the
+      findings, including recommendations for further testing or debugging.
   run_integration_tests:
     agent: false
-    description: Run the integration tests.
+    description: Run the integration tests for the entire compiler to verify the correct
+      interaction between its components. This step ensures that the compiler functions
+      as expected across different modules and scenarios.
     name: run_integration_tests
     nodes_depended_on:
     - write_integration_tests
-    nodes_dependent_on:
-    - generate_integration_test_report
-    prompt: Run the integration tests located in the 'integration_tests' directory.
-      Use the testing framework to execute all tests and generate a report.
+    nodes_dependent_on: []
+    prompt: Execute the integration tests located in the 'integration_tests' directory
+      using the specified testing framework. Ensure that all tests are run in a controlled
+      environment to accurately assess the interaction between different components
+      of the compiler. Generate a detailed report that includes test results, code
+      coverage metrics, and performance benchmarks. This report should be comprehensive,
+      providing insights into the system's behavior under various conditions and identifying
+      any potential issues or bottlenecks.
   run_unit_tests:
     agent: false
-    description: Run the unit tests.
+    description: Run the unit tests for the parser, lexer, optimizer, and backend
+      to validate their correctness and performance. Utilize a reliable testing framework
+      to execute these tests and produce a thorough report that can be used for further
+      analysis and improvement.
     name: run_unit_tests
     nodes_depended_on:
     - write_unit_tests
-    nodes_dependent_on:
-    - generate_unit_test_report
-    prompt: Run the unit tests located in the 'unit_tests' directory. Use the testing
-      framework to execute all tests and generate a report.
+    nodes_dependent_on: []
+    prompt: Execute the unit tests located in the 'unit_tests' directory using a robust
+      testing framework such as JUnit or PyTest. Ensure comprehensive coverage by
+      running all tests and generating a detailed report that includes test results,
+      code coverage metrics, and performance benchmarks. This report should be formatted
+      for easy readability and integration into continuous integration/continuous
+      deployment (CI/CD) pipelines.
   write_backend_code:
     agent: false
-    description: Write the backend code.
+    description: Develops and implements the backend code within the specified directory,
+      focusing on the generation of target code from an optimized intermediate representation.
+      This involves writing efficient, scalable, and well-documented functions that
+      adhere to industry standards and best practices.
     name: write_backend_code
     nodes_depended_on:
     - create_backend_directory
-    nodes_dependent_on:
-    - compile_backend_code
-    prompt: Write the backend code in the 'backend' directory. Ensure it includes
-      functions for generating target code from optimized intermediate representation.
+    nodes_dependent_on: []
+    prompt: Within the 'backend' directory, meticulously craft the backend code to
+      encompass a comprehensive suite of functions designed for generating target
+      code from an optimized intermediate representation. Ensure the implementation
+      adheres to best practices in software engineering, including modular design,
+      efficient data handling, and robust error management. Utilize modern programming
+      paradigms and frameworks to enhance performance and scalability. Document each
+      function thoroughly, providing clear explanations of their purpose, parameters,
+      and return values. Integrate unit tests to validate the correctness and reliability
+      of the generated code.
   write_developer_guide:
     agent: false
-    description: Write the developer guide for the compiler.
+    description: Develops and writes a thorough developer guide for the compiler,
+      detailing its architecture, coding standards, and development process. This
+      guide serves as a critical resource for new developers and contributors, ensuring
+      they have a deep understanding of the system's design and operational requirements.
     name: write_developer_guide
     nodes_depended_on:
     - create_developer_guide_directory
-    nodes_dependent_on:
-    - publish_developer_guide
-    prompt: Write the developer guide in the 'developer_guide' directory. Include
-      detailed information about the architecture, coding standards, and development
-      process.
+    nodes_dependent_on: []
+    prompt: Within the 'developer_guide' directory, meticulously craft a comprehensive
+      developer guide for the compiler. This document should encompass detailed architectural
+      diagrams and explanations, rigorous coding standards and best practices, and
+      a step-by-step development process that includes setup instructions, build procedures,
+      testing strategies, and deployment guidelines. Ensure the guide is structured
+      to facilitate easy navigation and understanding, with clear sections dedicated
+      to each aspect of the compiler's architecture and development lifecycle.
   write_integration_tests:
     agent: false
-    description: Write integration tests for the entire compiler.
+    description: Write integration tests for the entire compiler to ensure that different
+      components interact correctly and reliably. This involves creating a suite of
+      tests that cover various scenarios and edge cases, using a testing framework
+      to structure and execute the tests. The tests will be placed in the 'integration_tests'
+      directory, which is created by the preceding node.
     name: write_integration_tests
     nodes_depended_on:
     - create_integration_tests_directory
-    nodes_dependent_on:
-    - run_integration_tests
-    prompt: Write integration tests for the entire compiler in the 'integration_tests'
-      directory. Test the interaction between different components of the compiler.
+    nodes_dependent_on: []
+    prompt: Develop a comprehensive set of integration tests for the entire compiler,
+      ensuring that all components interact seamlessly. These tests should cover various
+      scenarios and edge cases to validate the overall functionality and reliability
+      of the compiler. Utilize a testing framework such as JUnit or PyTest to structure
+      and execute the tests. Place the test files in the 'integration_tests' directory,
+      which has been created by the previous step. Each test should be designed to
+      verify the correct behavior of individual components as well as their interactions,
+      using mock objects and stubs where necessary to isolate and test specific functionalities.
   write_lexer_code:
     agent: false
-    description: Write the lexer code.
+    description: Develops and writes the lexer code, which is responsible for breaking
+      down input code into meaningful tokens. This step ensures that the lexer is
+      capable of accurately identifying and categorizing different elements of the
+      code, such as keywords, identifiers, literals, and operators, while maintaining
+      high standards of efficiency and reliability.
     name: write_lexer_code
     nodes_depended_on:
     - create_lexer_directory
-    nodes_dependent_on:
-    - compile_lexer_code
-    prompt: Write the lexer code in the 'lexer' directory. Ensure it includes functions
-      for tokenizing input code.
+    nodes_dependent_on: []
+    prompt: Within the 'lexer' directory, implement a robust and efficient lexer codebase.
+      This should include comprehensive functions for tokenizing input code, ensuring
+      accurate and contextually relevant tokenization. Utilize modern programming
+      practices and best practices to enhance readability, maintainability, and performance.
+      Incorporate error handling mechanisms to manage unexpected input gracefully
+      and provide detailed logging for debugging purposes.
   write_optimizer_code:
     agent: false
-    description: Write the optimizer code.
+    description: Develop and write the optimizer code within the specified directory,
+      ensuring it includes sophisticated functions for optimizing compiled code through
+      various techniques such as loop unrolling, dead code elimination, constant folding,
+      and instruction scheduling. This step is crucial for enhancing the performance
+      and efficiency of the compiled code.
     name: write_optimizer_code
     nodes_depended_on:
     - create_optimizer_directory
-    nodes_dependent_on:
-    - compile_optimizer_code
-    prompt: Write the optimizer code in the 'optimizer' directory. Ensure it includes
-      functions for optimizing compiled code.
+    nodes_dependent_on: []
+    prompt: Within the 'optimizer' directory, implement a comprehensive set of functions
+      designed to optimize compiled code. These functions should include advanced
+      algorithms for loop unrolling, dead code elimination, constant folding, and
+      instruction scheduling. Ensure that the optimizer is capable of handling both
+      static and dynamic optimizations, and integrate profiling tools to gather runtime
+      data for informed decision-making. The code should be modular, allowing for
+      easy extension and maintenance, and adhere to best practices in software engineering,
+      such as writing clean, efficient, and well-documented code.
   write_parser_code:
     agent: false
-    description: Write the parser code.
+    description: Write the parser code in the 'parser' directory, focusing on creating
+      functions that accurately parse different parts of the language syntax. This
+      involves implementing lexical analysis, syntactic parsing, and semantic interpretation
+      modules. The code should be modular, efficient, and easy to extend or modify
+      as needed.
     name: write_parser_code
     nodes_depended_on:
     - create_parser_directory
-    nodes_dependent_on:
-    - compile_parser_code
-    prompt: Write the parser code in the 'parser' directory. Ensure it includes functions
-      for parsing different parts of the language syntax.
+    nodes_dependent_on: []
+    prompt: Develop a comprehensive parser codebase within the 'parser' directory,
+      ensuring it includes robust functions for parsing various components of the
+      language syntax. Utilize modern programming practices and design patterns to
+      enhance readability, maintainability, and performance. Implement error handling
+      and logging mechanisms to facilitate debugging and monitoring. Ensure the code
+      adheres to best coding standards and is well-documented for future reference.
   write_unit_tests:
     agent: false
-    description: Write unit tests for the parser, lexer, optimizer, and backend.
+    description: Write unit tests for the parser, lexer, optimizer, and backend components
+      to ensure their functionality and reliability. These tests will be placed in
+      the 'unit_tests' directory, which is created by the previous node. The goal
+      is to achieve comprehensive coverage, including edge cases and error handling,
+      to maintain high-quality software development practices.
     name: write_unit_tests
     nodes_depended_on:
     - create_unit_tests_directory
-    nodes_dependent_on:
-    - run_unit_tests
-    prompt: Write unit tests for the parser, lexer, optimizer, and backend in the
-      'unit_tests' directory. Use a testing framework like JUnit or PyTest to ensure
-      comprehensive coverage.
+    nodes_dependent_on: []
+    prompt: Develop a comprehensive set of unit tests for the parser, lexer, optimizer,
+      and backend components. Utilize a robust testing framework such as JUnit (for
+      Java) or PyTest (for Python) to ensure thorough coverage. Each test should be
+      designed to validate specific functionalities and edge cases within these components.
+      Organize the tests into subdirectories under 'unit_tests' based on the component
+      they pertain to, ensuring a modular and maintainable structure. Implement parameterized
+      tests where appropriate to cover a wide range of inputs and scenarios. Use assertions
+      to verify the correctness of outputs and handle exceptions gracefully to ensure
+      that all potential error conditions are tested. Document each test case with
+      clear and concise comments explaining its purpose and expected behavior.
   write_user_guide:
     agent: false
-    description: Write the user guide for the compiler.
+    description: Creates a comprehensive user guide for the compiler, detailing installation,
+      configuration, and usage procedures. This guide serves as a primary resource
+      for new users and provides valuable insights for experienced ones, ensuring
+      they can effectively utilize the compiler's features and functionalities.
     name: write_user_guide
     nodes_depended_on:
     - create_user_guide_directory
-    nodes_dependent_on:
-    - publish_user_guide
-    prompt: Write the user guide in the 'user_guide' directory. Include instructions
-      for installing, configuring, and using the compiler.
+    nodes_dependent_on: []
+    prompt: Write the user guide for the compiler in the 'user_guide' directory. The
+      guide should include detailed instructions for installing, configuring, and
+      using the compiler, covering all necessary steps from initial setup to advanced
+      usage scenarios. Ensure that the document is structured logically, with clear
+      headings and subheadings, and includes screenshots and code examples where appropriate.
+      Additionally, provide troubleshooting tips and best practices to help users
+      resolve common issues and optimize their experience.
